@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/WebApplication/dhbw/chess/project/css/styles.css" />
+        <title>Schach - Anleitung</title>
+    </head>
+    <body> 
+        <nav id="navbar" class="navigation"></nav>
+<!-- "pre" nur vorrübergehend als quick and dirty Lösung
+        später vielleicht noch ein dropdown menü in die navbar unter den Punkt "Anleitung" packen, damit man zu den einzelnen Überschriften springen kann
+        oder man macht noch eine extra nav-Leiste, die dann mitscrollt?-->
+        <nav id="navstrip" class="navigation">
+            <ul>
+                <li>
+                        <a href="#introduction">Einleitung</a>
+                </li>
+                <ul>
+                        <li>
+                                <a href="#goal">Das Ziel des Spiels</a>
+                        </li>
+                        <li>
+                                <a href="#board">Das Spielbrett</a>
+                        </li>
+                    </ul>
+                <li>
+                        <a href="#turns">Züge</a>
+                </li>
+                <ul>
+                        <li>
+                                <a href="#capturing">Das Schlagen von Figuren</a>
+                        </li>
+                        <li>
+                                <a href="#moving">Die Bewegung der Spielfiguren</a>
+                        </li>
+                        <ul>
+                                <li>
+                                        <a href="#rook">Turm</a>
+                                </li>
+                                <li>
+                                        <a href="#bishop">Läufer</a>
+                                </li>    
+                                <li>
+                                        <a href="#queen">Dame</a>
+                                </li>
+                                <li>
+                                        <a href="#king">König</a>
+                                </li>
+                                <li>
+                                        <a href="#knight">Springer</a>
+                                </li>
+                                <li>
+                                        <a href="#pawn">Bauer</a>
+                                </li>
+                        </ul>
+                        <li>
+                                <a href="#double-move">Doppelzug</a>
+                        </li>
+                        <li>
+                                <a href="#capture-passerby">Einen Passant schlagen</a>
+                        </li>
+                        <li>
+                                <a href="#convert-pawn">Umwandlung von Bauern</a>
+                        </li>
+                        <li>
+                                <a href="#rochade">Die Rochade</a>
+                        </li>
+                </ul>
+                <li>
+                        <a href="#endings">Schach, Schachmatt und Patt</a>
+                </li>
+                <ul>
+                        <li>
+                                <a href="#check">Schach</a>
+                        </li>
+                        <li>
+                                <a href="#checkmate">Schachmatt</a>
+                        </li>   
+                        <li>
+                                <a href="#stalemate">Patt</a>
+                        </li>
+                </ul>
+                <li>
+                        <a href="#remis">Remis</a>
+                </li>            
+            </ul>
+        </nav>
+        
+        <div id="text-manual">
+            <h1>Anleitung</h1>
+
+            <h2 id="introduction">Einleitung</h2>
+
+            <p>
+                Schach ist ein Brettspiel für zwei Personen. Ein Spieler spielt mit den weißen Figuren, der andere Spieler mit den schwarzen. Zu Beginn des Spiels haben beide Spieler 16 Figuren: einen König, eine Dame, zwei Läufer, zwei Springer, zwei Türme und acht Bauern.
+            </p>
+                
+            <h3 id="goal">Das Ziel des Spiels</h3>
+            <p>
+                Das Ziel des Schachspiels ist es, den Gegenspieler matt zu setzen. Matt bedeutet, dass der König im Schach steht und keine Möglichkeit hat einen Zug auszuführen, ohne erneut im Schach zu stehen.
+            </p>
+               
+            <h3 id="board">Das Spielbrett</h3>
+            <p>
+                Das Spiel wird auf einem Spielbrett mit 64 Feldern, aufgeteilt in ein 8x8 Raster gespielt. Jedes Feld wird durch eine Buchstaben/Ziffern Kombination bezeichnet. Hierbei werden die Spalten von a bis h und die Reihen von 1 bis 8 gezählt. Das Spielbrett ist so positioniert, dass die linke untere Ecke aus Sicht des weißen Spielers die Bezeichnung a1 trägt.
+              
+                Zu Beginn des Spiel sieht das Schachbrett wie folgt aus:
+                    
+                    <!-- hier müste noch ein Beispielbild rein-->
+                    
+                Auf der zweiten Reihe stehen die weißen Bauern, auf der siebten die schwarzen Bauern. Auf der ersten und achten Reihe sind die Figuren aus Sicht des weißen Spielers in folgender Reihenfolge aufgestellt: Turm, Springer, Läufer, Dame, König, Läufer, Springer und Turm.
+            </p>
+                
+            <h2 id="turns">Züge</h2>
+            <p>
+                Die Spieler ziehen abwechselnd. Der Spieler mit den weißen Figuren beginnt. Ein Zug beeinhaltet jeweils die Bewegung einer eigenen Figur. Eine Ausnahme ist die "Rochade", hierbei werden König und Turm gemeinsam bewegt.                
+            </p>
+
+            <h3 id="capturing">Das Schlagen von Figuren</h3>
+            <p>
+                Ein Spieler kann eine Figur des Gegners schlagen, indem er mit einer eigenen Figur auf ein Feld zieht, auf dem sich eine Figur des Gegners befindet. Die Figur des Gegners wird dann vom Spielbrett entfernt.
+            </p>
+
+            <h3 id"moving">Die Bewegung der Spielfiguren</h3>
+            <p>
+                Im Folgenden wird gezeigt, welche Züge mit den einzelnen Figuren möglich sind.
+            </p>
+                
+            <h4 id="rook">Turm</h4>
+            <p>
+                Der Turm bewegt sich horizontal und vertikal über Reihen und Spalten. Andere Figuren können nicht übersprungen werden.	
+            </p>
+
+            <h4 id="bishop">Läufer</h4>
+            <p>
+                Der Läufer bewegt sich diagonal über das Spielbrett, andere Spielfiguren können nicht übersprungen werden.	
+            </p>
+
+            <h4 id="queen">Dame</h4>
+            <p>
+                Die Dame vereint die Zugmöglichkeiten von Turm und Läufer und ist damit die Spielfigur mit der größten Bewegungsfreiheit. Die Dame kann horizontal, vertikal und diagonal bewegt werden. Auch sie darf andere Figuren nicht überspringen..	
+            </p>
+
+            <h4 id="king">König</h4>
+            <p>
+                Der König kann auf alle benachbarten, freien Felder bewegt werden, auf denen er nicht von einer gegnerischen Figur geschlagen werden kann.	
+            </p>
+
+            <h4 id="knight">Springer</h4>
+            <p>
+                Der Springer zieht entweder ein Feld horizontal und zwei Felder vertikal, oder zwei Felder horizontal und ein Feld vertikal. Dabei ist der Springer die einzige Figur, die über andere Figuren springen kann. Das bedeutet der Springer kann sich über Felder bewegen, die von anderen Figuren belegt sind. Die übersprungenen Felder werden hierbei nicht beeinflusst.
+            </p>
+               
+            <h4 id="pawn">Bauer</h4>
+            <p>
+                Der Bauer zieht auf seiner Spalte ein Feld in Richtung der gegnerischen Seite, d.h. weiße Bauern bewegen sich von der zweiten in Richtung der achten Reihe, schwarze Bauern bewegen sich ausgehend von der siebten in Richtung der ersten Reihe.
+                Eine Ausnahme ist das Schlagen gegnerischer Figuren mit dem Bauern. Dabei findet die Bewegung ein Feld diagonal vorwärts statt. Befindet sich also eine Figur des Gegners in Zugrichtung rechts oder links vor einem Bauern, so kann diese Figur geschlagen werden.	
+            </p>
+                
+            <h3 id="double-move">Doppelzug</h3>
+            <p>
+                Ein Bauer, der noch nicht bewegt wurde, d.h. ein weißer Bauer auf der zweiten Reihe bzw. ein schwarzer Bauer auf der siebten Reihe hat die Möglichkeit in einem Zug zwei Felder vorwärts zu ziehen. Dabei dürfen sich keine anderen Figuren zwischen Ausgangs- und Endposition befinden.	
+            </p>
+
+            <h3 id="capture-passerby">Einen Passant schlagen</h3>
+            <p>
+                Führt ein Bauer einen Doppelzug wie oben beschrieben aus, besteht für gegnerische Bauern die Möglichkeit, den eben bewegten Bauern so zu schlagen, als ob dieser nur einen einfachen Zug ausgeführt hätte.
+                <!-- hier müste noch ein Beispielbild rein-->
+                Befindet sich also nach dem Doppelzug links oder rechts von dem gezogenen Bauern ein gegnerischer Bauer, so kann der gegnerische Bauer das entsprechende diagonal vor ihm liegende Feld besetzen, und dabei den doppelt gezogenen Bauern en passant schlagen. Diese Regel findet nur unmittelbar nach dem Ausführen des Doppelzugs Anwendung.
+            </p>
+                
+            <h3 id="convert-pawn">Umwandlung von Bauern</h3>
+            <p>
+                Wenn ein Bauer die gegnerische Seite des Spielbretts erreicht, das bedeutet die achte Reihe für weiße Bauern, bzw. die erste Reihe für schwarze Bauern, dann wird dieser in eine andere Figur umgewandelt. Dabei hat der Spieler die Möglichkeit zwischen Springer, Läufer, Turm und Dame zu wählen. Die gewünschte Figur wird durch Klicken auf den entsprechenden Button ausgewählt (die Texte erscheinen dann natürlich in deutsch).	
+            </p>
+                
+            <h3 id="rochade">Die Rochade</h3>
+            <p>
+                Ein weiterer Sonderzug ist die Rochade. Sie ist der einzige Zug, in dem zwei Figuren bewegt werden, und zwar König und Turm. Hierbei wird der König zwei Felder nach rechts oder nach links bewegt. Gleichzeitig wird der Turm in dessen Richtung der König bewegt wurde, auf das Feld zwischen König und Ausgangsposition des Königs gesetzt. 
+                <!-- hier müste noch ein Beispielbild rein-->
+                Auf Brettspielnetz wird hierzu einfach der König zwei Felder zur Seite bewegt, der Turm wird anschließend automatisch platziert.	
+                  
+                Voraussetzungen für die Rochade:
+                König und Turm dürfen noch nicht bewegt worden sein
+                Zwischen König und Turm dürfen sich keine Figuren befinden
+                Der König darf vor der Rochade nicht im Schach stehen
+                Der König darf bei der Rochade kein Feld überspringen, auf dem Schach droht
+                Der König darf sich bei Abschluss der Rochade nicht auf einem Feld befinden, auf dem er im Schach stände
+            </p>
+                
+            <h2 id="endings">Schach, Schachmatt und Patt</h2>
+            <p>
+                Im Folgenden werden die Begriffe Schach, Schachmatt und Patt erklärt.
+            </p>
+                
+            <h3 id="check">Schach</h3>
+            <p>
+                Im Schach steht der König immer dann, wenn er von einer gegnerischen Figur geschlagen werden könnte. Züge, nach denen der eigene König im Schach stehen würde, sind nicht gestattet und werden bei Brettspielnetz automatisch verhindert.
+                Sobald der eigene König im Schach steht, muss dieses mit dem nächsten Zug abgewehrt werden.
+                    <!-- hier müste noch ein Beispielbild rein-->
+                Beispiel: Der schwarze König steht im Schach	
+            </p>
+                
+            <h3 id="checkmate">Schachmatt</h3>
+            <p>
+                Schachmatt tritt ein, wenn der König im Schach steht und der Spieler keinen Zug ausführen kann, der das Schach abwehrt.
+                Sobald der König eines Spielers Schachmatt ist, hat dieser das Spiel verloren.
+                <!-- hier müste noch ein Beispielbild rein-->
+                Beispiel: Schwarz am Zug ist matt	
+            </p>
+                
+            <h3 id="stalemate">Patt</h3>
+            <p>
+                Patt tritt ein, wenn der König eines Spielers nicht im Schach steht, der Spieler aber keinen Zug ausführen kann ohne den eigenen König einem Schach durch den Gegenspieler auszusetzen.
+                Sobald ein Patt besteht, endet das Spiel unentschieden. Man sagt auch remis. 
+                    <!-- hier müste noch ein Beispielbild rein-->
+                Beispiel: Schwarz am Zug ist patt	
+            </p>
+                
+            <h2 id="remis">Remis</h2>
+            <p>
+                Schachpartien können unentschieden enden. Dieses sogenannte Remis tritt ein, wenn:
+                beide Spieler sich auf das Unentschieden einigen
+                ein Spieler patt gesetzt wurde
+                zum dritten Mal die gleiche Stellung auftritt, wobei der gleiche Spieler am Zug ist, und die gleichen Züge möglich sind  *
+                50 Züge lang keine Figur geschlagen worden ist, kein Bauer bewegt worden ist und ein Spieler Remis beantragt  *
+                beide Spieler nicht mehr über die ausreichenden Figuren verfügen um den Gegner matt zu setzen. z.B. König gegen König, König gegen König und Springer, König gegen König und Läufer  *
+                * Diese Punkte werden von Brettspielnetz nicht automatisch erkannt. Du solltest deinen Gegner in diesem Fall mit einem Verweis auf die Spielregel das Unentschieden anbieten. Wenn dein Gegner weiterspielen will, obwohl du der Meinung bist, dass das Spiel unentschieden steht, kannst du einen der Administratoren von Brettspielnetz.de informieren. Wenn es tatsächlich Remis ist, kann es dem Gegner passieren, dass er wegen Spielverzögerung verwarnt wird.
+                Denke daran, Spiel und Spielnummer anzugeben! Wenn es sich um eine Zugwiederholung handelt, musst du auch die 3 Zugnummern angeben, in denen sich die Stellung wiederholt - wir suchen keine komplette Partie durch!
+                Der Administrator wird die Partie dann für unentschieden erklären, wenn eine der obigen Bedingungen erfüllt ist. Bitte beachte, dass es sich in den Bedingungen um 50 Vollzüge handelt. Das heißt, wenn beispielsweise der erste Zug die Zugnummer 41 hatte, ist das Spiel erst ab dem 91. Zug remis, wenn sich bis dahin nichts getan hat.
+                Wichtig: Du darfst den Zug nur dann ausführen, wenn das Spiel nicht durch den Zug verloren ist. Das können wir nicht mehr rückgängig machen.
+                Falls weitergespielt wird, verfält das Recht Remis zu beantragen. Zu beachten ist dies insbesondere beim Remis durch dreifache Zugwiederholung. Hier muss ggf. Remis beantragt werden bevor die gleiche Stellung zum dritten Mal auftritt. 
+            </p>
+        </div>
+    </body>
+</html>
+<script src="/WebApplication/dhbw/chess/project/js/script.js"></script>

@@ -1,0 +1,112 @@
+/* navigation */
+.navigation{
+    background: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.2) 25%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.4) 75%,
+    rgba(0, 0, 0, 0.5) 100%);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2),
+    inset 0 0 1px rgba(0, 0, 0, 0.8);
+}
+
+#navbar{
+    padding: 10px;
+    margin-bottom: 25px;
+}
+
+#navbar *{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#navstrip{
+    max-width: 300px;
+}
+
+#text-manual{
+    position: relative;
+    top: -400px;
+    left: 325px;
+}
+
+/* content */
+h1,h2,h3,h4,p{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1{
+    font-weight: bold;
+    font-size: 40px;
+}
+
+h2{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+h3{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+h4{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+img{
+	float: left;
+}
+
+
+/* highscore */
+#highscore-table{
+    border-style: solid;
+    border-color: black;
+}
+
+/* chessboard layout */
+.chessboard{
+    border-style: solid;
+    border-color: black;
+    margin: 5px;
+}
+
+.chessboard-tile{
+    height: 68px;
+    width: 68px;
+}
+
+.light{
+    background-color: antiquewhite;
+}
+
+.dark{
+    background-color: brown;
+}
+
+/* special tile-colors for evaluation */
+.valid-turn{
+    background-color: greenyellow;
+}
+
+.capture{
+    background-color: deeppink
+}
+
+.last-turn{
+    background-color: aqua;
+}
+
+.checkmate{
+    background-color: red;
+}
+
+.checkmate-cause{
+    background-color: lightcoral;
+}
+
+.chosen{
+    background-color: yellow;
+}
