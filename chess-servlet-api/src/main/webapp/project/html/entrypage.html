@@ -6,11 +6,29 @@
 
 <!-- <link rel="stylesheet" type="text/css" href="/ChessGame/project/css/defaultStyle.css" /> -->
 <link rel="stylesheet" type="text/css" href="/best-chess/project/css/defaultStyle.css" />
+	<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+			type="text/javascript"></script>
+	<script type="text/javascript">
+		var testObject = {};
+		function loadDoc(element) {
+			var sender = element;
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					testObject = JSON.parse(this.responseText);
+				}
+			};
+			//     		  xhttp.open("GET", "object.json", true);
+			xhttp
+					.open(
+							"GET",
+							"http://localhost:8080/ChessGame/GameControl?action=init-game",
+							true);
+			xhttp.send();
+		}
+	</script>
 
-
-<style type="text/css" >
-
-</style>
 </head>
 <body>
 
@@ -22,7 +40,7 @@
 		</header>
 		<div class="content-wrapper">
 			<section>
-				<div class="button-container"><button><a href="#">Play</a></button></div>
+				<div class="button-container"><button onclick="loadDoc(this)">Play</button></div>
 				<div class="button-container"><button>Anleitung</button></div>
 				<div class="button-container"><button>HighScore</button></div>
 				<div class="button-container"><button>Bewerte uns 😉</button></div>

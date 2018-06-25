@@ -1,8 +1,11 @@
 package api.config;
 
-import api.chess.gameplay.DefaultRule;
+import api.chess.equipment.pieces.Piece;
+import api.chess.gameplay.game.Game;
 
 import java.util.logging.Logger;
+
+import static api.config.GameConfig.RESOURCE_PATH_IMAGES_PIECESETS;
 
 public class PieceConfig {
     private final static Logger LOG = Logger.getLogger(PieceConfig.class.getName());
@@ -15,8 +18,13 @@ public class PieceConfig {
         BLACK, WHITE
     }
 
-    public static DefaultRule buildMovementRule(PieceName pieceName) {
-
-        return new DefaultRule();
+    public static String buildImageUrl(Piece piece) {
+        return RESOURCE_PATH_IMAGES_PIECESETS
+                + Game.pieceSet.toString().toLowerCase()
+                + "/"
+                + piece.getName().toString().toLowerCase()
+                + "_"
+                + piece.getColor().toString().toLowerCase()
+                + ".png";
     }
 }

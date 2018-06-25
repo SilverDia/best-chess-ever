@@ -1,4 +1,5 @@
 import com.google.common.base.Strings;
+import servlet.GetChessboardServlet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,18 +13,28 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-@WebServlet(urlPatterns = "/Control")
-public class Control extends HttpServlet {
+@WebServlet("/GameControl")
+public class GameControl extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private final static Logger LOG = Logger.getLogger(Control.class.getName());
+    private final static Logger LOG = Logger.getLogger(GameControl.class.getName());
+
+    private final static String ACTION = "action";
+
+    private final static String ACTION_INIT_GAME = "init-game";
+
+    private final static String ACTION_EVALUATE_MOVEMENT = "evaluate-movement";
+    private final static String PARAM_SQUARE_ID = "square-id";
+
+    private final static String ACTION_MOVE = "move";
+    private final static String PARAM_FROM = "from";
+    private final static String PARAM_TO = "to";
 
 
-    public Control() {
+    public GameControl() {
         super();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 
         RequestDispatcher dispatcher = redirectRequest(request);
         dispatcher.forward(request, response);
@@ -35,32 +46,25 @@ public class Control extends HttpServlet {
 
     private RequestDispatcher redirectRequest(HttpServletRequest request) {
         //Default dispatcher if nothing´s matching
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/overview/entryPage.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/project/entryPage.html");
         //Checking for next servlet
-        if (!Strings.isNullOrEmpty(request.getParameter("servlet"))) {
+        if (!Strings.isNullOrEmpty(request.getParameter(ACTION))) {
             //Check existence of servlet name --- else return entryPage.jsp
-            String nextServlet = request.getParameter("servlet");
+            String action = request.getParameter(ACTION);
             HashMap<String, String> requiredParameters = new HashMap<>();
             //Setting up next servlet
-            if (nextServlet.equals("CreateNewYearServlet")) {
+            if (action.equals(ACTION_INIT_GAME)) {
                 //Set other attributes
-
+                request.setAttribute("action", "init-game");
                 //return dispatcher
-                return dispatcher = request.getRequestDispatcher("/" + nextServlet);
-            } else if (nextServlet.equals("SelectionInYearServlet") && hasEssentialParameters(request, "", requiredParameters)) {
+                return dispatcher = request.getRequestDispatcher("/GetChessboardServlet");
+            } else if (action.equals(ACTION_MOVE)) {
                 //Set required attributes of request parameters
 
                 //Set other attributes
 
                 //return dispatcher
-                return dispatcher = request.getRequestDispatcher(nextServlet);
-            } else if (nextServlet.equals("SelectionInYearServlet") && hasEssentialParameters(request, "", requiredParameters)) {
-                //Set required attributes of request parameters
-
-                //Set other attributes
-
-                //return dispatcher
-                return dispatcher = request.getRequestDispatcher("/" + nextServlet);
+                return dispatcher = request.getRequestDispatcher("/GetChessboardServlet");
             }
         }
         return dispatcher;
