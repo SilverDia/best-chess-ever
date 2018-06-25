@@ -46,7 +46,7 @@ public class GameControl extends HttpServlet {
 
     private RequestDispatcher redirectRequest(HttpServletRequest request) {
         //Default dispatcher if nothing´s matching
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/project/entryPage.html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("../project/html/entrypage.html");
         //Checking for next servlet
         if (!Strings.isNullOrEmpty(request.getParameter(ACTION))) {
             //Check existence of servlet name --- else return entryPage.jsp
