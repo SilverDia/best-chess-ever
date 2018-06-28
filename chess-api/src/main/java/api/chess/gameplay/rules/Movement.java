@@ -12,18 +12,27 @@ import java.util.ArrayList;
 public class Movement {
 
     private String moveToSquareId;
-    private ArrayList<MovementRuleConfig> rules = new ArrayList<>();
+    private ArrayList<MovementRuleConfig.Move> rules = new ArrayList<>();
+
+    public Movement(String moveToSquareId, MovementRuleConfig.Move move) {
+        this.moveToSquareId = moveToSquareId;
+        addMovementRule(move);
+    }
 
     @Override
     public String toString() {
         return (new Gson().toJson(this));
     }
 
+    public void addMovementRule(MovementRuleConfig.Move move) {
+        rules.add(move);
+    }
+
     public String getMoveToSquareId() {
         return moveToSquareId;
     }
 
-    public ArrayList<MovementRuleConfig> getRules() {
+    public ArrayList<MovementRuleConfig.Move> getRules() {
         return rules;
     }
 }

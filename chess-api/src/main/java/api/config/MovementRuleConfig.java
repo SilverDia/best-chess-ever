@@ -1,7 +1,9 @@
 package api.config;
 
 import api.chess.equipment.board.Board;
+import api.chess.equipment.board.Square;
 import api.chess.equipment.pieces.Piece;
+import api.chess.gameplay.rules.Movement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,7 @@ public class MovementRuleConfig {
     private final static Logger LOG = Logger.getLogger(MovementRuleConfig.class.getName());
 
     public enum Move {
-        CAPTURE, STRAIGHT, STRAIGHT_ONE, DIAGONAL, DIAGONAL_ONE,  KNIGHT_JUMP, PAWN_MOVE, PAWN_FIRST_MOVE, PAWN_CAPTURE, PROMOTION, CASTELING, EN_PASSANT
+        BASIC_MOVE, CAPTURE_MOVE, STRAIGHT, STRAIGHT_ONE, DIAGONAL, DIAGONAL_ONE,  KNIGHT_JUMP, PAWN_MOVE, PAWN_FIRST_MOVE, PAWN_CAPTURE, PROMOTION, CASTELING, EN_PASSANT
     }
 
     public static ArrayList<Move> getMoves(PieceConfig.PieceName pieceName) {
@@ -58,5 +60,25 @@ public class MovementRuleConfig {
 
             }
         }
+    }
+
+    public static void evaluateStraightMove(Piece piece, Board board, boolean limitedSteps) {
+        boolean continueEvaluation = limitedSteps;
+        int x_start = BoardConfig.toCoordinates(piece.getPositionSquareId()).getX();
+        int y_start = BoardConfig.toCoordinates(piece.getPositionSquareId()).getY();
+        int steps = 1;
+        do {
+            Square squareToTest = board.getSquare(x_start + steps, y_start + steps);
+            steps++;
+            if (squareToTest.isVacant()) {
+                piece.addPossibleMove(new Movement(squareToTest.getSquareId(), Move.BASIC_MOVE));
+            } else if (squareToTest.getPieceId().contains(piece.getColor().toString())) {
+                continueEvaluation = false;
+            } else {
+                Movement movement = new Movement(squareToTest.getSquareId(), Move.BASIC_MOVE);
+                movement.addMovementRule(Move.CAPTURE_MOVE);
+                piece.addPossibleMove(movement);
+            }
+        } while (continueEvaluation);
     }
 }
