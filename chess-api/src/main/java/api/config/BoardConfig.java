@@ -21,6 +21,14 @@ public class BoardConfig {
         return toSquareId(coordinates.getX(), coordinates.getY());
     }
 
+    public static Coordinates toCoordinates(String suqareId) {
+        int x = suqareId.charAt(0) - 65;
+        int y = suqareId.charAt(1) - 49;
+        return new Coordinates(x, y);
+    }
+
+
+
     /**
      *
      * @param color Color of the player, used to parse coordinates if necessary

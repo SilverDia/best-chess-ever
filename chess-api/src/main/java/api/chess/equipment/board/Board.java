@@ -10,15 +10,17 @@ import java.util.logging.Logger;
 public class Board {
     private final transient static Logger LOG = Logger.getLogger(Board.class.getName());
 
-    private LinkedHashMap<String, Square> chessBoard = new LinkedHashMap<>();
+    private LinkedHashMap<Integer, LinkedHashMap<String, Square>> chessBoard = new LinkedHashMap<>();
 
     public Board() {
         Coordinates coordinates;
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
+        for (int y = 0; y < 8; y++) {
+            LinkedHashMap<String, Square> chessBoardRow = new LinkedHashMap<>();
+            for (int x = 0; x < 8; x++) {
                 coordinates = new Coordinates(x, y);
-                chessBoard.put(BoardConfig.toSquareId(coordinates), new Square(coordinates));
+                chessBoardRow.put(BoardConfig.toSquareId(coordinates), new Square(coordinates));
             }
+            chessBoard.put(y, chessBoardRow);
         }
     }
 
@@ -28,11 +30,12 @@ public class Board {
     }
 
     public Square getSquare(String squareId) {
-        return chessBoard.getOrDefault(squareId, null);
+        Coordinates coordinates = BoardConfig.toCoordinates(squareId);
+        return getSquare(coordinates.x, coordinates.y);
     }
 
     public Square getSquare(int x, int y) {
-        return chessBoard.get(BoardConfig.toSquareId(x, y));
+        return chessBoard.get(y).get(BoardConfig.toSquareId(x, y));
     }
 
 //    public boolean hasNext(String fromSquareId, BoardConfig.Direction direction) {

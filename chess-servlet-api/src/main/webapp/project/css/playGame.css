@@ -51,18 +51,18 @@ section {
 	display: table-row;
 }
 
-.board-square {
+.board-table-square {
 	content: "";
 	display: table-cell;
 	width: 10%;
 	height: auto;
 }
 
-.board-square.white{
+.board-table-square.WHITE{
 	background-color: white;
 }
 
-.board-square.black{
+.board-table-square.BLACK{
 	background-color: black;
 }
 

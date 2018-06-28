@@ -1,8 +1,7 @@
 package api.chess.equipment.pieces;
 
 import api.chess.equipment.board.Coordinates;
-import api.chess.equipment.board.Square;
-import api.chess.gameplay.rules.MovementRule;
+import api.chess.gameplay.rules.Movement;
 import api.config.BoardConfig;
 import api.config.GameConfig;
 import api.config.MovementRuleConfig;
@@ -11,6 +10,7 @@ import api.config.PieceConfig.*;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 public abstract class Piece {
@@ -27,8 +27,8 @@ public abstract class Piece {
     boolean captured = false;
 
     ArrayList<MovementRuleConfig.Move> moves;
-    ArrayList<String> freeSquares_move = new ArrayList<>();
-    ArrayList<String> freeSquares_capture = new ArrayList<>();
+
+    HashMap<String, Movement> possibleMoves = new HashMap<>();
 
     @Override
     public String toString() {
@@ -46,6 +46,10 @@ public abstract class Piece {
     public String initPosition(Coordinates coordinates, int id, int scale) {
         coordinates.setX(coordinates.getX() + (id*scale));
         return BoardConfig.toInitSquareId(color, coordinates);
+    }
+
+    public void addPossibleMove(Movement movement){
+        possibleMoves.put(movement.getMoveToSquareId(), movement);
     }
 
     public String getId() { return id; }
