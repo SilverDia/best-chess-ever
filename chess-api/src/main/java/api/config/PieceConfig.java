@@ -19,9 +19,9 @@ public class PieceConfig {
         BLACK, WHITE
     }
 
-    public static String buildImageUrl(Piece piece, PieceSet pieceSet) {
+    public static String buildImageUrl(Piece piece, GameConfig.PieceImageSet pieceSet) {
         return RESOURCE_PATH_IMAGES_PIECESETS
-                + Game.pieceSet.toString().toLowerCase()
+                + pieceSet.toString().toLowerCase()
                 + "/"
                 + piece.getName().toString().toLowerCase()
                 + "_"

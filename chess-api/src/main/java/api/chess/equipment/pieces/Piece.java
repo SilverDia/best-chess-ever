@@ -4,7 +4,9 @@ import api.chess.equipment.board.Coordinates;
 import api.chess.equipment.board.Square;
 import api.chess.gameplay.rules.MovementRule;
 import api.config.BoardConfig;
+import api.config.GameConfig;
 import api.config.MovementRuleConfig;
+import api.config.PieceConfig;
 import api.config.PieceConfig.*;
 import com.google.gson.Gson;
 
@@ -38,7 +40,7 @@ public abstract class Piece {
         this.id = name.toString() + "_" + color.toString() + "_" + String.valueOf(id);
 
         moves = MovementRuleConfig.getMoves(name);
-
+        imageUrl = PieceConfig.buildImageUrl(this, GameConfig.PieceImageSet.DEFAULT);
     }
 
     public String initPosition(Coordinates coordinates, int id, int scale) {

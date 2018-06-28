@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class Game {
     private final transient static Logger LOG = Logger.getLogger(Game.class.getName());
 
-    public static GameConfig.PieceSet pieceSet = GameConfig.PieceSet.DEFAULT;
+    public static GameConfig.PieceImageSet pieceSet = GameConfig.PieceImageSet.DEFAULT;
 
     private Board board = new Board();
 

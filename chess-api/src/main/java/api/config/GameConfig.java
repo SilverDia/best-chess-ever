@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 public class GameConfig {
     private final static Logger LOG = Logger.getLogger(GameConfig.class.getName());
 
-    public enum PieceSet {
+    public enum PieceImageSet {
         DEFAULT, SIMPSONS, SOUTH_PARK, PEANUTS, POKEMON
     }
 
