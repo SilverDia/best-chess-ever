@@ -20,4 +20,21 @@ public class BoardConfig {
     public static String toSquareId(Coordinates coordinates) {
         return toSquareId(coordinates.getX(), coordinates.getY());
     }
+
+    /**
+     *
+     * @param color Color of the player, used to parse coordinates if necessary
+     * @param coordinates Use coordinates of WHITE -> y-coordinate will be adapted for BLACK
+     * @return Id of the square; E.g. A1, G6, ...
+     */
+    public static String toInitSquareId(PieceConfig.Color color, Coordinates coordinates) {
+        if (color.equals(PieceConfig.Color.BLACK)) {
+            if (coordinates.getY() == 0) {
+                coordinates.setY(7);
+            } else if (coordinates.getY() == 1) {
+                coordinates.setY(6);
+            }
+        }
+        return toSquareId(coordinates.getX(), coordinates.getY());
+    }
 }

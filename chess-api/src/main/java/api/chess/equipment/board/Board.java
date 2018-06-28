@@ -1,60 +1,57 @@
 package api.chess.equipment.board;
 
-import api.chess.equipment.pieces.Pawn;
-import api.chess.equipment.pieces.Piece;
 import api.config.BoardConfig;
-import api.config.PieceConfig;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Logger;
 
 public class Board {
-    private final static Logger LOG = Logger.getLogger(Board.class.getName());
+    private final transient static Logger LOG = Logger.getLogger(Board.class.getName());
 
-    private HashMap<String, Square> board = new HashMap<>();
+    private LinkedHashMap<String, Square> chessBoard = new LinkedHashMap<>();
 
     public Board() {
         Coordinates coordinates;
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
                 coordinates = new Coordinates(x, y);
-                board.put(BoardConfig.toSquareId(coordinates), new Square(coordinates));
+                chessBoard.put(BoardConfig.toSquareId(coordinates), new Square(coordinates));
             }
         }
     }
 
-    public void init() {
-        for (int x = 0; x < 8; x++) {
-            getSquare(x, 1).setPiece(new Pawn(x, PieceConfig.Color.WHITE));
-            getSquare(x, 6).setPiece(new Pawn(x, PieceConfig.Color.BLACK));
-        }
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
     }
 
     public Square getSquare(String squareId) {
-        return board.getOrDefault(squareId, null);
+        return chessBoard.getOrDefault(squareId, null);
     }
 
     public Square getSquare(int x, int y) {
-        return board.get(BoardConfig.toSquareId(x, y));
+        return chessBoard.get(BoardConfig.toSquareId(x, y));
     }
 
 //    public boolean hasNext(String fromSquareId, BoardConfig.Direction direction) {
-//        return (board.get(fromSquareId).getCoordinates().hasNext(direction));
+//        return (chessBoard.get(fromSquareId).getCoordinates().hasNext(direction));
 //    }
 //
 //    public Square next(String fromSquareId, BoardConfig.Direction direction) {
-//        return board.get(BoardConfig.toSquareId(
-//                board.get(fromSquareId).getCoordinates().next(direction))
+//        return chessBoard.get(BoardConfig.toSquareId(
+//                chessBoard.get(fromSquareId).getCoordinates().next(direction))
 //        );
 //    }
 //
 //    public boolean hasPrev(String fromSquareId, BoardConfig.Direction direction) {
-//        return (board.get(fromSquareId).getCoordinates().hasPrev(direction));
+//        return (chessBoard.get(fromSquareId).getCoordinates().hasPrev(direction));
 //    }
 //
 //    public Square prev(String fromSquareId, BoardConfig.Direction direction) {
-//        return board.get(BoardConfig.toSquareId(
-//                board.get(fromSquareId).getCoordinates().prev(direction))
+//        return chessBoard.get(BoardConfig.toSquareId(
+//                chessBoard.get(fromSquareId).getCoordinates().prev(direction))
 //        );
 //    }
 }

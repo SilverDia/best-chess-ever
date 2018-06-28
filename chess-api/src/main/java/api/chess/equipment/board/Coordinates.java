@@ -1,11 +1,12 @@
 package api.chess.equipment.board;
 
 import api.config.BoardConfig;
+import com.google.gson.Gson;
 
 import java.util.logging.Logger;
 
 public class Coordinates {
-    private final static Logger LOG = Logger.getLogger(Coordinates.class.getName());
+    private final transient static Logger LOG = Logger.getLogger(Coordinates.class.getName());
 
     int x;
     int y;
@@ -19,12 +20,25 @@ public class Coordinates {
 
     }
 
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
+    }
+
     public int getX() {
         return x;
     }
 
     public int getY() {
         return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public boolean isValid() {
@@ -86,6 +100,6 @@ public class Coordinates {
     }
 
     private boolean validate(int x, int y) {
-        return (x < 0 || x > 7 || y < 0 || y > 7);
+        return (x >= 0 && x < 8 && y >= 0 && y < 8);
     }
 }

@@ -11,8 +11,8 @@ public class MovementRuleConfig {
         STRAIGHT, STRAIGHT_ONE, DIAGONAL, DIAGONAL_ONE,  KNIGHT_JUMP, PAWN_MOVE, PAWN_FIRST_MOVE, PAWN_CAPTURE, PROMOTION, CASTELING, EN_PASSANT
     }
 
-    public static List<Move> getMoves(PieceConfig.PieceName pieceName) {
-        List<Move> moves = new ArrayList<>();
+    public static ArrayList<Move> getMoves(PieceConfig.PieceName pieceName) {
+        ArrayList<Move> moves = new ArrayList<>();
         switch (pieceName) {
             case PAWN: {
                 moves.add(Move.PAWN_MOVE);

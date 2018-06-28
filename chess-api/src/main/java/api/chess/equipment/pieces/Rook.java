@@ -6,18 +6,14 @@ import com.google.gson.Gson;
 
 import java.util.logging.Logger;
 
-public class Pawn extends Piece {
-    private final transient static Logger LOG = Logger.getLogger(Pawn.class.getName());
-
-    private boolean moved = false;
-    private boolean enPassantCapture = false;
-    private boolean promotion = false;
+public class Rook extends Piece {
+    private final transient static Logger LOG = Logger.getLogger(Rook.class.getName());
 
     @Override
     public void init(int id, PieceConfig.Color color) {
-        name = PieceConfig.PieceName.PAWN;
+        name = PieceConfig.PieceName.ROOK;
         super.init(id, color);
-        positionSquareId = initPosition(new Coordinates(0, 1), id, 1);
+        positionSquareId = initPosition(new Coordinates(0, 0), id, 7);
     }
 
     @Override
