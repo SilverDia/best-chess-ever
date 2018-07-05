@@ -1,6 +1,6 @@
 var navbarContent = '<a href="/ChessGame/project/html/index.html">Startseite</a>';
 navbarContent += '<a href="/ChessGame/project/html/game.html">Spiel</a>';
-navbarContent += '<a href="">TODO</a>';
+navbarContent += '<a href="/ChessGame/project/html/highscore.html">Highscore</a>';
 navbarContent += '<div class="dropdown"><a class="dropbtn" href="/ChessGame/project/html/manual.html">Anleitung</a><div class="dropdown-content"><a href="/ChessGame/project/html/manual.html#introduction">Einleitung</a><a href="/ChessGame/project/html/manual.html#turns">Spielzüge</a><a href="/ChessGame/project/html/manual.html#endings">Spielende</a></div></div>';
 navbarContent += '<a href="/ChessGame/project/html/impressum.html">Impressum</a>';
 navbarContent += '<a href="javascript:void(0);" class="navbarIcon" onclick="toggleNavbar()"><i class="fa fa-bars"></i></a>';
