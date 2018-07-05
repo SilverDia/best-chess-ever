@@ -28,45 +28,10 @@
         </plugins>
     </build>
     <dependencies>
-        <!-- internal dependencies -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>chess-reader</artifactId>
-        </dependency>
-        <!-- external dependencies -->
-        <dependency>
-            <groupId>net.sf.supercsv</groupId>
-            <artifactId>super-csv</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.ejb</groupId>
-            <artifactId>javax.ejb-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-        <dependency>
-        <groupId>org.reflections</groupId>
-        <artifactId>reflections</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.biweekly</groupId>
-            <artifactId>biweekly</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>

@@ -11,14 +11,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.source.version>9</project.source.version>
-        <project.target.version>9</project.target.version>
+        <project.source.version>8</project.source.version>
+        <project.target.version>8</project.target.version>
     </properties>
 
     <modules>
         <module>chess-api</module>
-        <module>chess-reader</module>
-        <module>chess-core</module>
         <module>chess-servlet-api</module>
         <module>chess-2-ear</module>
     </modules>
@@ -28,16 +26,6 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>chess-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>chess-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>chess-reader</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -52,54 +40,9 @@
                 <version>2.4.0</version>
             </dependency>
             <dependency>
-                <groupId>javax.ejb</groupId>
-                <artifactId>javax.ejb-api</artifactId>
-                <version>3.2</version>
-            </dependency>
-            <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>3.1.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jdom</groupId>
-                <artifactId>jdom</artifactId>
-                <version>2.0.2</version>
-            </dependency>
-            <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time</artifactId>
-                <version>2.9.9</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
-                <version>3.2.3.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
-                <version>3.2.3.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>3.2.3.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>22.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.reflections</groupId>
-                <artifactId>reflections</artifactId>
-                <version>0.9.11</version>
-            </dependency>
-            <dependency>
-                <groupId>net.sf.biweekly</groupId>
-                <artifactId>biweekly</artifactId>
-                <version>0.6.2</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.gson</groupId>

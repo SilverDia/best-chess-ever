@@ -32,10 +32,6 @@
                         <earSourceDirectory>src\main\application\META-INF</earSourceDirectory>
                         <finalName>ChessGame</finalName>
                         <modules>
-                            <ejbModule>
-                                <groupId>${project.groupId}</groupId>
-                                <artifactId>chess-core</artifactId>
-                            </ejbModule>
                             <webModule>
                                 <groupId>${project.groupId}</groupId>
                                 <artifactId>chess-servlet-api</artifactId>
@@ -52,16 +48,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>chess-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>chess-core</artifactId>
-            <version>${project.version}</version>
-            <type>ejb</type>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>chess-reader</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
