@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 html, body {
-/* 	background-image: url("/ChessGame/project/resources/chess-wallpaper.jpeg"); */
-	background-image: url("/best-chess/project/resources/chess-wallpaper-3.jpeg");
+ 	background-image: url("/ChessGame/project/resources/chess-wallpaper.jpeg");
+/*	background-image: url("/best-chess/project/resources/chess-wallpaper-3.jpeg"); */
 	background-size: cover;
 	background-repeat: no-repeat;
 	

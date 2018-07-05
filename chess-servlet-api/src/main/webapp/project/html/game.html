@@ -2,16 +2,76 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="/best-chess/project/css/styles.css" />
+        <link rel="stylesheet" type="text/css" href="/ChessGame/project/css/styles.css" />
         <title>Schach - Spiel</title>
-        <script src="/WebApplication/dhbw/chess/project/js/turn_validation.js"></script>
+        <script src="/ChessGame/project/js/turn_validation.js"></script>
     </head>
     <body> 
-        <nav id="navbar" class="navigation"></nav>
-<!-- hier vielleicht, damits schöner und schlanker ist versuchen, das auch so zu generieren, wie die navbar-->
-        <div id="game">
-!#Schachbrett#!
+        <nav id="navbar" class="navbar"></nav>
+        <div class="content">
+        	<div class="content-block">
+	            <div class="grid">
+					<div id="turnInfo" class="grid-turnInfo">
+					</div>
+	                <div id="game" class="grid-game">
+	                </div>
+	                <div class="grid-pawn-convertion-white">
+	                    <table id="white" class="chessboard invisible">
+	                        <tr>
+	                            <td class="chessboard-tile light queen white piece">
+	                                <img src="/DHBW-Projekt/resources/images/queen_white.png"/>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="chessboard-tile dark bishop white piece">
+	                                <img src="/DHBW-Projekt/resources/images/bishop_white.png"/>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="chessboard-tile light knight white piece">
+	                                <img src="/DHBW-Projekt/resources/images/knight_white.png"/>
+	                            </td>
+	                        </tr>
+	                        <tr>            
+	                            <td class="chessboard-tile dark rook white piece">
+	                                <img src="/DHBW-Projekt/resources/images/rook_white.png"/>            
+	                            </td>
+	                        </tr>
+	                    </table>   
+	</div>
+	<div class="grid-pawn-convertion-black">
+	                    <table id="black" class="chessboard invisible">
+	                        <tr>            
+	                            <td class="chessboard-tile light queen black piece">
+	                                <img src="/DHBW-Projekt/resources/images/queen_black.png" />
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="chessboard-tile dark bishop black piece">
+	                                <img src="/DHBW-Projekt/resources/images/bishop_black.png" />
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="chessboard-tile light knight black piece">
+	                                <img src="/DHBW-Projekt/resources/images/knight_black.png" />
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="chessboard-tile dark rook black piece">
+	                                <img src="/DHBW-Projekt/resources/images/rook_black.png" />
+	                            </td>
+	                        </tr>
+	                    </table>
+	                </div>
+	                <div id="game-log" class="grid-game-log">
+	gamelog-placeholder
+	                </div>
+	            </div>
+            </div>
+            <!-- nur zum testen, später ausgelöst, wenn ein pawn bis ganz hinten durch kommt -->
+            <div id="toggleBlack" onclick="toggle('black')">toggleBlack</div>
+            <div id="toggleWhite" onclick="toggle('white')">toggleWhite</div>
         </div>
     </body>
+    <script src="/ChessGame/project/js/script.js"></script>
 </html>
-<script src="/best-chess/project/js/script.js"></script>
