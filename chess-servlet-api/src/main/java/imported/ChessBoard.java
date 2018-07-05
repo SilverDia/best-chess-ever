@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Servlet implementation class ChessBoard
@@ -65,8 +64,7 @@ public class ChessBoard extends HttpServlet {
 	}
 
 	private List<String> readTxtFile(String path) throws IOException {
-		return Files.readAllLines(Paths.get(getServletContext().getRealPath(path))).stream()
-				.collect(Collectors.toCollection(ArrayList<String>::new));
+		return new ArrayList<>(Files.readAllLines(Paths.get(getServletContext().getRealPath(path))));
 	}
 
 	private String[][] layOutFigures(Map<String, String[]> parameters) {
@@ -156,7 +154,7 @@ public class ChessBoard extends HttpServlet {
 		sb.append("\t\t\t\t<td id=\"tile-" + x + y + "\" class=\"" + "chessboard-tile " + tileColor + " " + piece[name]
 				+ " " + containsPiece + "\"" + isClickable + ">\n");
 		if (piece[name] != "")
-			sb.append("\t\t\t\t\t<img src=\"/DHBW-Projekt/resources/images/" + layout[y][x] + ".png\" " + isTurn
+			sb.append("\t\t\t\t\t<img src=\"/ChessGame/resources/images/" + layout[y][x] + ".png\" " + isTurn
 					+ "/>\n");
 		sb.append("\t\t\t\t</td>\n");
 		return sb.toString();

@@ -1,8 +1,8 @@
-var navbarContent = '<a href="/DHBW-Projekt/resources/html/index.html">Startseite</a>';
-navbarContent += '<a href="/DHBW-Projekt/ChessBoard">Spiel</a>';
-navbarContent += '<a href="/DHBW-Projekt/HighscoreTable">Highscore</a>';
-navbarContent += '<div class="dropdown"><a class="dropbtn" href="/DHBW-Projekt/resources/html/manual.html">Anleitung</a><div class="dropdown-content"><a href="/DHBW-Projekt/resources/html/manual.html#introduction">Einleitung</a><a href="/DHBW-Projekt/resources/html/manual.html#turns">Spielzüge</a><a href="/DHBW-Projekt/resources/html/manual.html#endings">Spielende</a></div></div>';
-navbarContent += '<a href="/DHBW-Projekt/resources/html/impressum.html">Impressum</a>';
+var navbarContent = '<a href="/ChessGame/resources/html/index.html">Startseite</a>';
+navbarContent += '<a href="/ChessGame/ChessBoard">Spiel</a>';
+navbarContent += '<a href="/ChessGame/HighscoreTable">Highscore</a>';
+navbarContent += '<div class="dropdown"><a class="dropbtn" href="/ChessGame/resources/html/manual.html">Anleitung</a><div class="dropdown-content"><a href="/ChessGame/resources/html/manual.html#introduction">Einleitung</a><a href="/ChessGame/resources/html/manual.html#turns">Spielzüge</a><a href="/ChessGame/resources/html/manual.html#endings">Spielende</a></div></div>';
+navbarContent += '<a href="/ChessGame/resources/html/impressum.html">Impressum</a>';
 navbarContent += '<a href="javascript:void(0);" class="navbarIcon" onclick="toggleNavbar()"><i class="fa fa-bars"></i></a>';
 document.getElementById("navbar").innerHTML = navbarContent;
 // bei der Anleitung vll noch ne hidden list drunter legen und da dann links rein packen, die dann weiterleiten zuden einzelnen unterpunkten des Textes, nachdem der formatiert worden ist und nicht mehr nur sporadisch eingefügt ist

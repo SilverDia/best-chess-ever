@@ -3,7 +3,7 @@
 
 body{
     margin: 0px;
-    background-image: url("/DHBW-Projekt/resources/images/chess_background.png");
+    background-image: url("/ChessGame/resources/images/chess_background.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;

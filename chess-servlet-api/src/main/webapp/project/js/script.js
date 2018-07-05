@@ -1,5 +1,5 @@
 var navbarContent = '<a href="/WebApplication/dhbw/chess/project/html/index.html">Startseite</a>';
-navbarContent += '<a href="/DHBW-Projekt/Schachbrett">Spiel</a>';
+navbarContent += '<a href="/ChessGame/Schachbrett">Spiel</a>';
 navbarContent += '<a href="/WebApplication/dhbw/chess/project/html/highscore.html">Highscore</a>';
 navbarContent += '<a href="/WebApplication/dhbw/chess/project/html/manual.html">Anleitung</a>';
 navbarContent += '<a href="/WebApplication/dhbw/chess/project/html/impressum.html">Impressum</a>';

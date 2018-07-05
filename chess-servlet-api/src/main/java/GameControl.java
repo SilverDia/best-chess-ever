@@ -41,7 +41,7 @@ public class GameControl extends HttpServlet {
 
     private RequestDispatcher redirectRequest(HttpServletRequest request) {
         //Default dispatcher if nothing´s matching
-        RequestDispatcher dispatcher = request.getRequestDispatcher("../project/html/entrypage.html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/ChessGame/resources/project/html/entrypage.html");
         //Checking for next servlet
         if (request.getParameter(ACTION) != null && ! request.getParameter(ACTION).equals("")) {
             //Check existence of servlet name --- else return entryPage.jsp

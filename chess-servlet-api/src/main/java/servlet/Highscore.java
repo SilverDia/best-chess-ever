@@ -13,7 +13,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = { "/HighscoreTable" })
 public class Highscore extends HttpServlet {
@@ -23,6 +22,7 @@ public class Highscore extends HttpServlet {
 	protected void doGetPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		StringBuffer requestUrl = request.getRequestURL();
 		for (String line : readTxtFile("/resources/html/highscore.html")) {
 			if (line.equals("!#highscore#!"))
 				response.getWriter().println(createHighscoreTable(request.getParameterMap()));
@@ -44,8 +44,7 @@ public class Highscore extends HttpServlet {
 	}
 
 	private List<String> readTxtFile(String path) throws IOException {
-		return Files.readAllLines(Paths.get(getServletContext().getRealPath(path))).stream()
-				.collect(Collectors.toCollection(ArrayList<String>::new));
+		return new ArrayList<>(Files.readAllLines(Paths.get(getServletContext().getRealPath(path))));
 	}
 
 	/**
