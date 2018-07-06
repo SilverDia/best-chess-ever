@@ -11,10 +11,12 @@ import java.util.ArrayList;
 
 public class Movement {
 
+    private String moveFromSquareId;
     private String moveToSquareId;
     private ArrayList<MovementRuleConfig.Move> rules = new ArrayList<>();
 
-    public Movement(String moveToSquareId, MovementRuleConfig.Move move) {
+    public Movement(String moveFromSquareId, String moveToSquareId, MovementRuleConfig.Move move) {
+        this.moveFromSquareId = moveFromSquareId;
         this.moveToSquareId = moveToSquareId;
         addMovementRule(move);
     }
@@ -30,6 +32,10 @@ public class Movement {
 
     public String getMoveToSquareId() {
         return moveToSquareId;
+    }
+
+    public String getMoveFromSquareId() {
+        return moveFromSquareId;
     }
 
     public ArrayList<MovementRuleConfig.Move> getRules() {

@@ -48,6 +48,14 @@ public abstract class Piece {
         return BoardConfig.toInitSquareId(color, coordinates);
     }
 
+    public Movement move(String squareId) {
+        if (possibleMoves.containsKey(squareId)) {
+            setPositionSquareId(squareId);
+            return possibleMoves.get(squareId);
+        }
+        return null;
+    }
+
     public void addPossibleMove(Movement movement){
         possibleMoves.put(movement.getMoveToSquareId(), movement);
     }

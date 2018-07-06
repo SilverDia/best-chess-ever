@@ -2,7 +2,9 @@ package api.chess.player;
 
 import api.chess.equipment.pieces.Piece;
 import api.chess.equipment.pieces.PieceSet;
+import api.chess.gameplay.rules.Movement;
 import api.chess.gameplay.rules.Turn;
+import api.config.MovementRuleConfig;
 import api.config.PieceConfig;
 
 import java.util.ArrayList;
@@ -15,13 +17,14 @@ public class Player {
 
     private String name;
     private PieceConfig.Color color;
+    private boolean active;
+    private boolean isChecked;
+    private boolean canCheck;
 
     private PieceSet pieceSet;
 
     private HashMap<String, Piece> freePieces = new HashMap<>();
     private HashMap<String, Piece> capturedPieces = new HashMap<>();
-
-    private LinkedList<Turn> lastTurns = new LinkedList<>();
 
     public void initPlayer(String name, PieceConfig.Color color) {
         this.name = name;
@@ -31,9 +34,11 @@ public class Player {
         pieceSet.init(color);
 
         updatePlayer();
+        active = color.equals(PieceConfig.Color.WHITE);
     }
 
     public void updatePlayer() {
+        active = !active;
         for (Piece piece : pieceSet.getPieces()) {
             String id = piece.getId();
             if (piece.isCaptured()) {
@@ -46,9 +51,8 @@ public class Player {
         }
     }
 
-    public void movePiece(String pieceId, String moveToSqaureId) {
-        pieceSet.movePiece(pieceId, moveToSqaureId);
-        updatePlayer();
+    public Movement movePiece(String pieceId, String moveToSqaureId) {
+        return pieceSet.movePiece(pieceId, moveToSqaureId);
     }
 
     public void removeCapturedPiece(String pieceId) {
@@ -57,5 +61,45 @@ public class Player {
 
     public HashMap<String, Piece> getFreePieces() {
         return freePieces;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public void setCanCheck(boolean canCheck) {
+        this.canCheck = canCheck;
+    }
+
+    public boolean isCanCheck() {
+        return canCheck;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public PieceConfig.Color getColor() {
+        return color;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public PieceSet getPieceSet() {
+        return pieceSet;
+    }
+
+    public HashMap<String, Piece> getCapturedPieces() {
+        return capturedPieces;
     }
 }

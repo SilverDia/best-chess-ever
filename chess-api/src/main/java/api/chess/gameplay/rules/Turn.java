@@ -2,61 +2,76 @@ package api.chess.gameplay.rules;
 
 import api.chess.player.Player;
 import api.config.MovementRuleConfig;
+import api.config.PieceConfig;
 import com.google.gson.Gson;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public class Turn {
     private final transient static Logger LOG = Logger.getLogger(Turn.class.getName());
 
-    private Player player;
-    private MovementRuleConfig.Move move;
-    private String pieceId;
-    private String fromSquareId;
-    private String toSquareId;
+    private PieceConfig.Color playerColor;
+    private Movement movement;
+    private boolean checked;
+    private boolean checkmated;
+    private Date startTime;
+    private Date endTime;
+    private String duration;
+
+
+    public Turn(PieceConfig.Color playerColor, Movement movement, boolean checked, boolean checkmated, Date startTime, Date endTime) {
+        this.playerColor = playerColor;
+        this.movement = movement;
+        this.checked = checked;
+        this.checkmated = checkmated;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        long millis = endTime.getTime() - startTime.getTime();
+        duration = String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes(millis),
+                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+    }
 
     @Override
     public String toString() {
         return new Gson().toJson(this);
     }
 
-    public Player getPlayer() {
-        return player;
+    public PieceConfig.Color getPlayerColor() {
+        return playerColor;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayerColor(PieceConfig.Color playerColor) {
+        this.playerColor = playerColor;
     }
 
-    public MovementRuleConfig.Move getMove() {
-        return move;
+    public Movement getMovement() {
+        return movement;
     }
 
-    public void setMove(MovementRuleConfig.Move move) {
-        this.move = move;
+    public void setMovement(Movement movement) {
+        this.movement = movement;
     }
 
-    public String getPieceId() {
-        return pieceId;
+    public boolean isChecked() {
+        return checked;
     }
 
-    public void setPieceId(String pieceId) {
-        this.pieceId = pieceId;
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
-    public String getFromSquareId() {
-        return fromSquareId;
+    public boolean isCheckmated() {
+        return checkmated;
     }
 
-    public void setFromSquareId(String fromSquareId) {
-        this.fromSquareId = fromSquareId;
+    public void setCheckmated(boolean checkmated) {
+        this.checkmated = checkmated;
     }
 
-    public String getToSquareId() {
-        return toSquareId;
-    }
-
-    public void setToSquareId(String toSquareId) {
-        this.toSquareId = toSquareId;
+    public Date getEndTime() {
+        return endTime;
     }
 }

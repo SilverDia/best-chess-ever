@@ -2,6 +2,8 @@ package api.chess.gameplay.game;
 
 import api.chess.equipment.board.Board;
 import api.chess.equipment.pieces.Piece;
+import api.chess.gameplay.rules.Movement;
+import api.chess.gameplay.rules.Turn;
 import api.chess.player.Player;
 import api.config.GameConfig;
 import api.config.PieceConfig;
@@ -9,6 +11,7 @@ import com.google.gson.Gson;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -21,7 +24,11 @@ public class Game {
 
     private Board board = new Board();
 
+    private LinkedList<Turn> turnHistory = new LinkedList<>();
+
     private HashMap<PieceConfig.Color, Player> player = new HashMap<>();
+    private PieceConfig.Color activePlayer;
+    private PieceConfig.Color inactivePlayer;
 
     @Override
     public String toString() {
@@ -35,16 +42,51 @@ public class Game {
         player.get(PieceConfig.Color.WHITE).initPlayer(namePlayerWhite, PieceConfig.Color.WHITE);
         player.get(PieceConfig.Color.BLACK).initPlayer(namePlayerBlack, PieceConfig.Color.BLACK);
 
-        updateBoard();
+        activePlayer = PieceConfig.Color.WHITE;
+        inactivePlayer = PieceConfig.Color.BLACK;
+
+        initBoard();
     }
 
-    private void updateBoard() {
+    public boolean executeMove(String pieceId, String squareId) {
+        try {
+            Movement movement = player.get(activePlayer).movePiece(pieceId, squareId);
+            if (movement != null) {
+                board.movePiece(movement);
+                finishTurn(new Turn(activePlayer, movement, false, false, turnHistory.getLast().getEndTime(), new Date()));
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private void initBoard() {
         board = new Board();
         for (Player player : player.values()) {
             for (Map.Entry<String, Piece> pieceEntry : player.getFreePieces().entrySet()) {
                 board.getSquare(pieceEntry.getValue().getPositionSquareId()).setPieceId(pieceEntry.getKey());
             }
         }
+    }
+
+    private void finishTurn(Turn turn) {
+        activePlayer = activePlayer.equals(PieceConfig.Color.WHITE) ? PieceConfig.Color.BLACK : PieceConfig.Color.WHITE;
+        inactivePlayer = inactivePlayer.equals(PieceConfig.Color.WHITE) ? PieceConfig.Color.BLACK : PieceConfig.Color.WHITE;
+        for (Player p : player.values()) {
+            p.updatePlayer();
+        }
+        // FIXME ▼
+        evaluatePossibleMoves();
+
+        turn.setChecked(player.get(activePlayer).isChecked());
+        turnHistory.add(turn);
+    }
+
+    private void evaluatePossibleMoves() {
+        // TODO Ich schätz mal hier wärs am besten...
+        // TODO Zuerst den inactive Player...
+        // TODO Danach den active Player wegen schach und so...
     }
 
     public String getGameId() {
@@ -57,5 +99,13 @@ public class Game {
 
     public HashMap<PieceConfig.Color, Player> getPlayer() {
         return player;
+    }
+
+    public LinkedList<Turn> getTurnHistory() {
+        return turnHistory;
+    }
+
+    public PieceConfig.Color getActivePlayer() {
+        return activePlayer;
     }
 }

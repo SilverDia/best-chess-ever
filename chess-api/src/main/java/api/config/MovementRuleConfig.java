@@ -71,11 +71,11 @@ public class MovementRuleConfig {
             Square squareToTest = board.getSquare(x_start + steps, y_start + steps);
             steps++;
             if (squareToTest.isVacant()) {
-                piece.addPossibleMove(new Movement(squareToTest.getSquareId(), Move.BASIC_MOVE));
+                piece.addPossibleMove(new Movement(piece.getPositionSquareId(), squareToTest.getSquareId(), Move.BASIC_MOVE));
             } else if (squareToTest.getPieceId().contains(piece.getColor().toString())) {
                 continueEvaluation = false;
             } else {
-                Movement movement = new Movement(squareToTest.getSquareId(), Move.BASIC_MOVE);
+                Movement movement = new Movement(piece.getPositionSquareId(), squareToTest.getSquareId(), Move.BASIC_MOVE);
                 movement.addMovementRule(Move.CAPTURE_MOVE);
                 piece.addPossibleMove(movement);
             }
