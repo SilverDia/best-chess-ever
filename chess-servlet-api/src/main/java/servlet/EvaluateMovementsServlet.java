@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/EvaluateMovementsServlet")
 public class EvaluateMovementsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private final static String ACTION = "action";
+	private final static String ACTION_EVALUATE = "evaluate";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -26,8 +29,11 @@ public class EvaluateMovementsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		if (request.getParameter(ACTION).equals(ACTION_EVALUATE)) {
+
+			response.getWriter().append("Evaluating...");
+
+		}
 	}
 
 	/**
