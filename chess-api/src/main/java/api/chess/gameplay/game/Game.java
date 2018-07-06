@@ -45,6 +45,7 @@ public class Game {
         activePlayer = PieceConfig.Color.WHITE;
         inactivePlayer = PieceConfig.Color.BLACK;
 
+        turnHistory.add(new Turn(null, null, false, false, new Date(), new Date())); // dummy to save game start time and to handle first turn
         initBoard();
     }
 
