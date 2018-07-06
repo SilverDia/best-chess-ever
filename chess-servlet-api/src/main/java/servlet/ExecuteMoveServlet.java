@@ -39,7 +39,7 @@ public class ExecuteMoveServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter(ACTION).equals(ACTION_MOVE)) {
 
-			response.getWriter().append("Test it...");
+			response.getWriter().append("Moving...");
 
 		}
 	}
