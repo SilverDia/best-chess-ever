@@ -1,4 +1,4 @@
-/*************** general settings ***************/
+/*************** GENERAL ***************/
 
 /* background */
 
@@ -50,7 +50,7 @@ body{
     }
 }
 
-/*************** navigation ***************/
+/*************** NAVIGATION ***************/
 
 /*** navigationbar ***/
 
@@ -132,7 +132,7 @@ body{
     display: none;
 }
 
-/*************** content ****************/
+/*************** CONTENT ****************/
 
 .content{
     margin-top: 100px;
@@ -210,7 +210,7 @@ h4{
     transform: rotate(90deg);
 }
 
-/*************** index ***************/
+/*************** INDEX ***************/
 
 .index-grid{
     display: grid;
@@ -271,7 +271,7 @@ h4{
     background-color: #ddd;
 }
 
-/************** highscore ****************/
+/************** HIGHSCORE ****************/
 
 #highscore-table{
     border-collapse: collapse;
@@ -294,11 +294,12 @@ h4{
     text-align: center;
 }
 
-/*************** game ****************/
+/*************** GAME ****************/
 
-.grid{
+.grid-game{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 570px 90px 1fr;
+    row-gap: 0px;
 }
 
 .grid-turnInfo{
@@ -306,7 +307,7 @@ h4{
     grid-row: 1 / 2;
 }
 
-.grid-game{
+.grid-chessboard{
     grid-column: 1 / 2;
     grid-row: 2 / 4;
 }
@@ -381,6 +382,16 @@ h4{
 
 .chosen{
     background-color: yellow;
+}
+
+/*** pawn conversion ***/
+
+.pawn-convertion-white{
+    margin-bottom: -3px;
+}
+
+.pawn-convertion-black{
+    margin-top: -3px;
 }
 
 /*************** manual ****************/

@@ -19,10 +19,10 @@ function toggleNavbar() {
 
 function toggle(string){
     var x = document.getElementById(string);
-    if(x.className === "chessboard"){
+    if(x.className === "chessboard pawn-convertion-"+string){
         x.className += " invisible";
     }else{
-        x.className = "chessboard";
+        x.className = "chessboard pawn-convertion-"+string;
     }
 }
 
