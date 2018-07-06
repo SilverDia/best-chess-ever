@@ -1,0 +1,1876 @@
+{
+	"board": {
+		"chessBoard": {
+			"0": {
+				"A1": {
+					"squareId": "A1",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "ROOK_WHITE_0",
+					"coordinates": {
+						"x": 0,
+						"y": 0,
+						"valid": true
+					}
+				},
+				"B1": {
+					"squareId": "B1",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "KNIGHT_WHITE_0",
+					"coordinates": {
+						"x": 1,
+						"y": 0,
+						"valid": true
+					}
+				},
+				"C1": {
+					"squareId": "C1",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "BISHOP_WHITE_0",
+					"coordinates": {
+						"x": 2,
+						"y": 0,
+						"valid": true
+					}
+				},
+				"D1": {
+					"squareId": "D1",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "KING_WHITE_0",
+					"coordinates": {
+						"x": 3,
+						"y": 0,
+						"valid": true
+					}
+				},
+				"E1": {
+					"squareId": "E1",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "QUEEN_WHITE_0",
+					"coordinates": {
+						"x": 4,
+						"y": 0,
+						"valid": true
+					}
+				},
+				"F1": {
+					"squareId": "F1",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "BISHOP_WHITE_1",
+					"coordinates": {
+						"x": 5,
+						"y": 0,
+						"valid": true
+					}
+				},
+				"G1": {
+					"squareId": "G1",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "KNIGHT_WHITE_1",
+					"coordinates": {
+						"x": 6,
+						"y": 0,
+						"valid": true
+					}
+				},
+				"H1": {
+					"squareId": "H1",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "ROOK_WHITE_1",
+					"coordinates": {
+						"x": 7,
+						"y": 0,
+						"valid": true
+					}
+				}
+			},
+			"1": {
+				"A2": {
+					"squareId": "A2",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "PAWN_WHITE_0",
+					"coordinates": {
+						"x": 0,
+						"y": 1,
+						"valid": true
+					}
+				},
+				"B2": {
+					"squareId": "B2",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "PAWN_WHITE_1",
+					"coordinates": {
+						"x": 1,
+						"y": 1,
+						"valid": true
+					}
+				},
+				"C2": {
+					"squareId": "C2",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "PAWN_WHITE_2",
+					"coordinates": {
+						"x": 2,
+						"y": 1,
+						"valid": true
+					}
+				},
+				"D2": {
+					"squareId": "D2",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "PAWN_WHITE_3",
+					"coordinates": {
+						"x": 3,
+						"y": 1,
+						"valid": true
+					}
+				},
+				"E2": {
+					"squareId": "E2",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "PAWN_WHITE_4",
+					"coordinates": {
+						"x": 4,
+						"y": 1,
+						"valid": true
+					}
+				},
+				"F2": {
+					"squareId": "F2",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "PAWN_WHITE_5",
+					"coordinates": {
+						"x": 5,
+						"y": 1,
+						"valid": true
+					}
+				},
+				"G2": {
+					"squareId": "G2",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "PAWN_WHITE_6",
+					"coordinates": {
+						"x": 6,
+						"y": 1,
+						"valid": true
+					}
+				},
+				"H2": {
+					"squareId": "H2",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "PAWN_WHITE_7",
+					"coordinates": {
+						"x": 7,
+						"y": 1,
+						"valid": true
+					}
+				}
+			},
+			"2": {
+				"A3": {
+					"squareId": "A3",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 0,
+						"y": 2,
+						"valid": true
+					}
+				},
+				"B3": {
+					"squareId": "B3",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 1,
+						"y": 2,
+						"valid": true
+					}
+				},
+				"C3": {
+					"squareId": "C3",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 2,
+						"y": 2,
+						"valid": true
+					}
+				},
+				"D3": {
+					"squareId": "D3",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 3,
+						"y": 2,
+						"valid": true
+					}
+				},
+				"E3": {
+					"squareId": "E3",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 4,
+						"y": 2,
+						"valid": true
+					}
+				},
+				"F3": {
+					"squareId": "F3",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 5,
+						"y": 2,
+						"valid": true
+					}
+				},
+				"G3": {
+					"squareId": "G3",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 6,
+						"y": 2,
+						"valid": true
+					}
+				},
+				"H3": {
+					"squareId": "H3",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 7,
+						"y": 2,
+						"valid": true
+					}
+				}
+			},
+			"3": {
+				"A4": {
+					"squareId": "A4",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 0,
+						"y": 3,
+						"valid": true
+					}
+				},
+				"B4": {
+					"squareId": "B4",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 1,
+						"y": 3,
+						"valid": true
+					}
+				},
+				"C4": {
+					"squareId": "C4",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 2,
+						"y": 3,
+						"valid": true
+					}
+				},
+				"D4": {
+					"squareId": "D4",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 3,
+						"y": 3,
+						"valid": true
+					}
+				},
+				"E4": {
+					"squareId": "E4",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 4,
+						"y": 3,
+						"valid": true
+					}
+				},
+				"F4": {
+					"squareId": "F4",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 5,
+						"y": 3,
+						"valid": true
+					}
+				},
+				"G4": {
+					"squareId": "G4",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 6,
+						"y": 3,
+						"valid": true
+					}
+				},
+				"H4": {
+					"squareId": "H4",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 7,
+						"y": 3,
+						"valid": true
+					}
+				}
+			},
+			"4": {
+				"A5": {
+					"squareId": "A5",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 0,
+						"y": 4,
+						"valid": true
+					}
+				},
+				"B5": {
+					"squareId": "B5",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 1,
+						"y": 4,
+						"valid": true
+					}
+				},
+				"C5": {
+					"squareId": "C5",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 2,
+						"y": 4,
+						"valid": true
+					}
+				},
+				"D5": {
+					"squareId": "D5",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 3,
+						"y": 4,
+						"valid": true
+					}
+				},
+				"E5": {
+					"squareId": "E5",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 4,
+						"y": 4,
+						"valid": true
+					}
+				},
+				"F5": {
+					"squareId": "F5",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 5,
+						"y": 4,
+						"valid": true
+					}
+				},
+				"G5": {
+					"squareId": "G5",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 6,
+						"y": 4,
+						"valid": true
+					}
+				},
+				"H5": {
+					"squareId": "H5",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 7,
+						"y": 4,
+						"valid": true
+					}
+				}
+			},
+			"5": {
+				"A6": {
+					"squareId": "A6",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 0,
+						"y": 5,
+						"valid": true
+					}
+				},
+				"B6": {
+					"squareId": "B6",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 1,
+						"y": 5,
+						"valid": true
+					}
+				},
+				"C6": {
+					"squareId": "C6",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 2,
+						"y": 5,
+						"valid": true
+					}
+				},
+				"D6": {
+					"squareId": "D6",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 3,
+						"y": 5,
+						"valid": true
+					}
+				},
+				"E6": {
+					"squareId": "E6",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 4,
+						"y": 5,
+						"valid": true
+					}
+				},
+				"F6": {
+					"squareId": "F6",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 5,
+						"y": 5,
+						"valid": true
+					}
+				},
+				"G6": {
+					"squareId": "G6",
+					"color": "WHITE",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 6,
+						"y": 5,
+						"valid": true
+					}
+				},
+				"H6": {
+					"squareId": "H6",
+					"color": "BLACK",
+					"vacant": true,
+					"pieceId": "",
+					"coordinates": {
+						"x": 7,
+						"y": 5,
+						"valid": true
+					}
+				}
+			},
+			"6": {
+				"A7": {
+					"squareId": "A7",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "PAWN_BLACK_0",
+					"coordinates": {
+						"x": 0,
+						"y": 6,
+						"valid": true
+					}
+				},
+				"B7": {
+					"squareId": "B7",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "PAWN_BLACK_1",
+					"coordinates": {
+						"x": 1,
+						"y": 6,
+						"valid": true
+					}
+				},
+				"C7": {
+					"squareId": "C7",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "PAWN_BLACK_2",
+					"coordinates": {
+						"x": 2,
+						"y": 6,
+						"valid": true
+					}
+				},
+				"D7": {
+					"squareId": "D7",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "PAWN_BLACK_3",
+					"coordinates": {
+						"x": 3,
+						"y": 6,
+						"valid": true
+					}
+				},
+				"E7": {
+					"squareId": "E7",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "PAWN_BLACK_4",
+					"coordinates": {
+						"x": 4,
+						"y": 6,
+						"valid": true
+					}
+				},
+				"F7": {
+					"squareId": "F7",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "PAWN_BLACK_5",
+					"coordinates": {
+						"x": 5,
+						"y": 6,
+						"valid": true
+					}
+				},
+				"G7": {
+					"squareId": "G7",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "PAWN_BLACK_6",
+					"coordinates": {
+						"x": 6,
+						"y": 6,
+						"valid": true
+					}
+				},
+				"H7": {
+					"squareId": "H7",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "PAWN_BLACK_7",
+					"coordinates": {
+						"x": 7,
+						"y": 6,
+						"valid": true
+					}
+				}
+			},
+			"7": {
+				"A8": {
+					"squareId": "A8",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "ROOK_BLACK_0",
+					"coordinates": {
+						"x": 0,
+						"y": 7,
+						"valid": true
+					}
+				},
+				"B8": {
+					"squareId": "B8",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "KNIGHT_BLACK_0",
+					"coordinates": {
+						"x": 1,
+						"y": 7,
+						"valid": true
+					}
+				},
+				"C8": {
+					"squareId": "C8",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "BISHOP_BLACK_0",
+					"coordinates": {
+						"x": 2,
+						"y": 7,
+						"valid": true
+					}
+				},
+				"D8": {
+					"squareId": "D8",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "KING_BLACK_0",
+					"coordinates": {
+						"x": 3,
+						"y": 7,
+						"valid": true
+					}
+				},
+				"E8": {
+					"squareId": "E8",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "QUEEN_BLACK_0",
+					"coordinates": {
+						"x": 4,
+						"y": 7,
+						"valid": true
+					}
+				},
+				"F8": {
+					"squareId": "F8",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "BISHOP_BLACK_1",
+					"coordinates": {
+						"x": 5,
+						"y": 7,
+						"valid": true
+					}
+				},
+				"G8": {
+					"squareId": "G8",
+					"color": "WHITE",
+					"vacant": false,
+					"pieceId": "KNIGHT_BLACK_1",
+					"coordinates": {
+						"x": 6,
+						"y": 7,
+						"valid": true
+					}
+				},
+				"H8": {
+					"squareId": "H8",
+					"color": "BLACK",
+					"vacant": false,
+					"pieceId": "ROOK_BLACK_1",
+					"coordinates": {
+						"x": 7,
+						"y": 7,
+						"valid": true
+					}
+				}
+			}
+		}
+	},
+	"player": {
+		"BLACK": {
+			"name": "b",
+			"color": "BLACK",
+			"pieceSet": {
+				"king": {
+					"id": "KING_BLACK_0",
+					"name": "KING",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/king_black.png",
+					"positionSquareId": "D8",
+					"captured": false,
+					"moves": [
+						"STRAIGHT_ONE",
+						"DIAGONAL_ONE",
+						"CASTELING"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"queen": {
+					"id": "QUEEN_BLACK_0",
+					"name": "QUEEN",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/queen_black.png",
+					"positionSquareId": "E8",
+					"captured": false,
+					"moves": [
+						"STRAIGHT",
+						"DIAGONAL"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"bishops": {
+					"BISHOP_BLACK_1": {
+						"id": "BISHOP_BLACK_1",
+						"name": "BISHOP",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/bishop_black.png",
+						"positionSquareId": "F8",
+						"captured": false,
+						"moves": [
+							"STRAIGHT"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"BISHOP_BLACK_0": {
+						"id": "BISHOP_BLACK_0",
+						"name": "BISHOP",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/bishop_black.png",
+						"positionSquareId": "C8",
+						"captured": false,
+						"moves": [
+							"STRAIGHT"
+						],
+						"possibleMoves": {
+							
+						}
+					}
+				},
+				"knights": {
+					"KNIGHT_BLACK_0": {
+						"id": "KNIGHT_BLACK_0",
+						"name": "KNIGHT",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/knight_black.png",
+						"positionSquareId": "B8",
+						"captured": false,
+						"moves": [
+							"KNIGHT_JUMP"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"KNIGHT_BLACK_1": {
+						"id": "KNIGHT_BLACK_1",
+						"name": "KNIGHT",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/knight_black.png",
+						"positionSquareId": "G8",
+						"captured": false,
+						"moves": [
+							"KNIGHT_JUMP"
+						],
+						"possibleMoves": {
+							
+						}
+					}
+				},
+				"rooks": {
+					"ROOK_BLACK_1": {
+						"id": "ROOK_BLACK_1",
+						"name": "ROOK",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/rook_black.png",
+						"positionSquareId": "H8",
+						"captured": false,
+						"moves": [
+							"STRAIGHT",
+							"CASTELING"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"ROOK_BLACK_0": {
+						"id": "ROOK_BLACK_0",
+						"name": "ROOK",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/rook_black.png",
+						"positionSquareId": "A8",
+						"captured": false,
+						"moves": [
+							"STRAIGHT",
+							"CASTELING"
+						],
+						"possibleMoves": {
+							
+						}
+					}
+				},
+				"pawns": {
+					"PAWN_BLACK_7": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_BLACK_7",
+						"name": "PAWN",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+						"positionSquareId": "H7",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_BLACK_2": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_BLACK_2",
+						"name": "PAWN",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+						"positionSquareId": "C7",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_BLACK_1": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_BLACK_1",
+						"name": "PAWN",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+						"positionSquareId": "B7",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_BLACK_0": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_BLACK_0",
+						"name": "PAWN",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+						"positionSquareId": "A7",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_BLACK_6": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_BLACK_6",
+						"name": "PAWN",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+						"positionSquareId": "G7",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_BLACK_5": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_BLACK_5",
+						"name": "PAWN",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+						"positionSquareId": "F7",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_BLACK_4": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_BLACK_4",
+						"name": "PAWN",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+						"positionSquareId": "E7",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_BLACK_3": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_BLACK_3",
+						"name": "PAWN",
+						"color": "BLACK",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+						"positionSquareId": "D7",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					}
+				}
+			},
+			"freePieces": {
+				"KING_BLACK_0": {
+					"id": "KING_BLACK_0",
+					"name": "KING",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/king_black.png",
+					"positionSquareId": "D8",
+					"captured": false,
+					"moves": [
+						"STRAIGHT_ONE",
+						"DIAGONAL_ONE",
+						"CASTELING"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_BLACK_2": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_BLACK_2",
+					"name": "PAWN",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+					"positionSquareId": "C7",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_BLACK_1": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_BLACK_1",
+					"name": "PAWN",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+					"positionSquareId": "B7",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_BLACK_0": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_BLACK_0",
+					"name": "PAWN",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+					"positionSquareId": "A7",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_BLACK_6": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_BLACK_6",
+					"name": "PAWN",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+					"positionSquareId": "G7",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_BLACK_5": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_BLACK_5",
+					"name": "PAWN",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+					"positionSquareId": "F7",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_BLACK_4": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_BLACK_4",
+					"name": "PAWN",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+					"positionSquareId": "E7",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_BLACK_3": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_BLACK_3",
+					"name": "PAWN",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+					"positionSquareId": "D7",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"QUEEN_BLACK_0": {
+					"id": "QUEEN_BLACK_0",
+					"name": "QUEEN",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/queen_black.png",
+					"positionSquareId": "E8",
+					"captured": false,
+					"moves": [
+						"STRAIGHT",
+						"DIAGONAL"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_BLACK_7": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_BLACK_7",
+					"name": "PAWN",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_black.png",
+					"positionSquareId": "H7",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"ROOK_BLACK_1": {
+					"id": "ROOK_BLACK_1",
+					"name": "ROOK",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/rook_black.png",
+					"positionSquareId": "H8",
+					"captured": false,
+					"moves": [
+						"STRAIGHT",
+						"CASTELING"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"ROOK_BLACK_0": {
+					"id": "ROOK_BLACK_0",
+					"name": "ROOK",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/rook_black.png",
+					"positionSquareId": "A8",
+					"captured": false,
+					"moves": [
+						"STRAIGHT",
+						"CASTELING"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"KNIGHT_BLACK_0": {
+					"id": "KNIGHT_BLACK_0",
+					"name": "KNIGHT",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/knight_black.png",
+					"positionSquareId": "B8",
+					"captured": false,
+					"moves": [
+						"KNIGHT_JUMP"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"KNIGHT_BLACK_1": {
+					"id": "KNIGHT_BLACK_1",
+					"name": "KNIGHT",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/knight_black.png",
+					"positionSquareId": "G8",
+					"captured": false,
+					"moves": [
+						"KNIGHT_JUMP"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"BISHOP_BLACK_1": {
+					"id": "BISHOP_BLACK_1",
+					"name": "BISHOP",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/bishop_black.png",
+					"positionSquareId": "F8",
+					"captured": false,
+					"moves": [
+						"STRAIGHT"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"BISHOP_BLACK_0": {
+					"id": "BISHOP_BLACK_0",
+					"name": "BISHOP",
+					"color": "BLACK",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/bishop_black.png",
+					"positionSquareId": "C8",
+					"captured": false,
+					"moves": [
+						"STRAIGHT"
+					],
+					"possibleMoves": {
+						
+					}
+				}
+			},
+			"capturedPieces": {
+				
+			},
+			"lastTurns": []
+		},
+		"WHITE": {
+			"name": "w",
+			"color": "WHITE",
+			"pieceSet": {
+				"king": {
+					"id": "KING_WHITE_0",
+					"name": "KING",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/king_white.png",
+					"positionSquareId": "D1",
+					"captured": false,
+					"moves": [
+						"STRAIGHT_ONE",
+						"DIAGONAL_ONE",
+						"CASTELING"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"queen": {
+					"id": "QUEEN_WHITE_0",
+					"name": "QUEEN",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/queen_white.png",
+					"positionSquareId": "E1",
+					"captured": false,
+					"moves": [
+						"STRAIGHT",
+						"DIAGONAL"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"bishops": {
+					"BISHOP_WHITE_0": {
+						"id": "BISHOP_WHITE_0",
+						"name": "BISHOP",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/bishop_white.png",
+						"positionSquareId": "C1",
+						"captured": false,
+						"moves": [
+							"STRAIGHT"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"BISHOP_WHITE_1": {
+						"id": "BISHOP_WHITE_1",
+						"name": "BISHOP",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/bishop_white.png",
+						"positionSquareId": "F1",
+						"captured": false,
+						"moves": [
+							"STRAIGHT"
+						],
+						"possibleMoves": {
+							
+						}
+					}
+				},
+				"knights": {
+					"KNIGHT_WHITE_0": {
+						"id": "KNIGHT_WHITE_0",
+						"name": "KNIGHT",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/knight_white.png",
+						"positionSquareId": "B1",
+						"captured": false,
+						"moves": [
+							"KNIGHT_JUMP"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"KNIGHT_WHITE_1": {
+						"id": "KNIGHT_WHITE_1",
+						"name": "KNIGHT",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/knight_white.png",
+						"positionSquareId": "G1",
+						"captured": false,
+						"moves": [
+							"KNIGHT_JUMP"
+						],
+						"possibleMoves": {
+							
+						}
+					}
+				},
+				"rooks": {
+					"ROOK_WHITE_1": {
+						"id": "ROOK_WHITE_1",
+						"name": "ROOK",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/rook_white.png",
+						"positionSquareId": "H1",
+						"captured": false,
+						"moves": [
+							"STRAIGHT",
+							"CASTELING"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"ROOK_WHITE_0": {
+						"id": "ROOK_WHITE_0",
+						"name": "ROOK",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/rook_white.png",
+						"positionSquareId": "A1",
+						"captured": false,
+						"moves": [
+							"STRAIGHT",
+							"CASTELING"
+						],
+						"possibleMoves": {
+							
+						}
+					}
+				},
+				"pawns": {
+					"PAWN_WHITE_7": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_WHITE_7",
+						"name": "PAWN",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+						"positionSquareId": "H2",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_WHITE_5": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_WHITE_5",
+						"name": "PAWN",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+						"positionSquareId": "F2",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_WHITE_6": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_WHITE_6",
+						"name": "PAWN",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+						"positionSquareId": "G2",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_WHITE_0": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_WHITE_0",
+						"name": "PAWN",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+						"positionSquareId": "A2",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_WHITE_3": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_WHITE_3",
+						"name": "PAWN",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+						"positionSquareId": "D2",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_WHITE_4": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_WHITE_4",
+						"name": "PAWN",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+						"positionSquareId": "E2",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_WHITE_1": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_WHITE_1",
+						"name": "PAWN",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+						"positionSquareId": "B2",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					},
+					"PAWN_WHITE_2": {
+						"moved": false,
+						"enPassantCapture": false,
+						"promotion": false,
+						"id": "PAWN_WHITE_2",
+						"name": "PAWN",
+						"color": "WHITE",
+						"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+						"positionSquareId": "C2",
+						"captured": false,
+						"moves": [
+							"PAWN_MOVE",
+							"PAWN_FIRST_MOVE",
+							"PAWN_CAPTURE",
+							"PROMOTION"
+						],
+						"possibleMoves": {
+							
+						}
+					}
+				}
+			},
+			"freePieces": {
+				"BISHOP_WHITE_0": {
+					"id": "BISHOP_WHITE_0",
+					"name": "BISHOP",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/bishop_white.png",
+					"positionSquareId": "C1",
+					"captured": false,
+					"moves": [
+						"STRAIGHT"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"BISHOP_WHITE_1": {
+					"id": "BISHOP_WHITE_1",
+					"name": "BISHOP",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/bishop_white.png",
+					"positionSquareId": "F1",
+					"captured": false,
+					"moves": [
+						"STRAIGHT"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"KING_WHITE_0": {
+					"id": "KING_WHITE_0",
+					"name": "KING",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/king_white.png",
+					"positionSquareId": "D1",
+					"captured": false,
+					"moves": [
+						"STRAIGHT_ONE",
+						"DIAGONAL_ONE",
+						"CASTELING"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"KNIGHT_WHITE_0": {
+					"id": "KNIGHT_WHITE_0",
+					"name": "KNIGHT",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/knight_white.png",
+					"positionSquareId": "B1",
+					"captured": false,
+					"moves": [
+						"KNIGHT_JUMP"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"KNIGHT_WHITE_1": {
+					"id": "KNIGHT_WHITE_1",
+					"name": "KNIGHT",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/knight_white.png",
+					"positionSquareId": "G1",
+					"captured": false,
+					"moves": [
+						"KNIGHT_JUMP"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_WHITE_7": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_WHITE_7",
+					"name": "PAWN",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+					"positionSquareId": "H2",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"ROOK_WHITE_1": {
+					"id": "ROOK_WHITE_1",
+					"name": "ROOK",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/rook_white.png",
+					"positionSquareId": "H1",
+					"captured": false,
+					"moves": [
+						"STRAIGHT",
+						"CASTELING"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_WHITE_5": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_WHITE_5",
+					"name": "PAWN",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+					"positionSquareId": "F2",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"ROOK_WHITE_0": {
+					"id": "ROOK_WHITE_0",
+					"name": "ROOK",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/rook_white.png",
+					"positionSquareId": "A1",
+					"captured": false,
+					"moves": [
+						"STRAIGHT",
+						"CASTELING"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_WHITE_6": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_WHITE_6",
+					"name": "PAWN",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+					"positionSquareId": "G2",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"QUEEN_WHITE_0": {
+					"id": "QUEEN_WHITE_0",
+					"name": "QUEEN",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/queen_white.png",
+					"positionSquareId": "E1",
+					"captured": false,
+					"moves": [
+						"STRAIGHT",
+						"DIAGONAL"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_WHITE_0": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_WHITE_0",
+					"name": "PAWN",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+					"positionSquareId": "A2",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_WHITE_3": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_WHITE_3",
+					"name": "PAWN",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+					"positionSquareId": "D2",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_WHITE_4": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_WHITE_4",
+					"name": "PAWN",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+					"positionSquareId": "E2",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_WHITE_1": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_WHITE_1",
+					"name": "PAWN",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+					"positionSquareId": "B2",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				},
+				"PAWN_WHITE_2": {
+					"moved": false,
+					"enPassantCapture": false,
+					"promotion": false,
+					"id": "PAWN_WHITE_2",
+					"name": "PAWN",
+					"color": "WHITE",
+					"imageUrl": "/ChessGame/project/resources/images/piece-sets/default/pawn_white.png",
+					"positionSquareId": "C2",
+					"captured": false,
+					"moves": [
+						"PAWN_MOVE",
+						"PAWN_FIRST_MOVE",
+						"PAWN_CAPTURE",
+						"PROMOTION"
+					],
+					"possibleMoves": {
+						
+					}
+				}
+			},
+			"capturedPieces": {
+				
+			},
+			"lastTurns": []
+		}
+	}
+}

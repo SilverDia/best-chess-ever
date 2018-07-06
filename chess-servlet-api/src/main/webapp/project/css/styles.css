@@ -1,72 +1,338 @@
-/* navigation */
-.navigation{
-    background: linear-gradient(90deg, 
-    rgba(0, 0, 0, 0.1) 0%,
-    rgba(0, 0, 0, 0.2) 25%,
-    rgba(0, 0, 0, 0.3) 50%,
-    rgba(0, 0, 0, 0.4) 75%,
-    rgba(0, 0, 0, 0.5) 100%);
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2),
-    inset 0 0 1px rgba(0, 0, 0, 0.8);
+/*************** GENERAL ***************/
+
+/* background */
+
+body{
+    margin: 0px;
+    background-image: url("/ChessGame/project/resources/kaiman/chess_background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-#navbar{
-    padding: 10px;
-    margin-bottom: 25px;
+/*** responsiveness ***/
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Startseite").*/
+
+@media screen and (max-width: 600px) {
+    .navbar a:not(:first-child) {
+    	display: none;
+    	}
+    .dropbtn {
+    	display: none !important;
+    }
+    .dropdown-content {
+    	display: none !important;
+    }
+    .navbar a.navbarIcon {
+        float: right;
+        display: block;
+    }
 }
 
-#navbar *{
-    margin-left: 10px;
-    margin-right: 10px;
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px) {
+    .navbar.responsive {position: relative;}
+    .navbar.responsive a.navbarIcon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .navbar.responsive a:not(.dropdown-content) {
+        float: none;
+        display: block !important;
+        text-align: left;
+    }
+    .navbar.responsive .dropdown {
+        float: none;
+        display: block !important;
+        text-align: left;
+    }
 }
 
-#navstrip{
-    max-width: 300px;
+/*************** NAVIGATION ***************/
+
+/*** navigationbar ***/
+
+.navbar{
+    background-color: #333;
+    position: fixed;
+  	top: 0;
+  	width: 100%;
+  	z-index: 98;
+  	box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
 }
 
-#text-manual{
-    position: relative;
-    top: -400px;
-    left: 325px;
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+    font-size: 17px;
 }
 
-/* content */
-h1,h2,h3,h4,p{
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #ddd;
+    color: black;
+}
+
+.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/*** manual dropdown navigation ***/
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn { 
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 60px;
+  width: 108px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 6px 16px 0px rgba(0,0,0,0.4);
+  z-index: 99;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/*** responsive navigation ***/
+
+/* Import hamburger menu icon */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+/* Hide the link that should open and close the topnav on small screens */
+.navbar .navbarIcon {
+    display: none;
+}
+
+/*************** CONTENT ****************/
+
+.content{
+    margin-top: 100px;
+    margin-bottom: 64px;
+}
+
+.content-block{
+	margin-top:50px;
+	background-color:white;
+	padding:20px 50px 20px 50px;
+	text-align: center;
+	margin-right:auto;
+	margin-left:auto;
+	max-width: 1000px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/*** content responsive ***/
+
+@media screen and (max-width: 1100px) {
+	.content-block {
+	    max-width: 760px;
+	}
+}
+
+@media screen and (max-width: 892px) {
+	.content-block {
+	    max-width: 420px;
+	}
+}
+
+@media screen and (max-width: 668px) {
+	.content-block {
+	    max-width: 340px;
+	}
+}
+
+/*** content fonts ***/
+
+h1,h2,h3,h4,p,label{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h1{
     font-weight: bold;
     font-size: 40px;
+    margin: 0px;
 }
 
 h2{
     font-weight: bold;
-    font-size: 30px;
+    font-size: 40px;
+    margin: 0px;
 }
 
 h3{
     font-weight: bold;
     font-size: 24px;
+    margin-bottom: 0px;
+    margin-top: 55px;
 }
 
 h4{
     font-weight: bold;
-    font-size: 18px;
+    font-size: 24px;
 }
 
-img{
-	float: left;
+/*** special content stuff */
+
+.hidden{
+    display: none;
 }
 
+.sideways{
+    transform: rotate(90deg);
+}
 
-/* highscore */
+/*************** INDEX ***************/
+
+.index-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.index-grid-greetings{
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+}
+
+.index-grid-play{
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.index-grid-highscore{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+#playChessImage{
+    width: 100%;
+    float: left;
+}
+
+.index-grid-play:hover{
+    background-color: #bfbfbf;
+}
+
+.index-grid-highscore:hover{
+    background-color: #bfbfbf;
+}
+
+.index-grid-play a{
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.index-grid-highscore a{
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 40px;
+}
+
+.index-grid-manual{
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+}
+
+.index-grid-content{
+    margin: 5px;
+    padding: 3px;
+    background-color: #ddd;
+}
+
+/************** HIGHSCORE ****************/
+
 #highscore-table{
-    border-style: solid;
-    border-color: black;
+    border-collapse: collapse;
+    border-spacing: 0px;
 }
 
-/* chessboard layout */
+#highscore-table td, #highscore-table th{
+    border: 1px;
+    border-style: solid;
+    border-color: slategray;
+}
+
+#highscore-table th{
+    background: darkgrey;
+    font-weight: bold;
+}
+
+#highscore-table td{
+    background: lightgrey;
+    text-align: center;
+}
+
+/*************** GAME ****************/
+
+.grid-game{
+    display: grid;
+    grid-template-columns: 570px 90px 1fr;
+    row-gap: 0px;
+}
+
+.grid-turnInfo{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.grid-chessboard{
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+}
+  
+.grid-pawn-convertion-white{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+.grid-pawn-convertion-black{
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+}
+
+.grid-game-log{
+    grid-column: 3 / 4;
+    grid-row: 1 / 4;
+}
+
+.invisible{
+    opacity: 0;
+}
+
+/*** chessboard layout ***/
+
 .chessboard{
     border-style: solid;
     border-color: black;
@@ -78,6 +344,12 @@ img{
     width: 68px;
 }
 
+.chessboard-tile img{
+	float: left;
+}
+
+/* tile-colors */
+
 .light{
     background-color: antiquewhite;
 }
@@ -87,6 +359,7 @@ img{
 }
 
 /* special tile-colors for evaluation */
+
 .valid-turn{
     background-color: greenyellow;
 }
@@ -109,4 +382,146 @@ img{
 
 .chosen{
     background-color: yellow;
+}
+
+/*** pawn conversion ***/
+
+.pawn-convertion-white{
+    margin-bottom: -3px;
+}
+
+.pawn-convertion-black{
+    margin-top: -3px;
+}
+
+/*************** manual ****************/
+
+/* spacing text passages */
+
+.manual-text {
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
+
+/* chessboard images size */
+
+.chessboard-img-manual{
+    height: 200px;
+}
+
+/*** grid for figure rules ***/
+
+.manual-figure-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.manual-figure-grid-rook{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.manual-figure-grid-bishop{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+
+.manual-figure-grid-queen{
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+}
+
+.manual-figure-grid-king{
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.manual-figure-grid-knight{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+.manual-figure-grid-pawn{
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+
+.manual-figure-grid-content{
+    margin: 5px;
+    padding: 3px;
+    text-align: center;
+    background-color: #ddd;
+}
+
+/*** grid for special turns at the end ***/
+
+.manual-ending-grid{
+    display: grid;
+    padding: 10px;
+    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10%; /* 9 columns */
+    column-gap: 1.25%;
+    grid-template-rows: 380px;
+    background-color: #9E9E9E;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* style of the inner white boxes witch content */
+
+.manual-ending-grid > div{ /* only applies for the div-childs at first level and not further */
+    background-color: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/** 3 sizes for the boxes **/
+
+/* check boxes */
+
+.manual-ending-grid-check{
+    grid-column: 1 / 4;
+}
+
+.manual-ending-grid-check-small{
+    grid-column: 1 / 2;
+}
+
+.manual-ending-grid-check-big{
+    grid-column: 1 / 8;
+}
+
+/* check-mate boxes */
+
+.manual-ending-grid-checkmate{
+    grid-column: 4 / 7;
+}
+
+.manual-ending-grid-checkmate-small-right{
+    grid-column: 8 / 9;
+}
+
+.manual-ending-grid-checkmate-small-left{
+    grid-column: 2 / 3;
+}
+
+.manual-ending-grid-checkmate-big{
+    grid-column: 2 / 9;
+}
+
+/* patt boxes */
+
+.manual-ending-grid-patt{
+    grid-column: 7 / 10;
+}
+
+.manual-ending-grid-patt-small{
+    grid-column: 9 / 10;
+}
+
+.manual-ending-grid-patt-big{
+    grid-column: 3 / 10;
+}
+
+/* put the vertical headding in the center, away from the top */
+
+.manual-ending-grid-check-small h4, .manual-ending-grid-checkmate-small-right h4, .manual-ending-grid-checkmate-small-left h4, .manual-ending-grid-patt-small h4{
+    margin-top: 165px;
 }

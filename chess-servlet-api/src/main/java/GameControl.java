@@ -1,6 +1,3 @@
-import com.google.common.base.Strings;
-import servlet.GetChessboardServlet;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,8 +5,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
@@ -46,9 +41,9 @@ public class GameControl extends HttpServlet {
 
     private RequestDispatcher redirectRequest(HttpServletRequest request) {
         //Default dispatcher if nothing´s matching
-        RequestDispatcher dispatcher = request.getRequestDispatcher("../project/html/entrypage.html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/ChessGame/resources/project/html/entrypage.html");
         //Checking for next servlet
-        if (!Strings.isNullOrEmpty(request.getParameter(ACTION))) {
+        if (request.getParameter(ACTION) != null && ! request.getParameter(ACTION).equals("")) {
             //Check existence of servlet name --- else return entryPage.jsp
             String action = request.getParameter(ACTION);
             HashMap<String, String> requiredParameters = new HashMap<>();
@@ -68,23 +63,6 @@ public class GameControl extends HttpServlet {
             }
         }
         return dispatcher;
-    }
-
-
-
-
-
-    private boolean hasEssentialParameters(HttpServletRequest request, String requiredParametersString, HashMap<String, String> requiredParameters) {
-        String[] requiredParametersSplitted = requiredParametersString.split(",");
-        Enumeration<String> parameterNames = request.getParameterNames();
-        Arrays.stream(requiredParametersSplitted).forEach(parameterName -> {
-            if (!Strings.isNullOrEmpty(request.getParameter(parameterName))) {
-                requiredParameters.put(parameterName, request.getParameter(parameterName));
-            }
-        });
-
-
-        return true;
     }
 }
 
