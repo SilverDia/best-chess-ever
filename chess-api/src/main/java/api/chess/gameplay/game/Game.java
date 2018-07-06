@@ -7,6 +7,7 @@ import api.config.GameConfig;
 import api.config.PieceConfig;
 import com.google.gson.Gson;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -15,6 +16,8 @@ public class Game {
     private final transient static Logger LOG = Logger.getLogger(Game.class.getName());
 
     public static GameConfig.PieceImageSet pieceSet = GameConfig.PieceImageSet.DEFAULT;
+
+    public final String gameId = "game_" + new Date().getTime();
 
     private Board board = new Board();
 
@@ -44,4 +47,15 @@ public class Game {
         }
     }
 
+    public String getGameId() {
+        return gameId;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public HashMap<PieceConfig.Color, Player> getPlayer() {
+        return player;
+    }
 }
