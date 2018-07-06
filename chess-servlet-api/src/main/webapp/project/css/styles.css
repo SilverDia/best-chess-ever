@@ -273,7 +273,7 @@ h4{
 
 .index-grid-highscore a{
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: block;
+    display: inline-block;
     text-decoration: none;
     color: black;
     padding: 40px;
