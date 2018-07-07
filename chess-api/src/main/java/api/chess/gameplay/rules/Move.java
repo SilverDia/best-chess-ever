@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import api.chess.equipment.board.Board;
+import api.chess.equipment.board.Coordinates;
 import api.chess.equipment.board.Direction;
 import api.chess.equipment.board.Square;
 import api.chess.equipment.pieces.Piece;
@@ -75,22 +76,25 @@ public enum Move {
 		@Override
 		public List<Movement> evaluate(Board board, Piece piece) {
 			List<Movement> moves = new ArrayList<>();
-			Piece diag_rt = board
-					.getSquare(BoardConfig.toSquareId(
-							board.getSquare(piece.getPositionSquareId()).getCoordinates().next(Direction.DIAG_RT, 1)))
-					.getPiece();
-			Piece diag_lt = board
-					.getSquare(BoardConfig.toSquareId(
-							board.getSquare(piece.getPositionSquareId()).getCoordinates().next(Direction.DIAG_LT, 1)))
-					.getPiece();
-
-			if (diag_lt != null && diag_lt.getColor() != piece.getColor())
-				moves.add(new Movement(piece.getPositionSquareId(), diag_lt.getPositionSquareId(), Direction.DIAG_LT,
-						this, diag_lt).addMovementRule(CAPTURE_MOVE));
+			Coordinates rt_coord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(Direction.DIAG_RT,
+					1);
+			Coordinates lt_coord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(Direction.DIAG_RT,
+					1);
+			
+			if (rt_coord.isValid()) {
+			Piece diag_rt = board.getSquare(BoardConfig.toSquareId(rt_coord)).getPiece();
 			if (diag_rt != null && diag_rt.getColor() != piece.getColor())
 				moves.add(new Movement(piece.getPositionSquareId(), diag_rt.getPositionSquareId(), Direction.DIAG_RT,
 						this, diag_rt).addMovementRule(CAPTURE_MOVE));
+			}
 
+			if (lt_coord.isValid()) {
+			Piece diag_lt = board.getSquare(BoardConfig.toSquareId(lt_coord)).getPiece();
+			if (diag_lt != null && diag_lt.getColor() != piece.getColor())
+				moves.add(new Movement(piece.getPositionSquareId(), diag_lt.getPositionSquareId(), Direction.DIAG_LT,
+						this, diag_lt).addMovementRule(CAPTURE_MOVE));
+			}
+			
 			return moves;
 		}
 	},
@@ -136,8 +140,8 @@ public enum Move {
 	 */;
 
 	public abstract List<Movement> evaluate(Board board, Piece piece);
-	
-	public List<Movement> evaluateDirection(Board board, Piece piece, Direction dir){
+
+	public List<Movement> evaluateDirection(Board board, Piece piece, Direction dir) {
 		return MoveUtils.evaluateDirection(this, true, null, dir, board, piece, 1);
 	}
 
@@ -150,10 +154,11 @@ public enum Move {
 		private static List<Movement> evaluateDirection(Move move, boolean continueAfter, Piece blockedBy,
 				Direction direction, Board board, Piece piece, int step) {
 			List<Movement> moves = new ArrayList<>();
-			Square next = board.getSquare(BoardConfig
-					.toSquareId(board.getSquare(piece.getPositionSquareId()).getCoordinates().next(direction, step)));
 
-			if (next.getCoordinates().isValid()) {
+			Coordinates newCoords = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(direction, step);
+
+			if (newCoords.isValid()) {
+				Square next = board.getSquare(BoardConfig.toSquareId(newCoords));
 				if (next.getPiece() == null) {
 					moves.add(
 							new Movement(piece.getPositionSquareId(), next.getSquareId(), direction, move, blockedBy));

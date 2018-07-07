@@ -1,6 +1,5 @@
 package api.chess.equipment.board;
 
-import api.config.BoardConfig;
 import com.google.gson.Gson;
 
 import java.util.logging.Logger;
