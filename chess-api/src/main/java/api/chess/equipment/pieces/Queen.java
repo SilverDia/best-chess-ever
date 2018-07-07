@@ -6,18 +6,18 @@ import com.google.gson.Gson;
 
 import java.util.logging.Logger;
 
-public class Queen extends Piece{
-    private final transient static Logger LOG = Logger.getLogger(Queen.class.getName());
+public class Queen extends Piece {
+	private final transient static Logger LOG = Logger.getLogger(Queen.class.getName());
 
-    @Override
-    public void init(int id, PieceConfig.Color color) {
-        name = PieceConfig.PieceName.QUEEN;
-        super.init(id, color);
-        positionSquareId = initPosition(new Coordinates(4, 0), id, 1);
-    }
+	@Override
+	public void init(int id, PieceConfig.Color color) {
+		name = PieceConfig.PieceName.QUEEN;
+		super.init(id, color);
+		positionSquareId = initPosition(new Coordinates(4, 0), id, 1);
+	}
 
-    @Override
-    public String toString() {
-        return new Gson().toJson(this);
-    }
+	@Override
+	public String toString() {
+		return new Gson().toJson(this);
+	}
 }

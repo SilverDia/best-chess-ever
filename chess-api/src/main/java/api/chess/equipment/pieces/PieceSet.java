@@ -18,8 +18,8 @@ public class PieceSet {
     private transient ArrayList<Piece> pieces = new ArrayList<>();
 
     private King king;
-    private Queen queen;
 
+    private HashMap<String, Queen> queens = new HashMap<>();
     private HashMap<String, Bishop> bishops = new HashMap<>();
     private HashMap<String, Knight> knights = new HashMap<>();
     private HashMap<String, Rook>  rooks = new HashMap<>();
@@ -34,8 +34,9 @@ public class PieceSet {
     public void init(PieceConfig.Color color) {
         king = new King();
         king.init(0, color);
-        queen = new Queen();
+        Queen queen = new Queen();
         queen.init(0, color);
+        queens.put(queen.id, queen);
 
         for (int i = 0; i < 2; i++) {
             Bishop bishop = new Bishop();
@@ -72,7 +73,7 @@ public class PieceSet {
         if (pieceName.equals(KING.toString())) {
             return king.move(moveToSqaureId);
         } else if (pieceName.equals(QUEEN.toString())) {
-            return queen.move(moveToSqaureId);
+            return queens.get(pieceId).move(moveToSqaureId);
         } else if (pieceName.equals(BISHOP.toString())) {
             return bishops.get(pieceId).move(moveToSqaureId);
         } else if (pieceName.equals(KNIGHT.toString())) {

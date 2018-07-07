@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 public class Pawn extends Piece {
     private final transient static Logger LOG = Logger.getLogger(Pawn.class.getName());
 
-    private boolean moved = false;
     private boolean enPassantCapture = false;
     private boolean promotion = false;
 

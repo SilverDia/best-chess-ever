@@ -3,6 +3,7 @@ package api.config;
 import api.chess.equipment.board.Board;
 import api.chess.equipment.board.Square;
 import api.chess.equipment.pieces.Piece;
+import api.chess.gameplay.rules.Move;
 import api.chess.gameplay.rules.Movement;
 
 import java.util.ArrayList;
@@ -11,10 +12,6 @@ import java.util.logging.Logger;
 
 public class MovementRuleConfig {
     private final static Logger LOG = Logger.getLogger(MovementRuleConfig.class.getName());
-
-    public enum Move {
-        BASIC_MOVE, CAPTURE_MOVE, STRAIGHT, STRAIGHT_ONE, DIAGONAL, DIAGONAL_ONE,  KNIGHT_JUMP, PAWN_MOVE, PAWN_FIRST_MOVE, PAWN_CAPTURE, PROMOTION, CASTELING, EN_PASSANT
-    }
 
     public static ArrayList<Move> getMoves(PieceConfig.PieceName pieceName) {
         ArrayList<Move> moves = new ArrayList<>();
@@ -55,7 +52,7 @@ public class MovementRuleConfig {
     }
 
     public static void evaluateMovement(Piece piece, Board board) {
-        for (MovementRuleConfig.Move move : piece.getMoves()) {
+        for (Move move : piece.getMoves()) {
             if (move.toString().startsWith("STRAIGHT")) {
 
             }

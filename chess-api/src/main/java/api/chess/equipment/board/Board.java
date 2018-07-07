@@ -1,8 +1,8 @@
 package api.chess.equipment.board;
 
+import api.chess.gameplay.rules.Move;
 import api.chess.gameplay.rules.Movement;
 import api.config.BoardConfig;
-import api.config.MovementRuleConfig;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -31,16 +31,16 @@ public class Board {
         return new Gson().toJson(this);
     }
 
-    public MovementRuleConfig.Move movePiece(Movement movement) throws IOException {
+    public Move movePiece(Movement movement) throws IOException {
         return movePiece(movement.getMoveFromSquareId(), movement.getMoveToSquareId());
     }
 
-    public MovementRuleConfig.Move movePiece(String fromSquareID, String toSquareID) throws IOException {
+    public Move movePiece(String fromSquareID, String toSquareID) throws IOException {
         try {
             boolean captureMove = !getSquare(toSquareID).isVacant();
             getSquare(toSquareID).setPieceId(getSquare(fromSquareID).getPieceId());
             getSquare(fromSquareID).setPieceId("");
-            return captureMove ? MovementRuleConfig.Move.CAPTURE_MOVE : MovementRuleConfig.Move.BASIC_MOVE;
+            return captureMove ? Move.CAPTURE_MOVE : Move.BASIC_MOVE;
         } catch (Exception e) {
             throw new IOException("Invalid squareId(s) ('" + fromSquareID + "', '" + toSquareID + "')\n", e);
         }

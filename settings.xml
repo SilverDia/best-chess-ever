@@ -130,6 +130,11 @@ under the License.
       <passphrase>optional; leave empty if not used.</passphrase>
     </server>
     -->
+    <server>
+      <id>TomcatServer</id>
+      <username>slx</username>
+      <password>1234asdf</password>
+    </server>
   </servers>
 
   <!-- mirrors

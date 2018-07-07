@@ -1,17 +1,20 @@
 package api.chess.equipment.pieces;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Logger;
+
+import com.google.gson.Gson;
+
 import api.chess.equipment.board.Coordinates;
+import api.chess.gameplay.rules.Move;
 import api.chess.gameplay.rules.Movement;
 import api.config.BoardConfig;
 import api.config.GameConfig;
 import api.config.MovementRuleConfig;
 import api.config.PieceConfig;
-import api.config.PieceConfig.*;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.logging.Logger;
+import api.config.PieceConfig.Color;
+import api.config.PieceConfig.PieceName;
 
 public abstract class Piece {
     transient Logger LOG = Logger.getLogger(Piece.class.getName());
@@ -25,8 +28,9 @@ public abstract class Piece {
 
     String positionSquareId;
     boolean captured = false;
+    boolean moved = false;
 
-    ArrayList<MovementRuleConfig.Move> moves;
+    ArrayList<Move> moves;
 
     HashMap<String, Movement> possibleMoves = new HashMap<>();
 
@@ -78,7 +82,7 @@ public abstract class Piece {
         return captured;
     }
 
-    public ArrayList<MovementRuleConfig.Move> getMoves() {
+    public ArrayList<Move> getMoves() {
         return moves;
     }
 
