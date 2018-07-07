@@ -9,6 +9,7 @@ import api.config.GameConfig;
 import api.config.PieceConfig;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -49,16 +50,15 @@ public class Game {
         initBoard();
     }
 
-    public boolean executeMove(String pieceId, String squareId) {
+    public void executeMove(String pieceId, String squareId) throws IOException{
         try {
             Movement movement = player.get(activePlayer).movePiece(pieceId, squareId);
             if (movement != null) {
                 board.movePiece(movement);
                 finishTurn(new Turn(activePlayer, movement, false, false, turnHistory.getLast().getEndTime(), new Date()));
             }
-            return false;
         } catch (Exception e) {
-            return false;
+            throw new IOException("Failed to execute move:\n", e);
         }
     }
 

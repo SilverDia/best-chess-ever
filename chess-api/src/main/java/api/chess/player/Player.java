@@ -18,6 +18,9 @@ public class Player {
     private String name;
     private PieceConfig.Color color;
     private boolean active;
+
+    private int turnCounter;
+
     private boolean isChecked;
     private boolean canCheck;
 
@@ -35,10 +38,12 @@ public class Player {
 
         updatePlayer();
         active = color.equals(PieceConfig.Color.WHITE);
+        turnCounter = 0;
     }
 
     public void updatePlayer() {
         active = !active;
+        turnCounter++;
         for (Piece piece : pieceSet.getPieces()) {
             String id = piece.getId();
             if (piece.isCaptured()) {
