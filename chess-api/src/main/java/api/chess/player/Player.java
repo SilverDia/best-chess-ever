@@ -23,8 +23,8 @@ public class Player {
 
     private PieceSet pieceSet;
 
-    private HashMap<String, Piece> freePieces = new HashMap<>();
-    private HashMap<String, Piece> capturedPieces = new HashMap<>();
+    private transient HashMap<String, Piece> freePieces = new HashMap<>();
+    private transient HashMap<String, Piece> capturedPieces = new HashMap<>();
 
     public void initPlayer(String name, PieceConfig.Color color) {
         this.name = name;

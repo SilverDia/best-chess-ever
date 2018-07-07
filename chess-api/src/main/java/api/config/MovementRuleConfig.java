@@ -26,7 +26,7 @@ public class MovementRuleConfig {
                 break;
             }
             case BISHOP: {
-                moves.add(Move.STRAIGHT);
+                moves.add(Move.DIAGONAL);
                 break;
             }
             case QUEEN: {

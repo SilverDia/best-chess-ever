@@ -23,6 +23,6 @@ public class Direction {
 	}
 
 	public Coordinates apply(Coordinates coordinates, int steps) {
-		return new Coordinates(coordinates.getX() + x * steps, coordinates.getX() + y * steps);
+		return new Coordinates(coordinates.getX() + x * steps, coordinates.getY() + y * steps);
 	}
 }

@@ -40,14 +40,18 @@ public class Game {
 	}
 
 	public void init(String namePlayerWhite, String namePlayerBlack) {
-		player.put(PieceConfig.Color.WHITE, new Player());
-		player.put(PieceConfig.Color.BLACK, new Player());
-
-		player.get(PieceConfig.Color.WHITE).initPlayer(namePlayerWhite, PieceConfig.Color.WHITE);
-		player.get(PieceConfig.Color.BLACK).initPlayer(namePlayerBlack, PieceConfig.Color.BLACK);
-
 		activePlayer = PieceConfig.Color.WHITE;
 		inactivePlayer = PieceConfig.Color.BLACK;
+		
+		player.put(activePlayer, new Player());
+		player.put(inactivePlayer, new Player());
+
+		player.get(activePlayer).initPlayer(namePlayerWhite, PieceConfig.Color.WHITE);
+		player.get(inactivePlayer).initPlayer(namePlayerBlack, PieceConfig.Color.BLACK);
+
+		player.get(activePlayer).getPieceSet().getPieces().forEach(piece -> board.getSquare(piece.getPositionSquareId()).setPiece(piece));
+		player.get(inactivePlayer).getPieceSet().getPieces().forEach(piece -> board.getSquare(piece.getPositionSquareId()));
+		
 		turnHistory.add(new Turn(null, null, false, false, new Date(), new Date())); // dummy to save game start time and to handle first turn
 		initBoard();
 		evaluatePossibleMoves();
@@ -71,7 +75,7 @@ public class Game {
 		board = new Board();
 		for (Player player : player.values()) {
 			for (Map.Entry<String, Piece> pieceEntry : player.getFreePieces().entrySet()) {
-				board.getSquare(pieceEntry.getValue().getPositionSquareId()).setPieceId(pieceEntry.getKey());
+				board.getSquare(pieceEntry.getValue().getPositionSquareId()).setPiece(pieceEntry.getValue());
 			}
 		}
 	}
@@ -98,7 +102,18 @@ public class Game {
 		List<Movement> activePlayerMoves = new ArrayList<>();
 		activePieces.forEach(piece -> activePlayerMoves.addAll(piece.evaluate(board)));
 
-		GameState state = getKing(player.get(activePlayer)).evaluateCheck(board, inactivePlayerMoves);
+		King king = getKing(player.get(activePlayer));
+		GameState state = king.evaluateCheck(board, inactivePlayerMoves);
+		
+		if(state.equals(GameState.CHECK))
+			inactivePieces.stream().filter(piece -> !piece.equals(king)).forEach(piece -> piece.setPossibleMoves(new ArrayList<Movement>()));
+		
+		if(state.equals(GameState.CHECKMATE)) {
+			//TODO spiel endet hier.
+		}
+		
+		inactivePieces.forEach(piece -> piece.setPossibleMoves(null));
+		activePieces.forEach(Piece::removeBlocked);
 	}
 
 	private King getKing(Player player) {

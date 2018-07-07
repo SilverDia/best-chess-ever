@@ -11,7 +11,7 @@ public class Movement {
 
     private final String moveFromSquareId;
     private final String moveToSquareId;
-    private final Direction direction;
+    private transient final Direction direction;
     private final Piece blockedBy;
     
     private ArrayList<Move> rules = new ArrayList<>();

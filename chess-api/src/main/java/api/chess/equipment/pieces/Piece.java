@@ -27,18 +27,16 @@ public abstract class Piece {
 	String id; // to identify each figure --- type_color_number --- example: Pawn_W_3 /
 				// Knight_B_1
 
-	PieceName name;
-	Color color;
-
-	String imageUrl;
+	transient PieceName name;
+	transient Color color;
 
 	String positionSquareId;
-	boolean captured = false;
-	boolean moved = false;
+	transient boolean captured = false;
+	transient boolean moved = false;
 
-	List<Move> moves;
+	transient List<Move> moves;
 
-	List<Movement> possibleMoves = new ArrayList<>();
+	private List<Movement> possibleMoves;
 
 	@Override
 	public String toString() {
@@ -50,7 +48,6 @@ public abstract class Piece {
 		this.id = name.toString() + "_" + color.toString() + "_" + String.valueOf(id);
 
 		moves = MovementRuleConfig.getMoves(name);
-		imageUrl = PieceConfig.buildImageUrl(this, GameConfig.PieceImageSet.DEFAULT);
 	}
 
 	public String initPosition(Coordinates coordinates, int id, int scale) {
@@ -59,16 +56,16 @@ public abstract class Piece {
 	}
 	
 	public Movement move(String squareId) {
-		Optional<Movement> optionalMove = possibleMoves.stream().filter(move -> move.getMoveToSquareId().equals(squareId)).findFirst();
+		Optional<Movement> optionalMove = getPossibleMoves().stream().filter(move -> move.getMoveToSquareId().equals(squareId)).findFirst();
 		if (optionalMove.isPresent())
 			setPositionSquareId(squareId);
 		return optionalMove.orElse(null);
 	}
 	
 	public List<Movement> evaluate(Board board){
-		possibleMoves.clear();
+		possibleMoves = new ArrayList<>();
 		for(Move move : moves) {
-			move.evaluate(board, this).stream().forEach(possibleMoves::add);
+			move.evaluate(board, this).stream().forEach(getPossibleMoves()::add);
 		}
 		return possibleMoves;
 	}
@@ -76,7 +73,13 @@ public abstract class Piece {
 	protected void limitMoves(Board board, Movement move) {
 		List<Movement> restrictTo = move.getRules().get(0).evaluateDirection(board, this, move.getDirection());
 		restrictTo.addAll(move.getRules().get(0).evaluateDirection(board, this, move.getDirection().invert()));
-		intersectLists(false, possibleMoves, restrictTo);
+		intersectLists(false, getPossibleMoves(), restrictTo);
+	}
+	
+	public void removeBlocked() {
+		possibleMoves.removeAll(possibleMoves.stream().filter(move -> move.getBlockedBy() != null).collect(Collectors.toList()));
+		if (possibleMoves.isEmpty())
+			possibleMoves = null;
 	}
 	
 	protected void intersectLists(boolean invert, List<Movement> l1, List<Movement> l2) {
@@ -133,5 +136,13 @@ public abstract class Piece {
 
 	public Coordinates getCoords(api.chess.equipment.board.Board board) {
 		return board.getSquare(positionSquareId).getCoordinates();
+	}
+
+	public List<Movement> getPossibleMoves() {
+		return possibleMoves;
+	}
+
+	public void setPossibleMoves(List<Movement> possibleMoves) {
+		this.possibleMoves = possibleMoves;
 	}
 }

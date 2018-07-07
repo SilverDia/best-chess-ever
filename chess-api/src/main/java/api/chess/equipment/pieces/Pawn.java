@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 public class Pawn extends Piece {
     private final transient static Logger LOG = Logger.getLogger(Pawn.class.getName());
 
-    private boolean enPassantCapture = false;
-    private boolean promotion = false;
+    private transient boolean enPassantCapture = false;
+    private transient boolean promotion = false;
 
     @Override
     public void init(int id, PieceConfig.Color color) {

@@ -1,5 +1,6 @@
 package api.chess.equipment.pieces;
 
+import api.chess.equipment.board.Board;
 import api.chess.gameplay.rules.Movement;
 import api.config.PieceConfig;
 import com.google.gson.Gson;

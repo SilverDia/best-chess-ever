@@ -10,6 +10,7 @@ import api.chess.equipment.board.Square;
 import api.chess.equipment.pieces.Piece;
 import api.chess.equipment.pieces.Rook;
 import api.config.BoardConfig;
+import api.config.PieceConfig;
 
 public enum Move {
 	CAPTURE_MOVE {
@@ -52,14 +53,19 @@ public enum Move {
 
 		@Override
 		public List<Movement> evaluate(Board board, Piece piece) {
-			return MoveUtils.evaluateCombination(this, false, new Direction(1, 2), board, piece);
+			List<Movement> moves = new ArrayList<>();
+			moves.addAll(MoveUtils.evaluateCombination(this, false, new Direction(1, 2), board, piece));
+			moves.addAll(MoveUtils.evaluateCombination(this, false, new Direction(-1, 2), board, piece));
+			return moves;
 		}
 	},
 	PAWN_MOVE {
 
 		@Override
 		public List<Movement> evaluate(Board board, Piece piece) {
-			return MoveUtils.evaluateDirection(this, false, Direction.VERT, board, piece);
+			return MoveUtils.evaluateDirection(this, false,
+					piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.VERT : Direction.VERT.invert(), board,
+					piece);
 		}
 	},
 	PAWN_FIRST_MOVE {
@@ -67,7 +73,9 @@ public enum Move {
 		@Override
 		public List<Movement> evaluate(Board board, Piece piece) {
 			if (!piece.hasMoved())
-				return MoveUtils.evaluateDirection(this, false, null, Direction.VERT, board, piece, 2);
+				return MoveUtils.evaluateDirection(this, false, null,
+						piece.getColor().equals(PieceConfig.Color.WHITE) ? new Direction(0, 2) : new Direction(0, -2),
+						board, piece, 1);
 			return new ArrayList<>();
 		}
 	},
@@ -76,25 +84,31 @@ public enum Move {
 		@Override
 		public List<Movement> evaluate(Board board, Piece piece) {
 			List<Movement> moves = new ArrayList<>();
-			Coordinates rt_coord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(Direction.DIAG_RT,
+			Coordinates rt_coord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(
+					piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.DIAG_RT : Direction.DIAG_RT.invert(),
 					1);
-			Coordinates lt_coord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(Direction.DIAG_RT,
+			Coordinates lt_coord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(
+					piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.DIAG_LT : Direction.DIAG_LT.invert(),
 					1);
-			
+
 			if (rt_coord.isValid()) {
-			Piece diag_rt = board.getSquare(BoardConfig.toSquareId(rt_coord)).getPiece();
-			if (diag_rt != null && diag_rt.getColor() != piece.getColor())
-				moves.add(new Movement(piece.getPositionSquareId(), diag_rt.getPositionSquareId(), Direction.DIAG_RT,
-						this, diag_rt).addMovementRule(CAPTURE_MOVE));
+				Piece diag_rt = board.getSquare(BoardConfig.toSquareId(rt_coord)).getPiece();
+				if (diag_rt != null && diag_rt.getColor() != piece.getColor())
+					moves.add(new Movement(piece.getPositionSquareId(), diag_rt.getPositionSquareId(),
+							piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.DIAG_RT
+									: Direction.DIAG_RT.invert(),
+							this, null).addMovementRule(CAPTURE_MOVE));
 			}
 
 			if (lt_coord.isValid()) {
-			Piece diag_lt = board.getSquare(BoardConfig.toSquareId(lt_coord)).getPiece();
-			if (diag_lt != null && diag_lt.getColor() != piece.getColor())
-				moves.add(new Movement(piece.getPositionSquareId(), diag_lt.getPositionSquareId(), Direction.DIAG_LT,
-						this, diag_lt).addMovementRule(CAPTURE_MOVE));
+				Piece diag_lt = board.getSquare(BoardConfig.toSquareId(lt_coord)).getPiece();
+				if (diag_lt != null && diag_lt.getColor() != piece.getColor())
+					moves.add(new Movement(piece.getPositionSquareId(), diag_lt.getPositionSquareId(),
+							piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.DIAG_LT
+									: Direction.DIAG_LT.invert(),
+							this, null).addMovementRule(CAPTURE_MOVE));
 			}
-			
+
 			return moves;
 		}
 	},
@@ -113,20 +127,24 @@ public enum Move {
 			if (!piece.hasMoved()) {
 				List<Movement> right_side = MoveUtils.evaluateDirection(this, true, null, Direction.HOR, board, piece,
 						1);
+				if (!right_side.isEmpty()) {
 				Piece rightOutmost = board.getSquare(right_side.get(right_side.size() - 1).getMoveToSquareId())
 						.getPiece();
 
 				if (rightOutmost != null && rightOutmost instanceof Rook && !rightOutmost.hasMoved()
 						&& right_side.get(right_side.size() - 1).getBlockedBy() == null)
 					moves.add(right_side.get(1));
+				}
 
 				List<Movement> left_side = MoveUtils.evaluateDirection(this, true, null, Direction.HOR.invert(), board,
 						piece, 1);
+				if (!left_side.isEmpty()) {
 				Piece leftOutmost = board.getSquare(left_side.get(left_side.size() - 1).getMoveToSquareId()).getPiece();
 
 				if (leftOutmost != null && leftOutmost instanceof Rook && !leftOutmost.hasMoved()
 						&& left_side.get(left_side.size() - 1).getBlockedBy() == null)
 					moves.add(left_side.get(1));
+				}
 			}
 
 			return moves;
@@ -168,10 +186,10 @@ public enum Move {
 							: moves;
 				}
 
-				if (next.getPiece().getColor() != piece.getColor()) {
-					blockedBy = (blockedBy == null) ? next.getPiece() : blockedBy;
+				if (!next.getPiece().getColor().equals(piece.getColor())) {
 					moves.add(new Movement(piece.getPositionSquareId(), next.getSquareId(), direction, move, blockedBy)
 							.addMovementRule(Move.CAPTURE_MOVE));
+					blockedBy = (blockedBy == null) ? next.getPiece() : blockedBy;
 					return continueAfter
 							? addLists(moves,
 									evaluateDirection(move, continueAfter, blockedBy, direction, board, piece, ++step))

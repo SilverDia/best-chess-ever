@@ -27,12 +27,12 @@ public class King extends Piece {
 	}
 
 	public GameState evaluateCheck(Board board, List<Movement> enemyMovements) {
-		intersectLists(true, possibleMoves, enemyMovements);
+		intersectLists(true, getPossibleMoves(), enemyMovements);
 		List<Movement> movesAimingOnKing = enemyMovements.stream()
 				.filter(move -> move.getMoveToSquareId().equals(getPositionSquareId())).collect(Collectors.toList());
 
 		if (movesAimingOnKing.stream().filter(move -> move.getBlockedBy() == null).count() > 0) {
-			if (possibleMoves.isEmpty())
+			if (getPossibleMoves().isEmpty())
 				return GameState.CHECKMATE;
 			return GameState.CHECK;
 		}

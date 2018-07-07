@@ -36,8 +36,8 @@ public class Board {
     	String toSquareID = movement.getMoveToSquareId();
     	
         try {
-            getSquare(toSquareID).setPieceId(getSquare(fromSquareID).getPieceId());
-            getSquare(fromSquareID).setPieceId("");
+            getSquare(toSquareID).setPiece(getSquare(fromSquareID).getPiece());
+            getSquare(fromSquareID).setPiece(null);
             return movement.getRules().contains(Move.CAPTURE_MOVE);
         } catch (Exception e) {
             throw new IOException("Invalid squareId(s) ('" + fromSquareID + "', '" + toSquareID + "')\n", e);
