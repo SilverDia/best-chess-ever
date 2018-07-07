@@ -17,84 +17,99 @@ import api.config.PieceConfig.Color;
 import api.config.PieceConfig.PieceName;
 
 public abstract class Piece {
-    transient Logger LOG = Logger.getLogger(Piece.class.getName());
+	transient Logger LOG = Logger.getLogger(Piece.class.getName());
 
-    String id; // to identify each figure --- type_color_number --- example: Pawn_W_3 / Knight_B_1
+	String id; // to identify each figure --- type_color_number --- example: Pawn_W_3 /
+				// Knight_B_1
 
-    PieceName name;
-    Color color;
+	PieceName name;
+	Color color;
 
-    String imageUrl;
+	String imageUrl;
 
-    String positionSquareId;
-    boolean captured = false;
-    boolean moved = false;
+	String positionSquareId;
+	boolean captured = false;
+	boolean moved = false;
 
-    ArrayList<Move> moves;
+	ArrayList<Move> moves;
 
-    HashMap<String, Movement> possibleMoves = new HashMap<>();
+	HashMap<String, Movement> possibleMoves = new HashMap<>();
 
-    @Override
-    public String toString() {
-        return new Gson().toJson(this);
-    }
+	@Override
+	public String toString() {
+		return new Gson().toJson(this);
+	}
 
-    public void init(int id, Color color) {
-        this.color = color;
-        this.id = name.toString() + "_" + color.toString() + "_" + String.valueOf(id);
+	public void init(int id, Color color) {
+		this.color = color;
+		this.id = name.toString() + "_" + color.toString() + "_" + String.valueOf(id);
 
-        moves = MovementRuleConfig.getMoves(name);
-        imageUrl = PieceConfig.buildImageUrl(this, GameConfig.PieceImageSet.DEFAULT);
-    }
+		moves = MovementRuleConfig.getMoves(name);
+		imageUrl = PieceConfig.buildImageUrl(this, GameConfig.PieceImageSet.DEFAULT);
+	}
 
-    public String initPosition(Coordinates coordinates, int id, int scale) {
-        coordinates.setX(coordinates.getX() + (id*scale));
-        return BoardConfig.toInitSquareId(color, coordinates);
-    }
+	public String initPosition(Coordinates coordinates, int id, int scale) {
+		coordinates.setX(coordinates.getX() + (id * scale));
+		return BoardConfig.toInitSquareId(color, coordinates);
+	}
 
-    public Movement move(String squareId) {
-        if (possibleMoves.containsKey(squareId)) {
-            setPositionSquareId(squareId);
-            return possibleMoves.get(squareId);
-        }
-        return null;
-    }
+	public Movement move(String squareId) {
+		if (possibleMoves.containsKey(squareId)) {
+			setPositionSquareId(squareId);
+			return possibleMoves.get(squareId);
+		}
+		return null;
+	}
 
-    public void addPossibleMove(Movement movement){
-        possibleMoves.put(movement.getMoveToSquareId(), movement);
-    }
+	public void addPossibleMove(Movement movement) {
+		possibleMoves.put(movement.getMoveToSquareId(), movement);
+	}
 
-    public String getId() { return id; }
+	public String getId() {
+		return id;
+	}
 
-    public PieceName getName() {
-        return name;
-    }
+	public PieceName getName() {
+		return name;
+	}
 
-    public Color getColor() {
-        return color;
-    }
+	public Color getColor() {
+		return color;
+	}
 
-    public String getPositionSquareId() {
-        return positionSquareId;
-    }
+	public String getPositionSquareId() {
+		return positionSquareId;
+	}
 
-    public boolean isCaptured() {
-        return captured;
-    }
+	public boolean isCaptured() {
+		return captured;
+	}
 
-    public ArrayList<Move> getMoves() {
-        return moves;
-    }
+	public ArrayList<Move> getMoves() {
+		return moves;
+	}
 
-    public void setPositionSquareId(String positionSquareId) {
-        this.positionSquareId = positionSquareId;
-        captured = positionSquareId.equals("");
-    }
+	public boolean hasMoved() {
+		return moved;
+	}
 
-    public void setCaptured(boolean captured) {
-        this.captured = captured;
-        if (captured) {
-            positionSquareId = "";
-        }
-    }
+	public void setMoved(boolean moved) {
+		this.moved = moved;
+	}
+
+	public void setPositionSquareId(String positionSquareId) {
+		this.positionSquareId = positionSquareId;
+		captured = positionSquareId.equals("");
+	}
+
+	public void setCaptured(boolean captured) {
+		this.captured = captured;
+		if (captured) {
+			positionSquareId = "";
+		}
+	}
+
+	public Coordinates getCoords(api.chess.equipment.board.Board board) {
+		return board.getSquare(positionSquareId).getCoordinates();
+	}
 }

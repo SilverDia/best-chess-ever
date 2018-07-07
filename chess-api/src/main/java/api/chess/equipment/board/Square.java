@@ -22,7 +22,7 @@ public class Square {
     public Square(Coordinates coordinates) {
         this.coordinates = coordinates;
         this.squareId = BoardConfig.toSquareId(coordinates);
-        if ((coordinates.x + coordinates.y) % 2 == 0) {
+        if ((coordinates.getX() + coordinates.getY()) % 2 == 0) {
             color = PieceConfig.Color.BLACK;
         } else {
             color = PieceConfig.Color.WHITE;

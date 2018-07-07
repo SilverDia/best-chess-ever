@@ -31,16 +31,14 @@ public class Board {
         return new Gson().toJson(this);
     }
 
-    public Move movePiece(Movement movement) throws IOException {
-        return movePiece(movement.getMoveFromSquareId(), movement.getMoveToSquareId());
-    }
-
-    public Move movePiece(String fromSquareID, String toSquareID) throws IOException {
+    public boolean movePiece(Movement movement) throws IOException {
+    	String fromSquareID = movement.getMoveFromSquareId();
+    	String toSquareID = movement.getMoveToSquareId();
+    	
         try {
-            boolean captureMove = !getSquare(toSquareID).isVacant();
             getSquare(toSquareID).setPieceId(getSquare(fromSquareID).getPieceId());
             getSquare(fromSquareID).setPieceId("");
-            return captureMove ? Move.CAPTURE_MOVE : Move.BASIC_MOVE;
+            return movement.getRules().contains(Move.CAPTURE_MOVE);
         } catch (Exception e) {
             throw new IOException("Invalid squareId(s) ('" + fromSquareID + "', '" + toSquareID + "')\n", e);
         }
@@ -48,30 +46,10 @@ public class Board {
 
     public Square getSquare(String squareId) {
         Coordinates coordinates = BoardConfig.toCoordinates(squareId);
-        return getSquare(coordinates.x, coordinates.y);
+        return getSquare(coordinates.getX(), coordinates.getY());
     }
 
     public Square getSquare(int x, int y) {
         return chessBoard.get(y).get(BoardConfig.toSquareId(x, y));
     }
-
-//    public boolean hasNext(String fromSquareId, BoardConfig.Direction direction) {
-//        return (chessBoard.get(fromSquareId).getCoordinates().hasNext(direction));
-//    }
-//
-//    public Square next(String fromSquareId, BoardConfig.Direction direction) {
-//        return chessBoard.get(BoardConfig.toSquareId(
-//                chessBoard.get(fromSquareId).getCoordinates().next(direction))
-//        );
-//    }
-//
-//    public boolean hasPrev(String fromSquareId, BoardConfig.Direction direction) {
-//        return (chessBoard.get(fromSquareId).getCoordinates().hasPrev(direction));
-//    }
-//
-//    public Square prev(String fromSquareId, BoardConfig.Direction direction) {
-//        return chessBoard.get(BoardConfig.toSquareId(
-//                chessBoard.get(fromSquareId).getCoordinates().prev(direction))
-//        );
-//    }
 }
