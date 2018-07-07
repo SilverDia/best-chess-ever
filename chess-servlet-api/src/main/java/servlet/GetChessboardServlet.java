@@ -53,8 +53,6 @@ public class GetChessboardServlet extends HttpServlet {
 				games = (HashMap<String, Game>) request.getServletContext().getAttribute("games");
 			} catch (ClassCastException e) {
 				LOG.log(Level.SEVERE, "Failed to load games hashmap from servlet context.\nSaved games cannot be loaded:\n" + e.getMessage(), e);
-			} finally {
-				games = new HashMap<>();
 			}
 
 		}
