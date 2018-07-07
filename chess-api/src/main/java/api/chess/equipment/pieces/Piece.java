@@ -2,10 +2,15 @@ package api.chess.equipment.pieces;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 
+import api.chess.equipment.board.Board;
 import api.chess.equipment.board.Coordinates;
 import api.chess.gameplay.rules.Move;
 import api.chess.gameplay.rules.Movement;
@@ -31,9 +36,9 @@ public abstract class Piece {
 	boolean captured = false;
 	boolean moved = false;
 
-	ArrayList<Move> moves;
+	List<Move> moves;
 
-	HashMap<String, Movement> possibleMoves = new HashMap<>();
+	List<Movement> possibleMoves = new ArrayList<>();
 
 	@Override
 	public String toString() {
@@ -52,17 +57,34 @@ public abstract class Piece {
 		coordinates.setX(coordinates.getX() + (id * scale));
 		return BoardConfig.toInitSquareId(color, coordinates);
 	}
-
+	
 	public Movement move(String squareId) {
-		if (possibleMoves.containsKey(squareId)) {
+		Optional<Movement> optionalMove = possibleMoves.stream().filter(move -> move.getMoveToSquareId().equals(squareId)).findFirst();
+		if (optionalMove.isPresent())
 			setPositionSquareId(squareId);
-			return possibleMoves.get(squareId);
-		}
-		return null;
+		return optionalMove.orElse(null);
 	}
-
-	public void addPossibleMove(Movement movement) {
-		possibleMoves.put(movement.getMoveToSquareId(), movement);
+	
+	public List<Movement> evaluate(Board board){
+		possibleMoves.clear();
+		for(Move move : moves) {
+			move.evaluate(board, this).stream().forEach(possibleMoves::add);
+		}
+		return possibleMoves;
+	}
+	
+	protected void limitMoves(Board board, Movement move) {
+		List<Movement> restrictTo = move.getRules().get(0).evaluateDirection(board, this, move.getDirection());
+		restrictTo.addAll(move.getRules().get(0).evaluateDirection(board, this, move.getDirection().invert()));
+		intersectLists(false, possibleMoves, restrictTo);
+	}
+	
+	protected void intersectLists(boolean invert, List<Movement> l1, List<Movement> l2) {
+		l1.removeAll(l1.stream().filter(move -> !invert ^ matchToSquare(move, l2)).collect(Collectors.toList()));
+	}
+	
+	private boolean matchToSquare(Movement move, List<Movement> list) {
+		return (list.stream().filter(listMove -> move.getMoveToSquareId().equals(listMove.getMoveToSquareId())).count() > 0);
 	}
 
 	public String getId() {
@@ -85,7 +107,7 @@ public abstract class Piece {
 		return captured;
 	}
 
-	public ArrayList<Move> getMoves() {
+	public List<Move> getMoves() {
 		return moves;
 	}
 

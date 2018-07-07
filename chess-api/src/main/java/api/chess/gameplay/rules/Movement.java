@@ -49,4 +49,8 @@ public class Movement {
 	public Piece getBlockedBy() {
 		return blockedBy;
 	}
+
+	public Direction getDirection() {
+		return direction;
+	}
 }

@@ -17,9 +17,9 @@ public class BoardConfig {
 		return toSquareId(coordinates.getX(), coordinates.getY());
 	}
 
-	public static Coordinates toCoordinates(String suqareId) {
-		int x = suqareId.charAt(0) - 65;
-		int y = suqareId.charAt(1) - 49;
+	public static Coordinates toCoordinates(String squareId) {
+		int x = squareId.charAt(0) - 65;
+		int y = squareId.charAt(1) - 49;
 		return new Coordinates(x, y);
 	}
 

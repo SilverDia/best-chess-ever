@@ -136,6 +136,10 @@ public enum Move {
 	 */;
 
 	public abstract List<Movement> evaluate(Board board, Piece piece);
+	
+	public List<Movement> evaluateDirection(Board board, Piece piece, Direction dir){
+		return MoveUtils.evaluateDirection(this, true, null, dir, board, piece, 1);
+	}
 
 	private static class MoveUtils {
 		private static List<Movement> evaluateDirection(Move move, boolean continueAfter, Direction direction,
