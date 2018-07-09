@@ -4,6 +4,7 @@ import api.chess.equipment.board.Board;
 import api.chess.equipment.board.Coordinates;
 import api.chess.gameplay.game.GameState;
 import api.chess.gameplay.rules.Movement;
+import api.chess.player.Player;
 import api.config.PieceConfig;
 import com.google.gson.Gson;
 

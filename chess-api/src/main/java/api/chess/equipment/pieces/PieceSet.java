@@ -2,6 +2,7 @@ package api.chess.equipment.pieces;
 
 import api.chess.equipment.board.Board;
 import api.chess.gameplay.rules.Movement;
+import api.chess.player.Player;
 import api.config.PieceConfig;
 import com.google.gson.Gson;
 
@@ -32,7 +33,8 @@ public class PieceSet {
         return new Gson().toJson(this);
     }
 
-    public void init(PieceConfig.Color color) {
+    public void init(Player player) {
+    	PieceConfig.Color color = player.getColor();
         king = new King();
         king.init(0, color);
         Queen queen = new Queen();
@@ -66,6 +68,10 @@ public class PieceSet {
 
     public ArrayList<Piece> getPieces() {
         return pieces;
+    }
+    
+    public Piece getPiece(String pieceId) {
+    	return pieces.stream().filter(piece -> piece.id.equals(pieceId)).findFirst().orElse(null);
     }
 
     public Movement movePiece(String pieceId, String moveToSqaureId) {

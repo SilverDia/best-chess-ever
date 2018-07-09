@@ -31,7 +31,7 @@ public class Player {
         this.color = color;
 
         pieceSet = new PieceSet();
-        pieceSet.init(color);
+        pieceSet.init(this);
 
         updatePlayer();
         active = color.equals(PieceConfig.Color.WHITE);
