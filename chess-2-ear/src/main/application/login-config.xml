@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<application-policy name="jboss-secure">
+       
+    <authentication>
+           
+        <login-module code="org.jboss.security.auth.spi.UsersRolesLoginModule" flag="required">
+                 
+            <module-option name="usersProperties">users.properties</module-option>
+                 
+            <module-option name="rolesProperties">roles.properties</module-option>
+               
+        </login-module>
+
+           
+    </authentication>
+</application-policy>

@@ -36,7 +36,7 @@ public class ExecuteMoveServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		if (request.getParameter(ACTION).equals(ACTION_MOVE)) {
 
 			response.getWriter().append("Moving...");

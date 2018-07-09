@@ -18,17 +18,12 @@ public class TestMainClass {
 
     public static void main(String[] args){
         // TODO add all little tests here...
-        Game game = new Game();
-        game.init("w", "b");
-        System.out.println(new Gson().toJson(game));
-
-        try {
-
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(File.createTempFile("initialGame", ".json")));
-            bufferedWriter.write(new Gson().toJson(game));
-            bufferedWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.getenv().entrySet().stream().forEach(env -> {
+            System.out.println(env.toString());
+        });
+        System.out.println();
+        System.getProperties().entrySet().stream().forEach(env -> {
+            System.out.println(env.toString());
+        });
     }
 }

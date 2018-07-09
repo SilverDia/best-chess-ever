@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 public class BoardConfig {
     private final static Logger LOG = Logger.getLogger(BoardConfig.class.getName());
 
-    public static enum Direction {
+    public enum Direction {
         DIAG_LT, VERT, DIAG_RT, HOR
     }
 

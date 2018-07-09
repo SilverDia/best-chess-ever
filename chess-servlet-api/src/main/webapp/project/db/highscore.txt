@@ -1,0 +1,4 @@
+Marcel;256
+Hasan;1337
+Hassan;65536
+Harambe;28052016

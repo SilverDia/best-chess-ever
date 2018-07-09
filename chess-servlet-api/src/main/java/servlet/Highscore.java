@@ -20,7 +20,7 @@ public class Highscore extends HttpServlet {
 	HighscoreHandler highscoreHandler = new HighscoreHandler();
 
 	protected void doGetPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws IOException {
 
 		StringBuffer requestUrl = request.getRequestURL();
 		for (String line : readTxtFile("/resources/html/highscore.html")) {

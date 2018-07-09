@@ -1,97 +1,119 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <link rel="shortcut icon" href="/ChessGame/project/resources/images/chess-icon-480x480-big.png" type="image/x-icon"></link>
-        
-        <link rel="stylesheet" type="text/css" href="/ChessGame/project/css/styles.css" />
-        <title>Schach - Spiel</title>
-        <script src="/ChessGame/project/js/turn_validation.js"></script>
-        
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
-<script	src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
-<script src="/ChessGame/project/js/game_script.js" type="text/javascript"></script>
-        
-    </head>
-    <body> 
-        <nav id="navbar" class="navbar"></nav>
-        <div class="content">
-        	<div class="content-block">
-	            <div class="grid-game">
-				<div id="name-white" class="grid-player active-player">WHITE</div>
-				<div id="time-white" class="grid-time active-time">00:00</div>
-				<div id="turnInfo" class="grid-turnInfo">
-				<h2 class="turn-info-content">Spieler WHITE ist am Zug</h2>
-					<div onclick="changePlayer()">...trigger change player...</div>
-				</div>
-				<div id="name-black" class="grid-player inactive-player">BLACK</div>
-				<div id="time-black" class="grid-time inactive-time">00:00</div>
-		            <div id="game-log-white" class="grid-game-log">
-	gamelog-placeholder
-	                </div>
-					<div id="pawn-convertion-white" class="grid-pawn-convertion-white">
-	                    <table id="white" class="chessboard pawn-convertion-white invisible">
-	                        <tr>
-	                            <td class="chessboard-tile light queen white piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/queen_white.png"/>
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td class="chessboard-tile dark bishop white piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/bishop_white.png"/>
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td class="chessboard-tile light knight white piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/knight_white.png"/>
-	                            </td>
-	                        </tr>
-	                        <tr>            
-	                            <td class="chessboard-tile dark rook white piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/rook_white.png"/>            
-	                            </td>
-	                        </tr>
-	                    </table>   
-					</div>
-	                <div id="game" class="grid-chessboard square">
-						<table id="chessboard" class="chessboard">
-							<tbody></tbody>
-						</table>
-	                </div>
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="/ChessGame/project/resources/images/chess-icon-480x480-big.png"
+		  type="image/x-icon"></link>
 
-					<div id="pawn-convertion-black" class="grid-pawn-convertion-black">
-	                    <table id="black" class="chessboard pawn-convertion-black invisible">
-	                        <tr>            
-	                            <td class="chessboard-tile light queen black piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/queen_black.png" />
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td class="chessboard-tile dark bishop black piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/bishop_black.png" />
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td class="chessboard-tile light knight black piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/knight_black.png" />
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td class="chessboard-tile dark rook black piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/rook_black.png" />
-	                            </td>
-	                        </tr>
-	                    </table>
-	                </div>
-	                <div id="game-log-black" class="grid-game-log">
-	gamelog-placeholder
-	                </div>
-	            </div>
-            </div>
-            <!-- nur zum testen, später ausgelöst, wenn ein pawn bis ganz hinten durch kommt -->
-            <div id="toggleBlack" onclick="toggle('black')">toggleBlack</div>
-            <div id="toggleWhite" onclick="toggle('white')">toggleWhite</div>
-        </div>
-    </body>
-    <script src="/ChessGame/project/js/script.js"></script>
+	<link rel="stylesheet" type="text/css" href="/ChessGame/project/css/styles.css"/>
+	<title>Schach - Spiel</title>
+	<script src="/ChessGame/project/js/turn_validation.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="/ChessGame/project/js/game_script.js" type="text/javascript"></script>
+
+</head>
+<body>
+<nav id="navbar" class="navbar"></nav>
+<div class="content">
+	<div class="content-block">
+		<div class="grid-game">
+			<div id="pause-layer">
+				<img class="pause-layer-img" src="/ChessGame/project/resources/images/pause-icon-480x480.png">
+			</div>
+			<div id="turnInfo" class="grid-turnInfo">
+				<h2 class="turn-info-content">Spieler WHITE ist am Zug</h2>
+				<div onclick="changePlayer()">...trigger change player...</div>
+			</div>
+			<div id="player-content-block-white" class="player-content-block grid-player grid-white active-player">
+				<div id="time-white" class="grid-time grid-white active-time ">
+					<img class="time-button" src="/ChessGame/project/resources/images/pause-icon-480x480.png"><span>00:00</span>
+				</div>
+				<div id="name-white" class="grid-name grid-white ">WHITE</div>
+				<div id="game-log-white" class="grid-game-log grid-white">
+					<textarea id="game-log-text-white" class="game-log-text">
+						letzter Zug
+					</textarea>
+				</div>
+				<div id="pawn-conversion-white" class="grid-pawn-conversion grid-white invisible">
+					<table class="chessboard pawn-conversion">
+						<tr>
+							<td class="chessboard-tile light queen white piece">
+								<img src="/ChessGame/project/resources/images/piece-sets/default/queen_white.png"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="chessboard-tile dark bishop white piece">
+								<img src="/ChessGame/project/resources/images/piece-sets/default/bishop_white.png"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="chessboard-tile light knight white piece">
+								<img src="/ChessGame/project/resources/images/piece-sets/default/knight_white.png"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="chessboard-tile dark rook white piece">
+								<img src="/ChessGame/project/resources/images/piece-sets/default/rook_white.png"/>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="captured-pieces-white" class="grid-captured-pieces grid-white ">
+
+				</div>
+			</div>
+
+			<div id="game" class="grid-chessboard square">
+				<table id="chessboard" class="chessboard">
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<div id="player-content-block-black" class="player-content-block grid-player grid-black inactive-player">
+				<div id="time-black" class="grid-time grid-black  inactive-time">
+					<img class="time-button" src="/ChessGame/project/resources/images/pause-icon-480x480.png"><span>00:00</span>
+				</div>
+				<div id="name-black" class="grid-name grid-black ">BLACK</div>
+				<div id="game-log-black" class="grid-game-log grid-black">
+					<textarea id="game-log-text-black" class="game-log-text">
+						letzter Zug
+					</textarea>
+				</div>
+				<div id="pawn-conversion-black" class="grid-pawn-conversion grid-black invisible">
+					<table id="black" class="chessboard pawn-conversion-black invisible">
+						<tr>
+							<td class="chessboard-tile light queen black piece">
+								<img src="/ChessGame/project/resources/images/piece-sets/default/queen_black.png"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="chessboard-tile dark bishop black piece">
+								<img src="/ChessGame/project/resources/images/piece-sets/default/bishop_black.png"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="chessboard-tile light knight black piece">
+								<img src="/ChessGame/project/resources/images/piece-sets/default/knight_black.png"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="chessboard-tile dark rook black piece">
+								<img src="/ChessGame/project/resources/images/piece-sets/default/rook_black.png"/>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="captured-pieces-black" class="grid-captured-pieces grid-black ">BLACK</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- nur zum testen, später ausgelöst, wenn ein pawn bis ganz hinten durch kommt -->
+<div id="toggleBlack" onclick="triggerConversion('black')">toggleBlack</div>
+<div id="toggleWhite" onclick="triggerConversion('white')">toggleWhite</div>
+</div>
+</body>
+<script src="/ChessGame/project/js/script.js"></script>
 </html>
