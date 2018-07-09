@@ -1,5 +1,7 @@
 package api.chess.equipment.pieces;
 
+import api.chess.equipment.board.Board;
+import api.chess.gameplay.rules.Movement;
 import api.config.PieceConfig;
 import com.google.gson.Gson;
 
@@ -17,8 +19,8 @@ public class PieceSet {
     private transient ArrayList<Piece> pieces = new ArrayList<>();
 
     private King king;
-    private Queen queen;
 
+    private HashMap<String, Queen> queens = new HashMap<>();
     private HashMap<String, Bishop> bishops = new HashMap<>();
     private HashMap<String, Knight> knights = new HashMap<>();
     private HashMap<String, Rook>  rooks = new HashMap<>();
@@ -33,8 +35,9 @@ public class PieceSet {
     public void init(PieceConfig.Color color) {
         king = new King();
         king.init(0, color);
-        queen = new Queen();
+        Queen queen = new Queen();
         queen.init(0, color);
+        queens.put(queen.id, queen);
 
         for (int i = 0; i < 2; i++) {
             Bishop bishop = new Bishop();
@@ -65,22 +68,23 @@ public class PieceSet {
         return pieces;
     }
 
-    public void movePiece(String pieceId, String moveToSqaureId) {
+    public Movement movePiece(String pieceId, String moveToSqaureId) {
         String pieceName = getPieceName(pieceId);
 
-        if (pieceName.equals(KING)) {
-            king.setPositionSquareId(moveToSqaureId);
-        } else if (pieceName.equals(QUEEN)) {
-            queen.setPositionSquareId(moveToSqaureId);
-        } else if (pieceName.equals(BISHOP)) {
-            bishops.get(pieceId).setPositionSquareId(moveToSqaureId);
-        } else if (pieceName.equals(KNIGHT)) {
-            knights.get(pieceId).setPositionSquareId(moveToSqaureId);
-        } else if (pieceName.equals(ROOK)) {
-            rooks.get(pieceId).setPositionSquareId(moveToSqaureId);
-        } else if (pieceName.equals(PAWN)) {
-            pawns.get(pieceId).setPositionSquareId(moveToSqaureId);
+        if (pieceName.equals(KING.toString())) {
+            return king.move(moveToSqaureId);
+        } else if (pieceName.equals(QUEEN.toString())) {
+            return queens.get(pieceId).move(moveToSqaureId);
+        } else if (pieceName.equals(BISHOP.toString())) {
+            return bishops.get(pieceId).move(moveToSqaureId);
+        } else if (pieceName.equals(KNIGHT.toString())) {
+            return knights.get(pieceId).move(moveToSqaureId);
+        } else if (pieceName.equals(ROOK.toString())) {
+            return rooks.get(pieceId).move(moveToSqaureId);
+        } else if (pieceName.equals(PAWN.toString())) {
+            return pawns.get(pieceId).move(moveToSqaureId);
         }
+        return null;
     }
 
     public void removeCapturedPiece(String pieceId) {

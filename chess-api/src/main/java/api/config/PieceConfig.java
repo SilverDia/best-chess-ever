@@ -18,14 +18,4 @@ public class PieceConfig {
     public enum Color {
         BLACK, WHITE
     }
-
-    public static String buildImageUrl(Piece piece, GameConfig.PieceImageSet pieceSet) {
-        return RESOURCE_PATH_IMAGES_PIECESETS
-                + pieceSet.toString().toLowerCase()
-                + "/"
-                + piece.getName().toString().toLowerCase()
-                + "_"
-                + piece.getColor().toString().toLowerCase()
-                + ".png";
-    }
 }

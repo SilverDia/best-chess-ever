@@ -1,21 +1,26 @@
 package api.chess.gameplay.rules;
 
-import api.chess.equipment.board.Board;
-import api.chess.equipment.board.Square;
-import api.chess.equipment.pieces.Piece;
-import api.config.BoardConfig;
-import api.config.MovementRuleConfig;
 import com.google.gson.Gson;
+
+import api.chess.equipment.board.Direction;
+import api.chess.equipment.pieces.Piece;
 
 import java.util.ArrayList;
 
 public class Movement {
 
-    private String moveToSquareId;
-    private ArrayList<MovementRuleConfig.Move> rules = new ArrayList<>();
+    private final String moveFromSquareId;
+    private final String moveToSquareId;
+    private transient final Direction direction;
+    private final Piece blockedBy;
+    
+    private ArrayList<Move> rules = new ArrayList<>();
 
-    public Movement(String moveToSquareId, MovementRuleConfig.Move move) {
+    public Movement(String moveFromSquareId, String moveToSquareId, Direction direction, Move move, Piece blockedBy) {
+        this.moveFromSquareId = moveFromSquareId;
         this.moveToSquareId = moveToSquareId;
+        this.direction = direction;
+        this.blockedBy = blockedBy;
         addMovementRule(move);
     }
 
@@ -24,15 +29,28 @@ public class Movement {
         return (new Gson().toJson(this));
     }
 
-    public void addMovementRule(MovementRuleConfig.Move move) {
+    public Movement addMovementRule(Move move) {
         rules.add(move);
+        return this;
     }
 
     public String getMoveToSquareId() {
         return moveToSquareId;
     }
 
-    public ArrayList<MovementRuleConfig.Move> getRules() {
+    public String getMoveFromSquareId() {
+        return moveFromSquareId;
+    }
+
+    public ArrayList<Move> getRules() {
         return rules;
     }
+
+	public Piece getBlockedBy() {
+		return blockedBy;
+	}
+
+	public Direction getDirection() {
+		return direction;
+	}
 }

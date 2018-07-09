@@ -157,6 +157,8 @@ body{
         max-width: 760px;
     }
     
+    /* index grid */
+
     .index-grid{
         display: grid !important;
         grid-template-columns: 1fr !important;
@@ -182,6 +184,42 @@ body{
         grid-column: 1 / 2 !important;
         grid-row: 4 / 5 !important;
     }
+
+    /* manual firuge grid */
+
+    .manual-figure-grid{
+        grid-template-columns: 1fr 1fr  !important;
+    }
+    
+    .manual-figure-grid-rook{
+        grid-column: 1 / 2 !important;
+        grid-row: 1 / 2 !important;
+    }
+    
+    .manual-figure-grid-bishop{
+        grid-column: 2 / 3 !important;
+        grid-row: 1 / 2 !important;
+    }
+    
+    .manual-figure-grid-queen{
+        grid-column:  1 / 2 !important;
+        grid-row: 2 / 3 !important;
+    }
+    
+    .manual-figure-grid-king{
+        grid-column: 2 / 3 !important;
+        grid-row: 2 / 3 !important;
+    }
+    
+    .manual-figure-grid-knight{
+        grid-column: 1 / 2 !important;
+        grid-row: 3 / 4 !important;
+    }
+    
+    .manual-figure-grid-pawn{
+        grid-column: 2 / 3 !important;
+        grid-row: 3 / 4 !important;
+    }
 }
 
 @media screen and (max-width: 892px) {
@@ -201,6 +239,42 @@ body{
     
     .index-grid-play{
         height: 150px !important;
+    }
+
+    /* manual firuge grid */
+
+    .manual-figure-grid{
+        grid-template-columns: 1fr !important;
+    }
+        
+    .manual-figure-grid-rook{
+        grid-column: 1 / 2 !important;
+        grid-row: 1 / 2 !important;
+    }
+    
+    .manual-figure-grid-bishop{
+        grid-column: 1 / 2 !important;
+        grid-row: 2 / 3 !important;
+    }
+    
+    .manual-figure-grid-queen{
+        grid-column:  1 / 2 !important;
+        grid-row: 3 / 4 !important;
+    }
+        
+    .manual-figure-grid-king{
+        grid-column: 1 / 2 !important;
+        grid-row: 4 / 5 !important;
+    }
+        
+    .manual-figure-grid-knight{
+        grid-column: 1 / 2 !important;
+        grid-row: 5 / 6 !important;
+    }
+    
+    .manual-figure-grid-pawn{
+        grid-column: 1 / 2 !important;
+        grid-row: 6 / 7 !important;
     }
 }
 

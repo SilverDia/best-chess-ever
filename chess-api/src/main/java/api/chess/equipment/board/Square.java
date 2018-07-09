@@ -11,18 +11,18 @@ public class Square {
     private final transient static Logger LOG = Logger.getLogger(Square.class.getName());
 
     private final String squareId;
-    private final PieceConfig.Color color;
+    private transient final PieceConfig.Color color;
 
-    private boolean vacant = true;
-    private Piece piece = null;
-    private String pieceId = "";
+    private transient boolean vacant = true;
+    private transient Piece piece = null;
+    private String pieceID = "";
 
-    private final Coordinates coordinates;
+    private transient final Coordinates coordinates;
 
     public Square(Coordinates coordinates) {
         this.coordinates = coordinates;
         this.squareId = BoardConfig.toSquareId(coordinates);
-        if ((coordinates.x + coordinates.y) % 2 == 0) {
+        if ((coordinates.getX() + coordinates.getY()) % 2 == 0) {
             color = PieceConfig.Color.BLACK;
         } else {
             color = PieceConfig.Color.WHITE;
@@ -52,15 +52,7 @@ public class Square {
 
     public void setPiece(Piece piece) {
         this.piece = piece;
+        pieceID = piece.getId();
         vacant = (piece == null);
-    }
-
-    public String getPieceId() {
-        return pieceId;
-    }
-
-    public void setPieceId(String pieceId) {
-        this.pieceId = pieceId;
-        vacant = (pieceId.equals(""));
     }
 }
