@@ -13,7 +13,6 @@ public class Square {
     private final String squareId;
     private transient final PieceConfig.Color color;
 
-    private transient boolean vacant = true;
     private transient Piece piece = null;
     private String pieceID = "";
 
@@ -38,10 +37,6 @@ public class Square {
         return squareId;
     }
 
-    public boolean isVacant() {
-        return vacant;
-    }
-
     public Coordinates getCoordinates() {
         return coordinates;
     }
@@ -53,6 +48,5 @@ public class Square {
     public void setPiece(Piece piece) {
         this.piece = piece;
         pieceID = piece.getId();
-        vacant = (piece == null);
     }
 }

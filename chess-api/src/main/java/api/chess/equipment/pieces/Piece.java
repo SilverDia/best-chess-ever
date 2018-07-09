@@ -1,10 +1,8 @@
 package api.chess.equipment.pieces;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -15,9 +13,7 @@ import api.chess.equipment.board.Coordinates;
 import api.chess.gameplay.rules.Move;
 import api.chess.gameplay.rules.Movement;
 import api.config.BoardConfig;
-import api.config.GameConfig;
 import api.config.MovementRuleConfig;
-import api.config.PieceConfig;
 import api.config.PieceConfig.Color;
 import api.config.PieceConfig.PieceName;
 
@@ -61,6 +57,10 @@ public abstract class Piece {
 			setPositionSquareId(squareId);
 		return optionalMove.orElse(null);
 	}
+	
+    public Movement getMoveWithDestination(String squareId) {
+    	return possibleMoves.stream().filter(move -> move.getMoveToSquareId().equals(squareId)).findFirst().orElse(null);
+    }
 	
 	public List<Movement> evaluate(Board board){
 		possibleMoves = new ArrayList<>();

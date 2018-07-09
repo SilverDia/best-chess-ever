@@ -1,6 +1,7 @@
 package api.chess.equipment.pieces;
 
 import api.chess.equipment.board.Coordinates;
+import api.chess.player.Player;
 import api.config.PieceConfig;
 import com.google.gson.Gson;
 
