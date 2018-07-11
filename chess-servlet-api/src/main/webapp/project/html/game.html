@@ -14,9 +14,42 @@
 <nav id="navbar" class="navbar"></nav>
 <div class="content">
 	<div class="content-block">
+		<h1>Schach-Spiel</h1>
+	</div>
+	<div class="content-block">
 		<div class="grid-game">
-			<div id="turnInfo" class="grid-turnInfo">Turninformation
-				Placeholder
+			<div id="turnInfo" class="grid-turnInfo">
+				<div class="turn-info-grid">
+				<div id="game-timer-white-container" class="turn-info game-timer-white-container">
+					<table class="game-timer">
+						<tr>
+							<td>
+								WEISS
+							</td>
+							<td id="game-timer-white">
+								00:00
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="game-turn-info-container" class="game-turn-info-continer">
+					<div>
+						WEISS ist am Zug!
+					</div>
+				</div>
+				<div id="game-timer-black-container" class="turn-info game-timer-black-container">
+					<table class="game-timer">
+						<tr>
+							<td>
+								SCHWARZ
+							</td>
+							<td id="game-timer-black">
+								00:00
+							</td>
+						</tr>
+					</table>
+				</div>
+				</div>
 			</div>
 			<div id="game" class="grid-chessboard">
 				<table id="chessboard" class="chessboard">
@@ -152,7 +185,10 @@
 					</tr>
 				</table>
 			</div>
-			<div id="game-log" class="grid-game-log">gamelog-placeholder</div>
+			<div id="game-log" class="grid-game-log">
+				<h4>Game-Log</h4>
+				<textarea readonly name="game-log" class="game-log"></textarea>
+			</div>
 		</div>
 	</div>
 	<!-- nur zum testen, später ausgelöst, wenn ein pawn bis ganz hinten durch kommt -->

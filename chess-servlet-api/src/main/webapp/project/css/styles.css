@@ -280,7 +280,7 @@ body{
 
 /*** content fonts ***/
 
-h1,h2,h3,h4,p,label{
+body *{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -410,7 +410,7 @@ h4{
 
 .grid-game{
     display: grid;
-    grid-template-columns: 570px 90px 1fr;
+    grid-template-columns: 592px 90px 1fr;
     row-gap: 0px;
 }
 
@@ -436,12 +436,57 @@ h4{
 
 .grid-game-log{
     grid-column: 3 / 4;
-    grid-row: 1 / 4;
+    grid-row: 2 / 4;
 }
 
 .invisible{
     opacity: 0;
 }
+
+/*** Game INFO ***/
+
+/* turn info grid */
+
+.turn-info-grid{
+    display: grid;
+    grid-template-columns: 113px 1fr 148px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.game-turn-info-continer{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+
+.game-timer-white-container{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.game-timer-black-container{
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+}
+
+/* Timer */
+
+.game-timer{
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.game-timer *{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.game-timer td, .game-timer tr{
+    border: 3px;
+    border-style: solid;
+    border-color: black;
+}
+
 
 /*** chessboard layout ***/
 
@@ -504,6 +549,14 @@ h4{
 
 .pawn-convertion-black{
     margin-top: -3px;
+}
+
+/*** game-log scrollable box ***/
+
+.game-log{
+    height: 82.5%;
+    width: 100%;
+    overflow: scroll;
 }
 
 /*************** manual ****************/
