@@ -1,8 +1,9 @@
 var jsonObject = {};
 var gameID;
+var sender;
 
 function init_game(element) {
-	var sender = element;
+	sender = element;
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -17,6 +18,8 @@ function init_game(element) {
 }
 
 function parse_json() {
+	clearOldSuggestions();
+
 	gameID = jsonObject.gameId;
 	document.getElementById("turnInfo").innerHTML = "ID: " + gameID;
 
@@ -57,13 +60,7 @@ function setupOnclick(color) {
 }
 
 function clickedPiece(color, pieceType, piece) {
-	var oldElements = document.getElementsByClassName("turn-suggestion");
-	for (i = 0; i < oldElements.length; i++) {
-		oldElements[i].classList.remove("capture");
-		oldElements[i].classList.remove("valid-turn");
-		oldElements[i].classList.remove("turn-suggestion");
-		oldElements[i].removeAttribute("onclick");
-	}
+	clearOldSuggestions();
 
 	for (move in jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves) {
 		var element = document
@@ -83,6 +80,16 @@ function clickedPiece(color, pieceType, piece) {
 			element.classList.add("valid-turn");
 		}
 		element.classList.add("turn-suggestion");
+	}
+}
+
+function clearOldSuggestions() {
+	var oldElements = document.getElementsByClassName("turn-suggestion");
+	for (i = 0; i < oldElements.length; i++) {
+		oldElements[i].classList.remove("capture");
+		oldElements[i].classList.remove("valid-turn");
+		oldElements[i].classList.remove("turn-suggestion");
+		oldElements[i].removeAttribute("onclick");
 	}
 }
 
