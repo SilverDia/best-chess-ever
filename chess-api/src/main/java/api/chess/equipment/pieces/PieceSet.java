@@ -19,13 +19,11 @@ public class PieceSet {
 
     private transient ArrayList<Piece> pieces = new ArrayList<>();
 
-    private King king;
-
+    private HashMap<String, King> kings = new HashMap<>(); //there is just one, but for json parsing on javascript side, it's better this way
     private HashMap<String, Queen> queens = new HashMap<>();
     private HashMap<String, Bishop> bishops = new HashMap<>();
     private HashMap<String, Knight> knights = new HashMap<>();
     private HashMap<String, Rook>  rooks = new HashMap<>();
-
     private HashMap<String, Pawn>  pawns = new HashMap<>();
 
     @Override
@@ -35,8 +33,9 @@ public class PieceSet {
 
     public void init(Player player) {
     	PieceConfig.Color color = player.getColor();
-        king = new King();
+        King king = new King();
         king.init(0, color);
+        kings.put(king.id, king);
         Queen queen = new Queen();
         queen.init(0, color);
         queens.put(queen.id, queen);
@@ -59,7 +58,7 @@ public class PieceSet {
         }
 
         pieces.add(king);
-        pieces.add(queen);
+        pieces.addAll(queens.values());
         pieces.addAll(bishops.values());
         pieces.addAll(rooks.values());
         pieces.addAll(knights.values());
@@ -78,7 +77,7 @@ public class PieceSet {
         String pieceName = getPieceName(pieceId);
 
         if (pieceName.equals(KING.toString())) {
-            return king.move(moveToSqaureId);
+            return kings.get(pieceId).move(moveToSqaureId);
         } else if (pieceName.equals(QUEEN.toString())) {
             return queens.get(pieceId).move(moveToSqaureId);
         } else if (pieceName.equals(BISHOP.toString())) {

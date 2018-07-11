@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import api.chess.equipment.board.Board;
-import api.chess.equipment.board.Coordinates;
-import api.chess.equipment.board.Direction;
-import api.chess.equipment.board.Square;
-import api.chess.equipment.pieces.Pawn;
+import api.chess.equipment.board.*;
 import api.chess.equipment.pieces.Piece;
 import api.chess.equipment.pieces.Rook;
 import api.config.BoardConfig;
@@ -77,8 +73,8 @@ public enum Move {
 				List<Movement> result = MoveUtils.evaluateDirection(this, 2, null,
 						piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.VERT : Direction.VERT.invert(),
 						board, piece, 1);
-				if (result.size() == 2 && result.get(2).getBlockedBy() == null)
-					return Arrays.asList(result.get(2));
+				if (result.size() == 2 && result.get(1).getBlockedBy() == null)
+					return Arrays.asList(result.get(1));
 			}
 			return new ArrayList<>();
 		}

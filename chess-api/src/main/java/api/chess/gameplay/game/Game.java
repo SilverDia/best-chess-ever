@@ -52,11 +52,6 @@ public class Game {
 		player.get(activePlayer).initPlayer(namePlayerWhite, PieceConfig.Color.WHITE);
 		player.get(inactivePlayer).initPlayer(namePlayerBlack, PieceConfig.Color.BLACK);
 
-		player.get(activePlayer).getPieceSet().getPieces()
-				.forEach(piece -> board.getSquare(piece.getPositionSquareId()).setPiece(piece));
-		player.get(inactivePlayer).getPieceSet().getPieces()
-				.forEach(piece -> board.getSquare(piece.getPositionSquareId()));
-
 		// dummy to save game start time and to handle first turn
 		turnHistory.add(new Turn(null, null, false, false, new Date(), new Date()));
 
@@ -75,7 +70,7 @@ public class Game {
 	}
 
 	public void handleSpecialMove(Movement movement) {
-		if (movement.getRules().contains(Move.CASTELING)) { 
+		if (movement.getRules().contains(Move.CASTELING)) {
 			boolean right = movement.getDirection().x > 0;
 			String moveFromId = "" + movement.getMoveFromSquareId().charAt(0) + (right ? "8" : "1");
 			String moveToId = "" + movement.getMoveFromSquareId().charAt(0) + (right ? "6" : "4");
