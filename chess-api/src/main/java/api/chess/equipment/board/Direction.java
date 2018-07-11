@@ -15,7 +15,7 @@ public class Direction {
 	}
 
 	public Direction rotate() {
-		return new Direction(y, x);
+		return new Direction(-y, x);
 	}
 
 	public Direction invert() {

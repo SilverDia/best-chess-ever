@@ -11,9 +11,11 @@ function init_game(element) {
 			parse_json();
 		}
 	};
-	xhttp.open("GET",
-			"http://localhost:8080/ChessGame/GetChessboardServlet?action=init-game",
-			true);
+	xhttp
+			.open(
+					"GET",
+					"http://localhost:8080/ChessGame/GetChessboardServlet?action=init-game",
+					true);
 	xhttp.send();
 }
 
@@ -49,12 +51,9 @@ function setupOnclick(color) {
 		for (piece in jsonObject.player[color].pieceSet[pieceType]) {
 			if (typeof jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves !== 'undefined')
 				document
-						.getElementById(
-								jsonObject.player[color].pieceSet[pieceType][piece].positionSquareId)
-						.setAttribute(
-								"onclick",
-								"clickedPiece('" + color + "','" + pieceType
-										+ "','" + piece + "')");
+						.getElementById(jsonObject.player[color].pieceSet[pieceType][piece].positionSquareId).firstChild
+						.setAttribute("onclick", "clickedPiece('" + color
+								+ "','" + pieceType + "','" + piece + "')");
 		}
 	}
 }
@@ -62,10 +61,11 @@ function setupOnclick(color) {
 function clickedPiece(color, pieceType, piece) {
 	clearOldSuggestions();
 
-	var piece = document.getElementById(jsonObject.player[color].pieceSet[pieceType][piece].positionSquareId);
-	piece.classList.add("click-display");
-	piece.classList.add("chosen");
-	
+	var selected = document
+			.getElementById(jsonObject.player[color].pieceSet[pieceType][piece].positionSquareId);
+	selected.classList.add("click-display");
+	selected.classList.add("chosen");
+
 	for (move in jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves) {
 		var element = document
 				.getElementById(jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves[move].moveToSquareId);
@@ -88,7 +88,8 @@ function clickedPiece(color, pieceType, piece) {
 }
 
 function clearOldSuggestions() {
-	$('.click-display').toggleClass("click-display capture valid-turn chosen", false).removeAttr("onclick");
+	$('.click-display').toggleClass("click-display capture valid-turn chosen",
+			false).removeAttr("onclick");
 }
 
 function madeMove(pieceId, moveToSquareId) {
@@ -99,9 +100,13 @@ function madeMove(pieceId, moveToSquareId) {
 			parse_json();
 		}
 	};
-	xhttp.open("GET",
-			"http://localhost:8080/ChessGame/GetChessboardServlet?action=execute-move&game-id="
-					+ gameID + "&move-piece-id=" + pieceId
-					+ "&move-to-square-id=" + moveToSquareId, true);
+	xhttp
+			.open(
+					"GET",
+					"http://localhost:8080/ChessGame/GetChessboardServlet?action=execute-move&game-id="
+							+ gameID
+							+ "&move-piece-id="
+							+ pieceId
+							+ "&move-to-square-id=" + moveToSquareId, true);
 	xhttp.send();
 }
