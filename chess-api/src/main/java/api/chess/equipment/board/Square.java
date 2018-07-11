@@ -8,45 +8,45 @@ import com.google.gson.Gson;
 import java.util.logging.Logger;
 
 public class Square {
-    private final transient static Logger LOG = Logger.getLogger(Square.class.getName());
+	private final transient static Logger LOG = Logger.getLogger(Square.class.getName());
 
-    private final String squareId;
-    private transient final PieceConfig.Color color;
+	private final String squareId;
+	private transient final PieceConfig.Color color;
 
-    private transient Piece piece = null;
-    private String pieceID = "";
+	private transient Piece piece = null;
+	private String pieceID = "";
 
-    private transient final Coordinates coordinates;
+	private transient final Coordinates coordinates;
 
-    public Square(Coordinates coordinates) {
-        this.coordinates = coordinates;
-        this.squareId = BoardConfig.toSquareId(coordinates);
-        if ((coordinates.getX() + coordinates.getY()) % 2 == 0) {
-            color = PieceConfig.Color.BLACK;
-        } else {
-            color = PieceConfig.Color.WHITE;
-        }
-    }
+	public Square(Coordinates coordinates) {
+		this.coordinates = coordinates;
+		this.squareId = BoardConfig.toSquareId(coordinates);
+		if ((coordinates.getX() + coordinates.getY()) % 2 == 0) {
+			color = PieceConfig.Color.BLACK;
+		} else {
+			color = PieceConfig.Color.WHITE;
+		}
+	}
 
-    @Override
-    public String toString() {
-        return new Gson().toJson(this);
-    }
+	@Override
+	public String toString() {
+		return new Gson().toJson(this);
+	}
 
-    public String getSquareId() {
-        return squareId;
-    }
+	public String getSquareId() {
+		return squareId;
+	}
 
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
+	public Coordinates getCoordinates() {
+		return coordinates;
+	}
 
-    public Piece getPiece() {
-        return piece;
-    }
+	public Piece getPiece() {
+		return piece;
+	}
 
-    public void setPiece(Piece piece) {
-        this.piece = piece;
-        pieceID = piece.getId();
-    }
+	public void setPiece(Piece piece) {
+		this.piece = piece;
+		pieceID = piece != null ? piece.getId() : "";
+	}
 }
