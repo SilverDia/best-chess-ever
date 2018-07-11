@@ -185,6 +185,21 @@ body{
         grid-row: 4 / 5 !important;
     }
 
+    /* game-grid */
+
+    .grid-game{
+        grid-template-columns: 592px 90px !important;
+    }
+    
+    .grid-game-log{
+        grid-column: 1 / 3 !important;
+        grid-row: 4 / 5 !important;
+    }
+
+    .game-log{
+        height: 300px !important;
+    }
+
     /* manual firuge grid */
 
     .manual-figure-grid{
