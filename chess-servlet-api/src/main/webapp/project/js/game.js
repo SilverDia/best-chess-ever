@@ -84,13 +84,8 @@ function clickedPiece(color, pieceType, piece) {
 }
 
 function clearOldSuggestions() {
-	var oldElements = document.getElementsByClassName("turn-suggestion");
-	for (i = 0; i < oldElements.length; i++) {
-		oldElements[i].classList.remove("capture");
-		oldElements[i].classList.remove("valid-turn");
-		oldElements[i].classList.remove("turn-suggestion");
-		oldElements[i].removeAttribute("onclick");
-	}
+	// var oldElements = document.getElementsByClassName("turn-suggestion");
+	$('.turn-suggestion').toggleClass("capture turn-suggestion valid-turn", false).prop("onclick", null);
 }
 
 function madeMove(pieceId, moveToSquareId) {
@@ -102,7 +97,7 @@ function madeMove(pieceId, moveToSquareId) {
 		}
 	};
 	xhttp.open("GET",
-			"http://localhost:8080/ChessGame/GameControl?action=execute-move&game-id="
+			"http://localhost:8080/ChessGame/GameControl?action=move&game-id="
 					+ gameID + "&move-piece-id=" + pieceId
 					+ "&move-to-square-id=" + moveToSquareId, true);
 	xhttp.send();
