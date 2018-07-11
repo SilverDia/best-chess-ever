@@ -1,6 +1,8 @@
 package api.chess.equipment.pieces;
 
+import java.security.cert.CollectionCertStoreParameters;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -20,7 +22,8 @@ import api.config.PieceConfig.PieceName;
 public abstract class Piece {
 	transient Logger LOG = Logger.getLogger(Piece.class.getName());
 
-	String id; // to identify each figure --- type_color_number --- example: Pawn_W_3 /
+	String id; // to identify each figure --- type_color_number --- example:
+				// Pawn_W_3 /
 				// Knight_B_1
 
 	transient PieceName name;
@@ -50,44 +53,49 @@ public abstract class Piece {
 		coordinates.setX(coordinates.getX() + (id * scale));
 		return BoardConfig.toInitSquareId(color, coordinates);
 	}
-	
+
 	public Movement move(String squareId) {
-		Optional<Movement> optionalMove = getPossibleMoves().stream().filter(move -> move.getMoveToSquareId().equals(squareId)).findFirst();
+		Optional<Movement> optionalMove = getPossibleMoves().stream()
+				.filter(move -> move.getMoveToSquareId().equals(squareId)).findFirst();
 		if (optionalMove.isPresent())
 			setPositionSquareId(squareId);
 		return optionalMove.orElse(null);
 	}
-	
-    public Movement getMoveWithDestination(String squareId) {
-    	return possibleMoves.stream().filter(move -> move.getMoveToSquareId().equals(squareId)).findFirst().orElse(null);
-    }
-	
-	public List<Movement> evaluate(Board board){
+
+	public Movement getMoveWithDestination(String squareId) {
+		return possibleMoves.stream().filter(move -> move.getMoveToSquareId().equals(squareId)).findFirst()
+				.orElse(null);
+	}
+
+	public List<Movement> evaluate(Board board) {
 		possibleMoves = new ArrayList<>();
-		for(Move move : moves) {
-			move.evaluate(board, this).stream().forEach(getPossibleMoves()::add);
-		}
+		if (!captured)
+			for (Move move : moves)
+				move.evaluate(board, this).stream().forEach(getPossibleMoves()::add);
+
 		return possibleMoves;
 	}
-	
+
 	protected void limitMoves(Board board, Movement move) {
 		List<Movement> restrictTo = move.getRules().get(0).evaluateDirection(board, this, move.getDirection());
 		restrictTo.addAll(move.getRules().get(0).evaluateDirection(board, this, move.getDirection().invert()));
 		intersectLists(false, getPossibleMoves(), restrictTo);
 	}
-	
+
 	public void removeBlocked() {
-		possibleMoves.removeAll(possibleMoves.stream().filter(move -> move.getBlockedBy() != null).collect(Collectors.toList()));
+		possibleMoves.removeAll(
+				possibleMoves.stream().filter(move -> move.getBlockedBy() != null).collect(Collectors.toList()));
 		if (possibleMoves.isEmpty())
 			possibleMoves = null;
 	}
-	
+
 	protected void intersectLists(boolean invert, List<Movement> l1, List<Movement> l2) {
 		l1.removeAll(l1.stream().filter(move -> !invert ^ matchToSquare(move, l2)).collect(Collectors.toList()));
 	}
-	
+
 	private boolean matchToSquare(Movement move, List<Movement> list) {
-		return (list.stream().filter(listMove -> move.getMoveToSquareId().equals(listMove.getMoveToSquareId())).count() > 0);
+		return (list.stream().filter(listMove -> move.getMoveToSquareId().equals(listMove.getMoveToSquareId()))
+				.count() > 0);
 	}
 
 	public String getId() {

@@ -62,6 +62,10 @@ function setupOnclick(color) {
 function clickedPiece(color, pieceType, piece) {
 	clearOldSuggestions();
 
+	var piece = document.getElementById(jsonObject.player[color].pieceSet[pieceType][piece].positionSquareId);
+	piece.classList.add("click-display");
+	piece.classList.add("chosen");
+	
 	for (move in jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves) {
 		var element = document
 				.getElementById(jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves[move].moveToSquareId);
@@ -79,13 +83,12 @@ function clickedPiece(color, pieceType, piece) {
 		} else {
 			element.classList.add("valid-turn");
 		}
-		element.classList.add("turn-suggestion");
+		element.classList.add("click-display");
 	}
 }
 
 function clearOldSuggestions() {
-	// var oldElements = document.getElementsByClassName("turn-suggestion");
-	$('.turn-suggestion').toggleClass("capture turn-suggestion valid-turn", false).prop("onclick", null);
+	$('.click-display').toggleClass("click-display capture valid-turn chosen", false).removeAttr("onclick");
 }
 
 function madeMove(pieceId, moveToSquareId) {
@@ -97,7 +100,7 @@ function madeMove(pieceId, moveToSquareId) {
 		}
 	};
 	xhttp.open("GET",
-			"http://localhost:8080/ChessGame/GetChessboardServlet?action=move&game-id="
+			"http://localhost:8080/ChessGame/GetChessboardServlet?action=execute-move&game-id="
 					+ gameID + "&move-piece-id=" + pieceId
 					+ "&move-to-square-id=" + moveToSquareId, true);
 	xhttp.send();
