@@ -17,6 +17,15 @@ function toggleNavbar() {
     }
 }
 
+function pause(){
+    var button = document.getElementById("pause-button");
+    if(button.className === 'pause-button'){
+        button.className += ' paused';
+    }else{
+        button.className = 'pause-button';
+    }
+}
+
 function toggle(string){
     var x = document.getElementById(string);
     if(x.className === "chessboard pawn-convertion-"+string){
