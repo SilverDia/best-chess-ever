@@ -27,8 +27,41 @@ import java.util.stream.Collectors;
 public class Game {
 
 	public enum GameState {
-		CLEAR, CHECK, CHECKMATE;
+		CLEAR {
+
+			@Override
+			protected void addMessage(Game game, Movement move) {
+				game.gamelog.add(game.board.getSquare(move.getMoveToSquareId()).getPiece().getName()
+						+ " was moved from " + move.getMoveFromSquareId() + " to " + move.getMoveToSquareId());
+			}
+
+		},
+		CHECK {
+
+			@Override
+			protected void addMessage(Game game, Movement move) {
+				game.gamelog.add(game.board.getSquare(move.getMoveToSquareId()).getPiece().getName()
+						+ " was moved from " + move.getMoveFromSquareId() + " to " + move.getMoveToSquareId()
+						+ " and put the King in check.");
+			}
+
+		},
+		CHECKMATE {
+
+			@Override
+			protected void addMessage(Game game, Movement move) {
+				game.gamelog.add("CHECKMATE LOL");
+			}
+
+		};
+		protected abstract void addMessage(Game game, Movement move);
 	}
+
+	private void addMessage(GameState state, Movement move) {
+		state.addMessage(this, move);
+	}
+
+	public List<String> gamelog = new ArrayList();
 
 	private final transient static Logger LOG = Logger.getLogger(Game.class.getName());
 
@@ -67,6 +100,8 @@ public class Game {
 	}
 
 	public void executeMove(String pieceId, String squareId) {
+		gamelog.clear();
+		
 		Movement movement = player.get(activePlayer).getPieceSet().getPiece(pieceId).getMoveWithDestination(squareId);
 		player.get(activePlayer).movePiece(pieceId, squareId);
 		if (movement != null) {
@@ -107,13 +142,15 @@ public class Game {
 		for (Player p : player.values()) {
 			p.updatePlayer();
 		}
-		evaluatePossibleMoves();
+		
+		addMessage(evaluatePossibleMoves(),turn.getMovement());
 
 		turn.setChecked(player.get(activePlayer).isChecked());
 		turnHistory.add(turn);
+
 	}
 
-	private void evaluatePossibleMoves() {
+	private GameState evaluatePossibleMoves() {
 		List<Piece> inactivePieces = player.get(inactivePlayer).getPieceSet().getPieces();
 		List<Movement> inactivePlayerMoves = new ArrayList<>();
 		inactivePieces.forEach(piece -> inactivePlayerMoves.addAll(piece.evaluate(board)));
@@ -142,9 +179,11 @@ public class Game {
 		activePieces.forEach(Piece::removeInvalid);
 		if (state.equals(GameState.CHECKMATE)) {
 			if (!activePieces.stream().anyMatch(piece -> piece.getPossibleMoves() != null)) {
-				//TODO game is done!
-			}
+				// TODO game is done!
+			} else
+				state = GameState.CHECK;
 		}
+		return state;
 	}
 
 	private King getKing(Player player) {

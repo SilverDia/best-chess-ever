@@ -22,8 +22,12 @@ function init_game(element) {
 function parse_json() {
 	clearOldSuggestions();
 	gameID = jsonObject.gameId;
+	
 	document.getElementById('game-turn-info-container').innerHTML = jsonObject.activePlayer + " ist am Zug!";
-
+	for (message in jsonObject.gamelog) {
+		document.getElementById('game-log-textarea').innerHTML += jsonObject.gamelog[message] + '\n';
+	}
+	
 	var i;
 	for (i = 0; i < 8; i++) {
 		for (square in jsonObject.board.chessBoard[i]) {
