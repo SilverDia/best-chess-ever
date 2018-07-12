@@ -5,7 +5,6 @@ navbarContent += '<div class="dropdown"><a class="dropbtn" href="/ChessGame/proj
 navbarContent += '<a href="/ChessGame/project/html/impressum.html">Impressum</a>';
 navbarContent += '<a href="javascript:void(0);" class="navbarIcon" onclick="toggleNavbar()"><i class="fa fa-bars"></i></a>';
 document.getElementById("navbar").innerHTML = navbarContent;
-// bei der Anleitung vll noch ne hidden list drunter legen und da dann links rein packen, die dann weiterleiten zuden einzelnen unterpunkten des Textes, nachdem der formatiert worden ist und nicht mehr nur sporadisch eingefügt ist
 
 // (On small screens) Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon
 function toggleNavbar() {
@@ -17,6 +16,7 @@ function toggleNavbar() {
     }
 }
 
+// pause button in game.html
 function pause(){
     var button = document.getElementById("pause-button");
     if(button.className === 'pause-button'){
@@ -26,6 +26,7 @@ function pause(){
     }
 }
 
+// toggle pawn-conversion in game.html
 function toggle(string){
     var x = document.getElementById(string);
     if(x.className === "chessboard pawn-convertion-"+string){
@@ -35,6 +36,7 @@ function toggle(string){
     }
 }
 
+// toggle the boxes in ending of manual.html
 function toggleManualEnding(string){
     if(string === 'check'){
         document.getElementById('check').className = "manual-ending-grid-check-big";
