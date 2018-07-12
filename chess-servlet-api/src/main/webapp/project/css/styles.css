@@ -245,6 +245,39 @@ body{
     .index-grid-play{
         height: 200px !important;
     }
+
+     /* game-grid */
+
+    .grid-game{
+        grid-template-columns: 320px 45px !important;
+    }
+    
+    .game-turn-info-continer{
+        grid-column: 1 / 4 !important;
+        grid-row: 1 / 2 !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .game-timer-white-container{
+        grid-column: 1 / 2 !important;
+        grid-row: 2 / 3 !important;
+    }
+    
+    .game-timer-black-container{
+        grid-column: 3 / 4 !important;
+        grid-row: 2 / 3 !important;
+    }
+
+    .chessboard-tile{
+        height: 34px !important;
+        width: 34px !important;
+    }
+    
+    .chessboard-tile img{
+        float: left !important;
+        height: 34px !important;
+        width: 34px !important;
+    }
 }
 
 @media screen and (max-width: 668px) {
@@ -254,6 +287,22 @@ body{
     
     .index-grid-play{
         height: 150px !important;
+    }
+
+     /* game-grid */
+
+    .grid-game{
+        grid-template-columns: 288px 45px !important;
+    }
+    .chessboard-tile{
+        height: 30px !important;
+        width: 33px !important;
+    }
+    
+    .chessboard-tile img{
+        float: left !important;
+        height: 30px !important;
+        width: 30px !important;
     }
 
     /* manual firuge grid */
@@ -501,7 +550,6 @@ h4{
     border-style: solid;
     border-color: black;
 }
-
 
 /*** chessboard layout ***/
 
