@@ -251,6 +251,23 @@ body{
     .grid-game{
         grid-template-columns: 320px 45px !important;
     }
+    
+    .game-turn-info-continer{
+        grid-column: 1 / 4 !important;
+        grid-row: 1 / 2 !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .game-timer-white-container{
+        grid-column: 1 / 2 !important;
+        grid-row: 2 / 3 !important;
+    }
+    
+    .game-timer-black-container{
+        grid-column: 3 / 4 !important;
+        grid-row: 2 / 3 !important;
+    }
+
     .chessboard-tile{
         height: 34px !important;
         width: 34px !important;
