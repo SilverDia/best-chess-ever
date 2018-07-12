@@ -14,6 +14,8 @@ import api.config.PieceConfig;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -23,6 +25,11 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class Game {
+
+	public enum GameState {
+		CLEAR, CHECK, CHECKMATE;
+	}
+
 	private final transient static Logger LOG = Logger.getLogger(Game.class.getName());
 
 	public static GameConfig.PieceImageSet pieceSet = GameConfig.PieceImageSet.DEFAULT;
@@ -118,20 +125,31 @@ public class Game {
 		King king = getKing(player.get(activePlayer));
 		GameState state = king.evaluateCheck(board, inactivePlayerMoves);
 
-		if (state.equals(GameState.CHECK))
-			activePieces.stream().filter(piece -> !piece.equals(king)).forEach(piece -> piece.setPossibleMoves(null));
+		if (state.ordinal() >= GameState.CHECK.ordinal()) {
+			Movement checkingMove = king.getCheckMove();
+			Piece checkingPiece = board.getSquare(checkingMove.getMoveFromSquareId()).getPiece();
+			List<Movement> movesToBlock = Move.MoveUtils.evaluateDirection(checkingMove.getRules().get(0), 8,
+					checkingMove.getDirection(), board, checkingPiece);
+			// adding fake move, so you can capture checkingPiece
+			movesToBlock.add(new Movement(checkingPiece.getPositionSquareId(), checkingPiece.getPositionSquareId(),
+					checkingMove.getDirection(), checkingMove.getRules().get(0), null));
 
-		if (state.equals(GameState.CHECKMATE)) {
-			// TODO spiel endet hier.
+			activePieces.stream().filter(piece -> piece != king).forEach(piece -> piece
+					.setPossibleMoves(GameConfig.intersectLists(piece.getPossibleMoves(), movesToBlock, move -> true)));
 		}
 
 		inactivePieces.forEach(piece -> piece.setPossibleMoves(null));
-		activePieces.forEach(Piece::removeBlocked);
+		activePieces.forEach(Piece::removeInvalid);
+		if (state.equals(GameState.CHECKMATE)) {
+			if (!activePieces.stream().anyMatch(piece -> piece.getPossibleMoves() != null)) {
+				//TODO game is done!
+			}
+		}
 	}
 
 	private King getKing(Player player) {
 		List<Piece> pieces = player.getPieceSet().getPieces();
-		return (King) pieces.stream().filter(piece -> piece instanceof King).collect(Collectors.toList()).get(0);
+		return (King) pieces.stream().filter(piece -> piece instanceof King).findFirst().orElse(null);
 	}
 
 	public String getGameId() {

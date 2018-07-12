@@ -21,9 +21,8 @@ function init_game(element) {
 
 function parse_json() {
 	clearOldSuggestions();
-
 	gameID = jsonObject.gameId;
-	document.getElementById("turnInfo").innerHTML = "ID: " + gameID;
+	document.getElementById('game-turn-info-container').innerHTML = jsonObject.activePlayer + " ist am Zug!";
 
 	var i;
 	for (i = 0; i < 8; i++) {

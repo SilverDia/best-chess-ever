@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
@@ -14,7 +16,9 @@ import api.chess.equipment.board.Board;
 import api.chess.equipment.board.Coordinates;
 import api.chess.gameplay.rules.Move;
 import api.chess.gameplay.rules.Movement;
+import api.chess.gameplay.rules.Movement.Restriction;
 import api.config.BoardConfig;
+import api.config.GameConfig;
 import api.config.MovementRuleConfig;
 import api.config.PieceConfig.Color;
 import api.config.PieceConfig.PieceName;
@@ -79,23 +83,16 @@ public abstract class Piece {
 	protected void limitMoves(Board board, Movement move) {
 		List<Movement> restrictTo = move.getRules().get(0).evaluateDirection(board, this, move.getDirection());
 		restrictTo.addAll(move.getRules().get(0).evaluateDirection(board, this, move.getDirection().invert()));
-		intersectLists(false, getPossibleMoves(), restrictTo);
+		getPossibleMoves().removeAll(GameConfig.intersectLists(getPossibleMoves(), restrictTo, condition -> true));//no conditions
 	}
 
-	public void removeBlocked() {
-		possibleMoves.removeAll(
-				possibleMoves.stream().filter(move -> move.getBlockedBy() != null).collect(Collectors.toList()));
+	public void removeInvalid() {
+		if (possibleMoves != null) {
+			possibleMoves.removeAll(
+					possibleMoves.stream().filter(move -> move.getBlockedBy() != null || Restriction.RESTRICT_KING.equals(move.getRestriction())).collect(Collectors.toList()));
 		if (possibleMoves.isEmpty())
 			possibleMoves = null;
-	}
-
-	protected void intersectLists(boolean invert, List<Movement> l1, List<Movement> l2) {
-		l1.removeAll(l1.stream().filter(move -> !invert ^ matchToSquare(move, l2)).collect(Collectors.toList()));
-	}
-
-	private boolean matchToSquare(Movement move, List<Movement> list) {
-		return (list.stream().filter(listMove -> move.getMoveToSquareId().equals(listMove.getMoveToSquareId()))
-				.count() > 0);
+		}
 	}
 
 	public String getId() {
