@@ -511,7 +511,7 @@ h4{
 
 .grid-game{
     display: grid;
-    grid-template-columns: 642px 90px 1fr;
+    grid-template-columns: 624px 90px 1fr;
     row-gap: 0px;
 }
 
@@ -580,22 +580,49 @@ h4{
 .game-timer{
     border-collapse: collapse;
     border-spacing: 0px;
-}
-
-.game-timer *{
     font-weight: bold;
     font-size: 18px;
-}
-
-.game-timer td, .game-timer tr{
-    border: 3px;
-    border-style: solid;
-    border-color: black;
+	border: 3px solid black;
 }
 
 /*** Pause ***/
 
-.pause-button {
+#grid-pause {
+	grid-row: 1 / 2;
+	grid-column: 2 / 3;
+}
+
+#pause-button {
+	padding: 10px;
+	height: 40px;
+	width: 40px;
+	box-shadow: -1px 1px 0px 1px black;
+	border: black solid 3px;
+}
+
+#pause-button:hover {
+	background-color: #bfbfbf;
+	box-shadow: inset 2px -2px 3px 5px black;
+	opacity: 0.5;
+}
+
+#pause-layer {
+	box-sizing: border-box;
+	z-index: 10;
+	display: none;
+	height: 100%;
+	width: 100%;
+	padding: 30px;
+	background-color: #9E9E9E;
+	border: black solid 3px;
+	box-shadow: grey  inset 0 0 20px 20px;
+}
+
+#pause-layer img {
+	max-width: 100%;
+}
+
+/*.pause-button {
     border: 0;
     background: transparent;
     box-sizing: border-box;
@@ -615,7 +642,7 @@ h4{
   
   .pause-button:hover {
     border-color: transparent transparent transparent #404040;
-  }
+  }*/
 
 /*** chessboard layout ***/
 
@@ -697,9 +724,13 @@ h4{
 /*** game-log scrollable box ***/
 
 .game-log{
+	box-sizing: border-box;
+	padding: 10px;
+	margin: auto;
     height: 82.5%;
     width: 100%;
-    overflow: scroll;
+    overflow: auto;
+	resize: none;
 }
 
 /*************** manual ****************/

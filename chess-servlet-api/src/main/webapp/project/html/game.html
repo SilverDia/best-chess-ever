@@ -12,13 +12,19 @@
 	<script src="/ChessGame/project/js/game.js"></script>
 
 </head>
-<body onload="init_game()">
+<body>
 <nav id="navbar" class="navbar"></nav>
 <div class="content">
 	<div class="content-block">
 		<h1>Schach-Spiel</h1>
 	</div>
 	<div class="content-block">
+		<div id="pause-layer">
+			<img src="/ChessGame/project/resources/images/pause-icon-480x480.png"
+				 title="Zum Fortsetzen klicken">
+			<p>Spiel pausiert</p>
+			<p>Zum Fortsetzen klicken</p>
+		</div>
 		<div class="grid-game">
 			<div id="turnInfo" class="grid-turnInfo">
 				<div class="turn-info-grid">
@@ -52,7 +58,8 @@
 				</div>
 			</div>
 			<div id="grid-pause">
-				<button id="pause-button" class="pause-button"></button>
+				<img src="/ChessGame/project/resources/images/pause-icon-128x128.png" title="Pause" id="pause-button">
+				<!-- <button id="pause-button" class="pause-button"></button> -->
 			</div>
 			<div id="game" class="grid-chessboard">
 				<table id="chessboard" class="chessboard">
@@ -229,7 +236,7 @@
 				</table>
 			</div>
 			<div id="game-log" class="grid-game-log">
-				<h4>Game-Log</h4>
+				<h4 style="margin: 5px">Game-Log</h4>
 				<textarea readonly name="game-log" id="game-log-textarea" class="game-log"></textarea>
 			</div>
 		</div>
