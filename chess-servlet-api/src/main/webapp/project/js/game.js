@@ -1,21 +1,21 @@
 var jsonObject = {};
 var gameID;
-var sender;
 
-function init_game(element) {
-	sender = element;
+$(document).ready(function () {
+	init_game()
+});
+
+function init_game() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
+		if (this.readyState === 4 && this.status === 200) {
 			jsonObject = JSON.parse(this.responseText);
 			parse_json();
 		}
 	};
-	xhttp
-			.open(
-					"GET",
-					"http://localhost:8080/ChessGame/GetChessboardServlet?action=init-game",
-					true);
+	xhttp.open("GET",
+		"http://localhost:8080/ChessGame/GetChessboardServlet?action=init-game",
+		true);
 	xhttp.send();
 }
 
@@ -112,4 +112,75 @@ function madeMove(pieceId, moveToSquareId) {
 							+ pieceId
 							+ "&move-to-square-id=" + moveToSquareId, true);
 	xhttp.send();
+}
+
+
+var s = 0;
+var m = 0;
+var t;
+var timer_is_on = 0;
+
+function runTimer() {
+    s = s + 1;
+    formatTimer(s, m);
+    t = setTimeout(runTimer, 1000);
+}
+
+function startTimer(pause) {
+    if (!timer_is_on) {
+        timer_is_on = 1;
+        runTimer();
+        if (pause) {
+            $('#pause-layer').slideToggle("500");
+        }
+    }
+}
+
+function stopTimer(pause) {
+    clearTimeout(t);
+    timer_is_on = 0;
+
+    if (!pause) {
+        $('.active-time img.time-button').toggleClass("time-pause time-continue",false);
+        s = 0;
+        m = 0;
+    } else {
+        $('#pause-layer').slideToggle("500");
+    }
+    formatTimer(s, m)
+}
+
+function formatTimer() {
+    if (s === 60) {
+        s = 0;
+        m += 1;
+    }
+
+    $('.grid-time.active-time span').text(checkTime(m) + ":" + checkTime(s));
+}
+
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i
+    }
+    // add zero in front of numbers < 10
+    return i;
+}
+
+function triggerConversion(player) {
+    $('#pawn-conversion-' + player).slideToggle(500);
+}
+
+function changePlayer() {
+
+    stopTimer();
+    $('.grid-time').toggleClass('active-time inactive-time');
+    $('.active-time img.time-button').toggleClass("time-pause",true);
+
+    $('.player-content-block').toggleClass('active-player inactive-player');
+    $('.turn-info-content')
+        .text(
+            "Spieler " + $('.grid-player.active-player .grid-name').text()
+            + " ist am Zug");
+    startTimer();
 }
