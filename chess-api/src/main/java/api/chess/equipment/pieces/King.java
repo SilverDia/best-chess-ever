@@ -20,10 +20,11 @@ public class King extends Piece {
 	private transient Movement checkedByMove;
 
 	@Override
-	public void init(int id, PieceConfig.Color color) {
+	public Piece init(int id, PieceConfig.Color color) {
 		name = PieceConfig.PieceName.KING;
 		super.init(id, color);
 		positionSquareId = initPosition(new Coordinates(3, 0), id, 1);
+		return this;
 	}
 
 	@Override
@@ -32,10 +33,12 @@ public class King extends Piece {
 	}
 
 	public Game.GameState evaluateCheck(Board board, List<Movement> enemyMovements) {
-		getPossibleMoves().removeAll(GameConfig.intersectLists(getPossibleMoves(), enemyMovements, move -> !Restriction.NO_CAPTURE.equals(move.getRestriction()) && (move.getBlockedBy() == null || move.getBlockedBy() == this)));
+		getPossibleMoves().removeAll(GameConfig.intersectLists(getPossibleMoves(), enemyMovements,
+				move -> !Restriction.NO_CAPTURE.equals(move.getRestriction())
+						&& (move.getBlockedBy() == null || move.getBlockedBy() == this)));
 		List<Movement> movesAimingOnKing = enemyMovements.stream()
 				.filter(move -> move.getMoveToSquareId().equals(getPositionSquareId())).collect(Collectors.toList());
-		
+
 		checkedByMove = movesAimingOnKing.stream().filter(move -> move.getBlockedBy() == null).findAny().orElse(null);
 
 		if (movesAimingOnKing.stream().filter(move -> move.getBlockedBy() == null).count() > 0) {
@@ -50,7 +53,7 @@ public class King extends Piece {
 		movesAimingOnKing.forEach(move -> move.getBlockedBy().limitMoves(board, move));
 		return Game.GameState.CLEAR;
 	}
-	
+
 	public Movement getCheckMove() {
 		return checkedByMove;
 	}

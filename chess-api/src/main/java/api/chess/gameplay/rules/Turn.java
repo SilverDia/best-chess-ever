@@ -10,68 +10,85 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public class Turn {
-    private final transient static Logger LOG = Logger.getLogger(Turn.class.getName());
+	private final transient static Logger LOG = Logger.getLogger(Turn.class.getName());
 
-    private PieceConfig.Color playerColor;
-    private Movement movement;
-    private boolean checked;
-    private boolean checkmated;
-    private Date startTime;
-    private Date endTime;
-    private String duration;
+	private PieceConfig.Color playerColor;
+	private Movement movement;
+	private boolean checked;
+	private boolean checkmated;
+	private Date startTime;
+	private Date endTime;
+	private String duration;
+	String movedPiece;
+	String capturedPiece;
+	private String message;
 
+	public Turn(PieceConfig.Color playerColor, Movement movement, String movedPiece, String capturedPiece,
+			boolean checked, boolean checkmated, Date startTime, Date endTime) {
+		this.playerColor = playerColor;
+		this.movement = movement;
+		this.checked = checked;
+		this.checkmated = checkmated;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.movedPiece = movedPiece;
+		this.capturedPiece = capturedPiece;
+		long millis = endTime.getTime() - startTime.getTime();
+		duration = String.format("%d min, %d sek", TimeUnit.MILLISECONDS.toMinutes(millis),
+				TimeUnit.MILLISECONDS.toSeconds(millis)
+						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+		setMessage();
+	}
 
-    public Turn(PieceConfig.Color playerColor, Movement movement, boolean checked, boolean checkmated, Date startTime, Date endTime) {
-        this.playerColor = playerColor;
-        this.movement = movement;
-        this.checked = checked;
-        this.checkmated = checkmated;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        long millis = endTime.getTime() - startTime.getTime();
-        duration = String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes(millis),
-                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-    }
+	private void setMessage() {
+		if (playerColor != null) { //dummy Turn
+		message = playerColor.name() + " bewegt seinen " + movedPiece + " von " + movement.getMoveFromSquareId() + " nach "
+				+ movement.getMoveToSquareId() + " in " + duration;
+		if (movement.getRules().contains(Move.CAPTURE_MOVE))
+			message += " und schlägt " + capturedPiece;
+		if (checked || checkmated)
+			message += " und stellt den König in " + (checkmated ? "Schachmatt" : "Schach");
+		}
+	}
 
-    @Override
-    public String toString() {
-        return new Gson().toJson(this);
-    }
+	@Override
+	public String toString() {
+		return new Gson().toJson(this);
+	}
 
-    public PieceConfig.Color getPlayerColor() {
-        return playerColor;
-    }
+	public PieceConfig.Color getPlayerColor() {
+		return playerColor;
+	}
 
-    public void setPlayerColor(PieceConfig.Color playerColor) {
-        this.playerColor = playerColor;
-    }
+	public void setPlayerColor(PieceConfig.Color playerColor) {
+		this.playerColor = playerColor;
+	}
 
-    public Movement getMovement() {
-        return movement;
-    }
+	public Movement getMovement() {
+		return movement;
+	}
 
-    public void setMovement(Movement movement) {
-        this.movement = movement;
-    }
+	public void setMovement(Movement movement) {
+		this.movement = movement;
+	}
 
-    public boolean isChecked() {
-        return checked;
-    }
+	public boolean isChecked() {
+		return checked;
+	}
 
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
 
-    public boolean isCheckmated() {
-        return checkmated;
-    }
+	public boolean isCheckmated() {
+		return checkmated;
+	}
 
-    public void setCheckmated(boolean checkmated) {
-        this.checkmated = checkmated;
-    }
+	public void setCheckmated(boolean checkmated) {
+		this.checkmated = checkmated;
+	}
 
-    public Date getEndTime() {
-        return endTime;
-    }
+	public Date getEndTime() {
+		return endTime;
+	}
 }

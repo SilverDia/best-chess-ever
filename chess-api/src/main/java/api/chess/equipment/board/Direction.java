@@ -22,6 +22,10 @@ public class Direction {
 		return new Direction(-x, -y);
 	}
 
+	public Direction add(Direction dir) {
+		return new Direction(dir.x + x, dir.y + y);
+	}
+
 	public Coordinates apply(Coordinates coordinates, int steps) {
 		return new Coordinates(coordinates.getX() + x * steps, coordinates.getY() + y * steps);
 	}

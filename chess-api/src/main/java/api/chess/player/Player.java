@@ -10,6 +10,7 @@ import api.config.PieceConfig;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map.Entry;
 import java.util.logging.Logger;
 
 public class Player {
@@ -39,8 +40,10 @@ public class Player {
 
     public void updatePlayer() {
         active = !active;
-        for (Piece piece : pieceSet.getPieces()) {
-            String id = piece.getId();
+        for (Entry<String, Piece> entry : pieceSet.getPieces().entrySet()) {
+        	String id = entry.getKey();
+        	Piece piece = entry.getValue();
+        	
             if (piece.isCaptured()) {
                 capturedPieces.put(id, piece);
                 freePieces.remove(id);

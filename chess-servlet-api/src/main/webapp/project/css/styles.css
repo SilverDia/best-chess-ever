@@ -691,12 +691,12 @@ h4{
     background-color: greenyellow;
 }
 
-.capture{
-    background-color: deeppink
-}
-
 .last-turn{
     background-color: aqua;
+}
+
+.capture{
+    background-color: darkorange;
 }
 
 .checkmate{

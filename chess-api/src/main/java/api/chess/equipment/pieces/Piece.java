@@ -46,11 +46,12 @@ public abstract class Piece {
 		return new Gson().toJson(this);
 	}
 
-	public void init(int id, Color color) {
+	public Piece init(int id, Color color) {
 		this.color = color;
 		this.id = name.toString() + "_" + color.toString() + "_" + String.valueOf(id);
 
 		moves = MovementRuleConfig.getMoves(name);
+		return this;
 	}
 
 	public String initPosition(Coordinates coordinates, int id, int scale) {
@@ -83,7 +84,8 @@ public abstract class Piece {
 	protected void limitMoves(Board board, Movement move) {
 		List<Movement> restrictTo = move.getRules().get(0).evaluateDirection(board, this, move.getDirection());
 		restrictTo.addAll(move.getRules().get(0).evaluateDirection(board, this, move.getDirection().invert()));
-		getPossibleMoves().removeAll(GameConfig.intersectLists(getPossibleMoves(), restrictTo, condition -> true));//no conditions
+		
+		setPossibleMoves(GameConfig.intersectLists(getPossibleMoves(), restrictTo, condition -> true));//no conditions
 	}
 
 	public void removeInvalid() {

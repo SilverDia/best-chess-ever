@@ -8,20 +8,21 @@ import com.google.gson.Gson;
 import java.util.logging.Logger;
 
 public class Pawn extends Piece {
-    private final transient static Logger LOG = Logger.getLogger(Pawn.class.getName());
+	private final transient static Logger LOG = Logger.getLogger(Pawn.class.getName());
 
-    private transient boolean enPassantCapture = false;
-    private transient boolean promotion = false;
+	private transient boolean enPassantCapture = false;
+	private transient boolean promotion = false;
 
-    @Override
-    public void init(int id, PieceConfig.Color color) {
-        name = PieceConfig.PieceName.PAWN;
-        super.init(id, color);
-        positionSquareId = initPosition(new Coordinates(0, 1), id, 1);
-    }
+	@Override
+	public Piece init(int id, PieceConfig.Color color) {
+		name = PieceConfig.PieceName.PAWN;
+		super.init(id, color);
+		positionSquareId = initPosition(new Coordinates(0, 1), id, 1);
+		return this;
+	}
 
-    @Override
-    public String toString() {
-        return new Gson().toJson(this);
-    }
+	@Override
+	public String toString() {
+		return new Gson().toJson(this);
+	}
 }

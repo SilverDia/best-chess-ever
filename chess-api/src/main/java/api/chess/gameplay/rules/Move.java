@@ -67,8 +67,8 @@ public enum Move {
 			if (coord.isValid()) {
 				Piece next = board.getSquare(BoardConfig.toSquareId(coord)).getPiece();
 				if (next == null)
-					moves.add(
-							new Movement(piece.getPositionSquareId(), BoardConfig.toSquareId(coord), dir, this, null).restrict(Restriction.NO_CAPTURE));
+					moves.add(new Movement(piece.getPositionSquareId(), BoardConfig.toSquareId(coord), dir, this, null)
+							.restrict(Restriction.NO_CAPTURE));
 			}
 			return moves;
 		}
@@ -185,29 +185,34 @@ public enum Move {
 		public List<Movement> evaluate(Board board, Piece piece) {
 			List<Movement> moves = new ArrayList<>();
 
-			Coordinates rCoord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(Direction.HOR, 1);
-			if (rCoord.isValid()) {
-				Piece rPiece = board.getSquare(BoardConfig.toSquareId(rCoord)).getPiece();
-				Turn lastTurn = board.getGame().getTurnHistory().getLast();
-				if (rPiece != null && !rPiece.getColor().equals(piece.getColor())
-						&& lastTurn.getMovement().getRules().contains(PAWN_FIRST_MOVE)
-						&& board.getSquare(lastTurn.getMovement().getMoveToSquareId()).getPiece() == rPiece)
-					moves.add(new Movement(piece.getPositionSquareId(), rPiece.getPositionSquareId(), Direction.HOR,
-							this, null).addMovementRule(CAPTURE_MOVE));
-			}
+			Turn lastTurn = board.getGame().getTurnHistory().getLast();
+			if (lastTurn.getMovement() != null && lastTurn.getMovement().getRules().contains(PAWN_FIRST_MOVE)) {
+				Direction pawnDir = piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.VERT
+						: Direction.VERT.invert();
 
-			Coordinates lCoord = board.getSquare(piece.getPositionSquareId()).getCoordinates()
-					.next(Direction.HOR.invert(), 1);
-			if (lCoord.isValid()) {
-				Piece lPiece = board.getSquare(BoardConfig.toSquareId(lCoord)).getPiece();
-				Turn lastTurn = board.getGame().getTurnHistory().getLast();
-				if (lPiece != null && !lPiece.getColor().equals(piece.getColor())
-						&& lastTurn.getMovement().getRules().contains(PAWN_FIRST_MOVE)
-						&& board.getSquare(lastTurn.getMovement().getMoveToSquareId()).getPiece() == lPiece)
-					moves.add(new Movement(piece.getPositionSquareId(), lPiece.getPositionSquareId(), Direction.HOR,
-							this, null).addMovementRule(CAPTURE_MOVE));
-			}
+				Coordinates rCoord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(Direction.HOR,
+						1);
+				if (rCoord.isValid()) {
+					Piece rPiece = board.getSquare(BoardConfig.toSquareId(rCoord)).getPiece();
 
+					if (rPiece != null && !rPiece.getColor().equals(piece.getColor())
+							&& board.getSquare(lastTurn.getMovement().getMoveToSquareId()).getPiece() == rPiece)
+						moves.add(new Movement(piece.getPositionSquareId(),
+								BoardConfig.toSquareId(rCoord.next(pawnDir, 1)), pawnDir.add(Direction.HOR), this, null)
+										.addMovementRule(Move.CAPTURE_MOVE));
+				}
+
+				Coordinates lCoord = board.getSquare(piece.getPositionSquareId()).getCoordinates()
+						.next(Direction.HOR.invert(), 1);
+				if (lCoord.isValid()) {
+					Piece lPiece = board.getSquare(BoardConfig.toSquareId(lCoord)).getPiece();
+					if (lPiece != null && !lPiece.getColor().equals(piece.getColor())
+							&& board.getSquare(lastTurn.getMovement().getMoveToSquareId()).getPiece() == lPiece)
+						moves.add(new Movement(piece.getPositionSquareId(),
+								BoardConfig.toSquareId(lCoord.next(pawnDir, 1)), pawnDir.add(Direction.HOR), this, null)
+										.addMovementRule(Move.CAPTURE_MOVE));
+				}
+			}
 			return moves;
 		}
 	};
