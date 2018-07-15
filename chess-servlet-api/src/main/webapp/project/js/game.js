@@ -21,7 +21,7 @@ function init_game() {
         }
     };
     xhttp.open("GET",
-        "http://localhost:8080/ChessGame/GetChessboardServlet?action=init-game&game-id=" + gameID,
+        "/ChessGame/GetChessboardServlet?action=init-game&game-id=" + gameID,
         true);
     xhttp.send();
 }
@@ -123,7 +123,7 @@ function madeMove(pieceId, moveToSquareId) {
     xhttp
         .open(
             "GET",
-            "http://localhost:8080/ChessGame/GetChessboardServlet?action=execute-move&game-id="
+            "/ChessGame/GetChessboardServlet?action=execute-move&game-id="
             + gameID
             + "&move-piece-id="
             + pieceId

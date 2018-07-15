@@ -873,3 +873,10 @@ h4{
 .manual-ending-grid-check-small h4, .manual-ending-grid-checkmate-small-right h4, .manual-ending-grid-checkmate-small-left h4, .manual-ending-grid-patt-small h4{
     margin-top: 165px;
 }
+
+.anchor{
+  display: block;
+  height: 60px; /*same height as navbar*/
+  margin-top: -60px; /*same height as navbar*/
+  visibility: hidden;
+}
