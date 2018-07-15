@@ -82,7 +82,7 @@ function clickedPiece(color, pieceType, piece) {
         element
             .setAttribute(
                 "onclick",
-                "madeMove('"
+                "checkPawnProm(this, '"
                 + piece
                 + "','"
                 + jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves[move].moveToSquareId
@@ -102,7 +102,38 @@ function clearOldSuggestions() {
         false).removeAttr("onclick");
 }
 
-function madeMove(pieceId, moveToSquareId) {
+function checkPawnProm(sender, pieceId, moveToSquareId) {
+    if ($(sender.parentElement).hasClass("promotion-row-white") && pieceId.includes("PAWN_WHITE")) {
+        toggle("pawn-promotion-white");
+        $('#pawn-promotion-white .chessboard-tile').click(function () {
+            var promPiece = this.className;
+            toggle("pawn-promotion-white");
+            madeMove(pieceId, moveToSquareId, promPiece);
+        });
+    } else if ($(sender.parentElement).hasClass("promotion-row-black") && pieceId.includes("PAWN_BLACK")) {
+        toggle("pawn-promotion-black");
+        $('#pawn-promotion-black .chessboard-tile').click(function () {
+            var promPiece = this.className;
+            toggle("pawn-promotion-black");
+            madeMove(pieceId, moveToSquareId, promPiece);
+        });
+    }
+    else {
+        madeMove(pieceId, moveToSquareId);
+    }
+}
+
+function madeMove(pieceId, moveToSquareId, promPiece) {
+    var request;
+    request = "/ChessGame/GetChessboardServlet?action=execute-move&game-id="
+        + gameID
+        + "&move-piece-id="
+        + pieceId
+        + "&move-to-square-id=" + moveToSquareId
+        + "&duration=" + secTotal;
+    if (promPiece) {
+        request += "&promotion=" + promPiece;
+    }
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
@@ -114,12 +145,7 @@ function madeMove(pieceId, moveToSquareId) {
     xhttp
         .open(
             "GET",
-            "/ChessGame/GetChessboardServlet?action=execute-move&game-id="
-            + gameID
-            + "&move-piece-id="
-            + pieceId
-            + "&move-to-square-id=" + moveToSquareId
-            + "&duration=" + secTotal, true);
+            request, true);
     xhttp.send();
     stopTimer();
 }
