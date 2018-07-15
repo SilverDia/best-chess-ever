@@ -76,7 +76,8 @@ public class PieceSet {
 			newPiece = new Rook().init(createId(PieceConfig.PieceName.ROOK, color), color);
 		}
 		newPiece.setPositionSquareId(position);
-		pieces.remove(pawnPieceId);
+		pieces.get(pawnPieceId).positionSquareId = "";
+		pieces.get(pawnPieceId).captured = true;
 		pieces.put(newPiece.id, newPiece);
 	}
 

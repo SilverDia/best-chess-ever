@@ -25,7 +25,7 @@ public class Player {
     private PieceSet pieceSet;
 
     private transient HashMap<String, Piece> freePieces = new HashMap<>();
-    private transient HashMap<String, Piece> capturedPieces = new HashMap<>();
+    private HashMap<String, Piece> capturedPieces = new HashMap<>();
 
     public void initPlayer(String name, PieceConfig.Color color) {
         this.name = name;
@@ -40,10 +40,14 @@ public class Player {
 
     public void updatePlayer() {
         active = !active;
+        updatePlayerPieces();
+    }
+
+    public void updatePlayerPieces() {
         for (Entry<String, Piece> entry : pieceSet.getPieces().entrySet()) {
-        	String id = entry.getKey();
-        	Piece piece = entry.getValue();
-        	
+            String id = entry.getKey();
+            Piece piece = entry.getValue();
+
             if (piece.isCaptured()) {
                 capturedPieces.put(id, piece);
                 freePieces.remove(id);

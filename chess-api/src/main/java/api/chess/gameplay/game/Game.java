@@ -101,6 +101,10 @@ public class Game {
 
 	private void initBoard() {
 		board = new Board(this);
+		updateBoard();
+	}
+
+	private void updateBoard() {
 		for (Player player : player.values()) {
 			for (Map.Entry<String, Piece> pieceEntry : player.getFreePieces().entrySet()) {
 				board.getSquare(pieceEntry.getValue().getPositionSquareId()).setPiece(pieceEntry.getValue());
@@ -160,6 +164,8 @@ public class Game {
 
 	public void promote(String pieceId, String toPiece) {
 		player.get(inactivePlayer).getPieceSet().doPromotion(pieceId, toPiece);
+		player.get(inactivePlayer).updatePlayerPieces();
+		updateBoard();
 	}
 
 	private King getKing(Player player) {

@@ -34,7 +34,7 @@ public abstract class Piece {
 	transient Color color;
 
 	String positionSquareId;
-	transient boolean captured = false;
+	boolean captured = false;
 	transient boolean moved = false;
 
 	transient List<Move> moves;
