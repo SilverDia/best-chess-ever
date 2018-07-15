@@ -2,16 +2,26 @@ var jsonObject = {};
 var gameID;
 
 $(document).ready(function () {
-    init_game(gameID);
-    $('#pause-button').click(function () {
-        stopTimer(true);
-    });
-    $('#pause-layer').click(function () {
-        startTimer(true);
+    $('#grid-game').toggle();
+    $('#start-new-game').click(function () {
+        var whitePlayerName = $('#init-player-white').val();
+        var blackPlayerName = $('#init-player-black').val();
+        if (whitePlayerName && blackPlayerName) {
+            init_game(gameID, whitePlayerName, blackPlayerName);
+            $('#init-layer').toggle();
+            $('#grid-game').toggle();
+
+            $('#pause-button').click(function () {
+                stopTimer(true);
+            });
+            $('#pause-layer').click(function () {
+                startTimer(true);
+            });
+        }
     });
 });
 
-function init_game() {
+function init_game(id, whiteName, blackName) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
@@ -21,7 +31,9 @@ function init_game() {
         }
     };
     xhttp.open("GET",
-        "/ChessGame/GetChessboardServlet?action=init-game&game-id=" + gameID,
+        "/ChessGame/GetChessboardServlet?action=init-game&game-id=" + gameID +
+        "&white-player-name=" + whiteName +
+        "&black-player-name=" + blackName,
         true);
     xhttp.send();
 }
@@ -31,13 +43,13 @@ function parse_json() {
     clearLastMove();
     gameID = jsonObject.gameId;
 
-    var lastEntry = jsonObject.turnHistory.length-1;
+    var lastEntry = jsonObject.turnHistory.length - 1;
     document.getElementById('game-turn-info-container').innerHTML = jsonObject.activePlayer + " ist am Zug!";
     if (typeof jsonObject.turnHistory[lastEntry].message !== 'undefined')
         document.getElementById('game-log-textarea').innerHTML += jsonObject.turnHistory[lastEntry].message + '\n';
     if (typeof jsonObject.turnHistory[lastEntry].movement !== 'undefined') {
-    	document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveFromSquareId).classList.add("last-turn");
-    	document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveToSquareId).classList.add("last-turn");
+        document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveFromSquareId).classList.add("last-turn");
+        document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveToSquareId).classList.add("last-turn");
     }
 
     var i;

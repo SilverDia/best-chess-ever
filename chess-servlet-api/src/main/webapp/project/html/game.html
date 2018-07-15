@@ -19,13 +19,22 @@
 		<h1>Schach-Spiel</h1>
 	</div>
 	<div class="content-block">
-		<div id="pause-layer">
+		<div id="pause-layer" class="full-layer">
 			<img src="/ChessGame/project/resources/images/pause-icon-480x480.png"
 				 title="Zum Fortsetzen klicken">
 			<p>Spiel pausiert</p>
 			<p>Zum Fortsetzen klicken</p>
 		</div>
-		<div class="grid-game">
+		<div id="init-layer" class="full-layer">
+			<h2>Neues Spiel starten</h2>
+			<p class="init-layer-content">Spielernamen eingeben:</p>
+			<div>
+				<input type="text" id="init-player-white" class="init-layer-content" placeholder="WHITE">
+				<input type="text" id="init-player-black" class="init-layer-content" placeholder="BLACK">
+				<button id="start-new-game" class="init-layer-content">START</button>
+			</div>
+		</div>
+		<div id="grid-game" class="grid-game">
 			<div id="turnInfo" class="grid-turnInfo">
 				<div class="turn-info-grid">
 					<div id="game-timer-white-container" class="turn-info game-timer-white-container">

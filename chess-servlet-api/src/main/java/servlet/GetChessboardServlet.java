@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,8 @@ public class GetChessboardServlet extends HttpServlet {
 
 	private final static String ACTION = "action";
 	private final static String ACTION_INIT_GAME = "init-game";
+	private final static String BLACK_PLAYER_NAME = "black-player-name";
+	private final static String WHITE_PLAYER_NAME = "white-player-name";
 	private final static String ACTION_EXECUTE_MOVE = "execute-move";
 	private final static String GAME_ID = "game-id";
 	private final static String MOVE_PIECE_ID = "move-piece-id";
@@ -64,10 +67,18 @@ public class GetChessboardServlet extends HttpServlet {
 		if (request.getParameter(ACTION) != null && !request.getParameter(ACTION).equals("")) {
 			String action = request.getParameter(ACTION);
 			if (action.equals(ACTION_INIT_GAME)) {
+				String nameWhitePlayer = "WHITE_PLAYER_" + String.valueOf(new Date().getTime());
+				String nameBlackPlayer = "BLACK_PLAYER_" + String.valueOf(new Date().getTime());
+				if (request.getParameter(BLACK_PLAYER_NAME) != null && !request.getParameter(BLACK_PLAYER_NAME).equals("")) {
+					nameBlackPlayer = request.getParameter(BLACK_PLAYER_NAME);
+				}
+				if (request.getParameter(WHITE_PLAYER_NAME) != null && !request.getParameter(WHITE_PLAYER_NAME).equals("")) {
+					nameWhitePlayer = request.getParameter(WHITE_PLAYER_NAME);
+				}
 				Game game = new Game();
 				games.put(game.gameId, game);
 				request.getServletContext().setAttribute("games", games);
-				game.init("white_player", "black_player");
+				game.init(nameWhitePlayer, nameBlackPlayer);
 				response.getWriter().append(new Gson().toJson(game));
 
 			} else if (action.equals(ACTION_EXECUTE_MOVE)) {

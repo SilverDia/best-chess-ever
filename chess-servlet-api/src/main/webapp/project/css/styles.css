@@ -530,12 +530,12 @@ h4{
     grid-row: 2 / 4;
 }
   
-.grid-pawn-convertion-white{
+.grid-pawn-promotion-white{
     grid-column: 2 / 3;
     grid-row: 2 / 3;
 }
 
-.grid-pawn-convertion-black{
+.grid-pawn-promotion-black{
     grid-column: 2 / 3;
     grid-row: 3 / 4;
 }
@@ -606,10 +606,9 @@ h4{
 	opacity: 0.5;
 }
 
-#pause-layer {
+.full-layer {
 	box-sizing: border-box;
 	z-index: 10;
-	display: none;
 	height: 100%;
 	width: 100%;
 	padding: 30px;
@@ -618,8 +617,27 @@ h4{
 	box-shadow: grey  inset 0 0 20px 20px;
 }
 
-#pause-layer img {
+.full-layer img {
 	max-width: 100%;
+}
+
+#pause-layer {
+	display: none;
+}
+
+#init-layer {
+	background-image: url("/ChessGame/project/resources/images/chess-icon-480x480-big.png");
+}
+
+.init-layer-content {
+	font-size: 48px;
+	margin: auto;
+	width: 33%;
+}
+
+#start-new-game {
+	width: 90%;
+	margin: auto;
 }
 
 /*.pause-button {
@@ -713,11 +731,11 @@ h4{
 
 /*** pawn conversion ***/
 
-.pawn-convertion-white{
+.pawn-promotion-white{
     margin-bottom: -3px;
 }
 
-.pawn-convertion-black{
+.pawn-promotion-black{
     margin-top: -3px;
 }
 
