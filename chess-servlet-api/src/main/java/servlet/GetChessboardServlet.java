@@ -24,40 +24,44 @@ public class GetChessboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static Logger LOG = Logger.getLogger(GetChessboardServlet.class.getName());
 
-
 	private final static String ACTION = "action";
 	private final static String ACTION_INIT_GAME = "init-game";
 	private final static String ACTION_EXECUTE_MOVE = "execute-move";
 	private final static String GAME_ID = "game-id";
 	private final static String MOVE_PIECE_ID = "move-piece-id";
 	private final static String MOVE_TO_SQUARE_ID = "move-to-square-id";
-
+	private final static String PROMOTE_TO_PIECE = "promote-to-piece";
 
 	HashMap<String, Game> games = new HashMap<>();
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GetChessboardServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GetChessboardServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		if (request.getServletContext().getAttribute("games") != null) {
 			try {
 				games = (HashMap<String, Game>) request.getServletContext().getAttribute("games");
 			} catch (ClassCastException e) {
-				LOG.log(Level.SEVERE, "Failed to load games hashmap from servlet context.\nSaved games cannot be loaded:\n" + e.getMessage(), e);
+				LOG.log(Level.SEVERE,
+						"Failed to load games hashmap from servlet context.\nSaved games cannot be loaded:\n"
+								+ e.getMessage(),
+						e);
 			}
 
 		}
 
-		if (request.getParameter(ACTION) != null && ! request.getParameter(ACTION).equals("")) {
+		if (request.getParameter(ACTION) != null && !request.getParameter(ACTION).equals("")) {
 			String action = request.getParameter(ACTION);
 			if (action.equals(ACTION_INIT_GAME)) {
 				Game game = new Game();
@@ -66,15 +70,19 @@ public class GetChessboardServlet extends HttpServlet {
 				game.init("white_player", "black_player");
 				response.getWriter().append(new Gson().toJson(game));
 
-			}
-			else if (action.equals(ACTION_EXECUTE_MOVE)) {
-				if ((request.getParameter(GAME_ID) != null && ! request.getParameter(GAME_ID).equals("")) &&
-						(request.getParameter(MOVE_PIECE_ID) != null && ! request.getParameter(MOVE_PIECE_ID).equals("")) &&
-						(request.getParameter(MOVE_TO_SQUARE_ID) != null && ! request.getParameter(MOVE_TO_SQUARE_ID).equals(""))) {
+			} else if (action.equals(ACTION_EXECUTE_MOVE)) {
+				if ((request.getParameter(GAME_ID) != null && !request.getParameter(GAME_ID).equals(""))
+						&& (request.getParameter(MOVE_PIECE_ID) != null
+								&& !request.getParameter(MOVE_PIECE_ID).equals(""))
+						&& (request.getParameter(MOVE_TO_SQUARE_ID) != null
+								&& !request.getParameter(MOVE_TO_SQUARE_ID).equals(""))) {
 					String gameId = request.getParameter(GAME_ID);
 					if (games.containsKey(gameId)) {
 						Game game = games.get(gameId);
 						game.executeMove(request.getParameter(MOVE_PIECE_ID), request.getParameter(MOVE_TO_SQUARE_ID));
+						if ((request.getParameter(PROMOTE_TO_PIECE) != null
+								&& !request.getParameter(PROMOTE_TO_PIECE).equals("")))
+							game.promote(MOVE_PIECE_ID, PROMOTE_TO_PIECE);
 						response.getWriter().append(new Gson().toJson(game));
 
 					}
@@ -86,9 +94,11 @@ public class GetChessboardServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

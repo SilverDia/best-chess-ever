@@ -8,17 +8,18 @@ import com.google.gson.Gson;
 import java.util.logging.Logger;
 
 public class Knight extends Piece {
-    private final transient static Logger LOG = Logger.getLogger(Knight.class.getName());
+	private final transient static Logger LOG = Logger.getLogger(Knight.class.getName());
 
-    @Override
-    public void init(int id, PieceConfig.Color color) {
-        name = PieceConfig.PieceName.KNIGHT;
-        super.init(id, color);
-        positionSquareId = initPosition(new Coordinates(1, 0), id, 5);
-    }
+	@Override
+	public Piece init(int id, PieceConfig.Color color) {
+		name = PieceConfig.PieceName.KNIGHT;
+		super.init(id, color);
+		positionSquareId = initPosition(new Coordinates(1, 0), id, 5);
+		return this;
+	}
 
-    @Override
-    public String toString() {
-        return new Gson().toJson(this);
-    }
+	@Override
+	public String toString() {
+		return new Gson().toJson(this);
+	}
 }

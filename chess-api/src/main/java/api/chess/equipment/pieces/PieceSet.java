@@ -15,90 +15,58 @@ import static api.config.PieceConfig.PieceName.*;
 import static java.lang.String.valueOf;
 
 public class PieceSet {
-    private final transient static Logger LOG = Logger.getLogger(PieceSet.class.getName());
+	private final transient static Logger LOG = Logger.getLogger(PieceSet.class.getName());
 
-    private transient ArrayList<Piece> pieces = new ArrayList<>();
+	private HashMap<String, Piece> pieces = new HashMap<>();
 
-    private HashMap<String, King> kings = new HashMap<>(); //there is just one, but for json parsing on javascript side, it's better this way
-    private HashMap<String, Queen> queens = new HashMap<>();
-    private HashMap<String, Bishop> bishops = new HashMap<>();
-    private HashMap<String, Knight> knights = new HashMap<>();
-    private HashMap<String, Rook>  rooks = new HashMap<>();
-    private HashMap<String, Pawn>  pawns = new HashMap<>();
+	@Override
+	public String toString() {
+		return new Gson().toJson(this);
+	}
 
-    @Override
-    public String toString() {
-        return new Gson().toJson(this);
-    }
+	public void init(Player player) {
+		PieceConfig.Color color = player.getColor();
 
-    public void init(Player player) {
-    	PieceConfig.Color color = player.getColor();
-        King king = new King();
-        king.init(0, color);
-        kings.put(king.id, king);
-        Queen queen = new Queen();
-        queen.init(0, color);
-        queens.put(queen.id, queen);
+		Piece king = new King().init(0, color);
+		pieces.put(king.id, king);
 
-        for (int i = 0; i < 2; i++) {
-            Bishop bishop = new Bishop();
-            bishop.init(i, color);
-            bishops.put(bishop.id, bishop);
-            Rook rook = new Rook();
-            rook.init(i, color);
-            rooks.put(rook.id, rook);
-            Knight knight= new Knight();
-            knight.init(i, color);
-            knights.put(knight.id, knight);
-        }
-        for (int i = 0; i < 8; i++) {
-            Pawn pawn = new Pawn();
-            pawn.init(i, color);
-            pawns.put(pawn.id, pawn);
-        }
+		Piece queen = new Queen().init(0, color);
+		pieces.put(queen.id, queen);
 
-        pieces.add(king);
-        pieces.addAll(queens.values());
-        pieces.addAll(bishops.values());
-        pieces.addAll(rooks.values());
-        pieces.addAll(knights.values());
-        pieces.addAll(pawns.values());
-    }
+		for (int i = 0; i < 2; i++) {
+			Piece bishop = new Bishop().init(i, color);
+			pieces.put(bishop.id, bishop);
 
-    public ArrayList<Piece> getPieces() {
-        return pieces;
-    }
-    
-    public Piece getPiece(String pieceId) {
-    	return pieces.stream().filter(piece -> piece.id.equals(pieceId)).findFirst().orElse(null);
-    }
+			Piece rook = new Rook().init(i, color);
+			pieces.put(rook.id, rook);
 
-    public Movement movePiece(String pieceId, String moveToSqaureId) {
-        String pieceName = getPieceName(pieceId);
+			Piece knight = new Knight().init(i, color);
+			pieces.put(knight.id, knight);
+		}
+		for (int i = 0; i < 8; i++) {
+			Piece pawn = new Pawn().init(i, color);
+			pieces.put(pawn.id, pawn);
+		}
+	}
 
-        if (pieceName.equals(KING.toString())) {
-            return kings.get(pieceId).move(moveToSqaureId);
-        } else if (pieceName.equals(QUEEN.toString())) {
-            return queens.get(pieceId).move(moveToSqaureId);
-        } else if (pieceName.equals(BISHOP.toString())) {
-            return bishops.get(pieceId).move(moveToSqaureId);
-        } else if (pieceName.equals(KNIGHT.toString())) {
-            return knights.get(pieceId).move(moveToSqaureId);
-        } else if (pieceName.equals(ROOK.toString())) {
-            return rooks.get(pieceId).move(moveToSqaureId);
-        } else if (pieceName.equals(PAWN.toString())) {
-            return pawns.get(pieceId).move(moveToSqaureId);
-        }
-        return null;
-    }
+	public HashMap<String, Piece> getPieces() {
+		return pieces;
+	}
 
-    public void removeCapturedPiece(String pieceId) {
-        movePiece(pieceId, "");
-    }
+	public Piece getPiece(String pieceId) {
+		return pieces.get(pieceId);
+	}
 
-    private String getPieceName(String pieceId) {
-        return pieceId.split("_")[0];
-    }
+	public Movement movePiece(String pieceId, String moveToSqaureId) {
+		return pieces.get(pieceId).move(moveToSqaureId);
+	}
 
+	public void removeCapturedPiece(String pieceId) {
+		movePiece(pieceId, "");
+	}
+
+	private String getPieceName(String pieceId) {
+		return pieceId.split("_")[0];
+	}
 
 }

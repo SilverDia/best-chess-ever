@@ -40,7 +40,7 @@ public class Board {
 		String toSquareID = movement.getMoveToSquareId();
 
 		Piece piece = getSquare(fromSquareID).getPiece();
-		if (movement.getRules().contains(Move.CAPTURE_MOVE))
+		if (movement.getRules().contains(Move.CAPTURE_MOVE) && getSquare(toSquareID).getPiece() != null)
 			getSquare(toSquareID).getPiece().setCaptured(true);
 		piece.setMoved(true);
 

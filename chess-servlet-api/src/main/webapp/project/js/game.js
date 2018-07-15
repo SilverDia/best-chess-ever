@@ -28,11 +28,16 @@ function init_game() {
 
 function parse_json() {
     clearOldSuggestions();
+    clearLastMove();
     gameID = jsonObject.gameId;
 
+    var lastEntry = jsonObject.turnHistory.length-1;
     document.getElementById('game-turn-info-container').innerHTML = jsonObject.activePlayer + " ist am Zug!";
-    for (message in jsonObject.gamelog) {
-        document.getElementById('game-log-textarea').innerHTML += jsonObject.gamelog[message] + '\n';
+    if (typeof jsonObject.turnHistory[lastEntry].message !== 'undefined')
+        document.getElementById('game-log-textarea').innerHTML += jsonObject.turnHistory[lastEntry].message + '\n';
+    if (typeof jsonObject.turnHistory[lastEntry].movement !== 'undefined') {
+    	document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveFromSquareId).classList.add("last-turn");
+    	document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveToSquareId).classList.add("last-turn");
     }
 
     var i;
@@ -88,7 +93,7 @@ function clickedPiece(color, pieceType, piece) {
                 + jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves[move].moveToSquareId
                 + "')");
 
-        if (element.innerHTML !== "") {
+        if (jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves[move].rules[jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves[move].rules.length - 1] == "CAPTURE_MOVE") {
             element.classList.add("capture");
         } else {
             element.classList.add("valid-turn");
@@ -100,6 +105,10 @@ function clickedPiece(color, pieceType, piece) {
 function clearOldSuggestions() {
     $('.click-display').toggleClass("click-display capture valid-turn chosen",
         false).removeAttr("onclick");
+}
+
+function clearLastMove() {
+    $('.last-turn').toggleClass("last-turn", false);
 }
 
 function madeMove(pieceId, moveToSquareId) {
