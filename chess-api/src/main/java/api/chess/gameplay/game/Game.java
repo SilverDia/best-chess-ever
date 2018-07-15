@@ -158,8 +158,8 @@ public class Game {
 		return state;
 	}
 
-	public void promote(String PieceId, String toPiece) {
-		player.get(inactivePlayer).getPieceSet();
+	public void promote(String pieceId, String toPiece) {
+		player.get(inactivePlayer).getPieceSet().doPromotion(pieceId, toPiece);
 	}
 
 	private King getKing(Player player) {

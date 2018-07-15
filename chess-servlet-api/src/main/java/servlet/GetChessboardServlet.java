@@ -81,8 +81,9 @@ public class GetChessboardServlet extends HttpServlet {
 						Game game = games.get(gameId);
 						game.executeMove(request.getParameter(MOVE_PIECE_ID), request.getParameter(MOVE_TO_SQUARE_ID));
 						if ((request.getParameter(PROMOTE_TO_PIECE) != null
-								&& !request.getParameter(PROMOTE_TO_PIECE).equals("")))
-							game.promote(MOVE_PIECE_ID, PROMOTE_TO_PIECE);
+								&& !request.getParameter(PROMOTE_TO_PIECE).equals(""))) {
+							game.promote(request.getParameter(MOVE_PIECE_ID), request.getParameter(PROMOTE_TO_PIECE));
+						}
 						response.getWriter().append(new Gson().toJson(game));
 
 					}

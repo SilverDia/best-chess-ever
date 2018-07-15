@@ -111,14 +111,14 @@ function checkPawnProm(sender, pieceId, moveToSquareId) {
     if ($(sender.parentElement).hasClass("promotion-row-white") && pieceId.includes("PAWN_WHITE")) {
         toggle("pawn-promotion-white");
         $('#pawn-promotion-white .chessboard-tile').click(function () {
-            var promPiece = this.className;
+            var promPiece = this.id;
             toggle("pawn-promotion-white");
             madeMove(pieceId, moveToSquareId, promPiece);
         });
     } else if ($(sender.parentElement).hasClass("promotion-row-black") && pieceId.includes("PAWN_BLACK")) {
         toggle("pawn-promotion-black");
         $('#pawn-promotion-black .chessboard-tile').click(function () {
-            var promPiece = this.className;
+            var promPiece = this.id;
             toggle("pawn-promotion-black");
             madeMove(pieceId, moveToSquareId, promPiece);
         });
@@ -132,7 +132,19 @@ function clearLastMove() {
     $('.last-turn').toggleClass("last-turn", false);
 }
 
-function madeMove(pieceId, moveToSquareId) {
+
+function madeMove(pieceId, moveToSquareId, promPiece) {
+    var request;
+    request = "/ChessGame/GetChessboardServlet?action=execute-move&game-id="
+        + gameID
+        + "&move-piece-id="
+        + pieceId
+        + "&move-to-square-id=" + moveToSquareId
+        + "&duration=" + secTotal;
+    if (promPiece) {
+        promPiece = promPiece.substring(promPiece.lastIndexOf("-") + 1);
+        request += "&promote-to-piece=" + promPiece;
+    }
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
