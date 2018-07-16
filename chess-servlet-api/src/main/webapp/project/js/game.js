@@ -121,14 +121,14 @@ function clearOldSuggestions() {
 }
 
 function checkPawnProm(sender, pieceId, moveToSquareId) {
-    if ($(sender.parentElement).hasClass("promotion-row-white") && pieceId.includes("PAWN_WHITE")) {
+    if ($(sender.parentElement.parentElement).hasClass("promotion-row-white") && pieceId.includes("PAWN_WHITE")) {
         toggle("pawn-promotion-white");
         $('#pawn-promotion-white .chessboard-tile').click(function () {
             var promPiece = this.id;
             toggle("pawn-promotion-white");
             madeMove(pieceId, moveToSquareId, promPiece);
         });
-    } else if ($(sender.parentElement).hasClass("promotion-row-black") && pieceId.includes("PAWN_BLACK")) {
+    } else if ($(sender.parentElement.parentElement).hasClass("promotion-row-black") && pieceId.includes("PAWN_BLACK")) {
         toggle("pawn-promotion-black");
         $('#pawn-promotion-black .chessboard-tile').click(function () {
             var promPiece = this.id;
