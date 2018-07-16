@@ -19,6 +19,7 @@ public class Turn {
 	private Date startTime;
 	private Date endTime;
 	private String duration;
+	private Long durationSecs;
 	String movedPiece;
 	String capturedPiece;
 	private String message;
@@ -34,6 +35,7 @@ public class Turn {
 		this.movedPiece = movedPiece;
 		this.capturedPiece = capturedPiece;
 		long millis = endTime.getTime() - startTime.getTime();
+		durationSecs = TimeUnit.MILLISECONDS.toSeconds(millis);
 		duration = String.format("%d min, %d sek", TimeUnit.MILLISECONDS.toMinutes(millis),
 				TimeUnit.MILLISECONDS.toSeconds(millis)
 						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
@@ -90,5 +92,9 @@ public class Turn {
 
 	public Date getEndTime() {
 		return endTime;
+	}
+
+	public Long getDurationSecs() {
+		return durationSecs;
 	}
 }

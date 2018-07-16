@@ -27,7 +27,7 @@
 		</div>
 		<div id="init-layer" class="full-layer">
 			<h2>Neues Spiel starten</h2>
-			<p class="init-layer-content">Spielernamen eingeben:</p>
+			<h3>Spielernamen eingeben:</h3>
 			<div>
 				<input type="text" id="init-player-white" class="init-layer-content" placeholder="WHITE">
 				<input type="text" id="init-player-black" class="init-layer-content" placeholder="BLACK">
@@ -35,37 +35,57 @@
 			</div>
 		</div>
 		<div id="grid-game" class="grid-game">
-			<div id="turnInfo" class="grid-turnInfo">
-				<div class="turn-info-grid">
-					<div id="game-timer-white-container" class="turn-info game-timer-white-container">
-						<table class="game-timer">
-							<tr>
-								<td>
-									WEISS
-								</td>
-								<td id="game-timer-white">
-									00:00
-								</td>
-							</tr>
-						</table>
-					</div>
-					<div id="game-turn-info-container" class="game-turn-info-continer">
-						WEISS ist am Zug!
-					</div>
-					<div id="game-timer-black-container" class="turn-info game-timer-black-container">
-						<table class="game-timer">
-							<tr>
-								<td>
-									SCHWARZ
-								</td>
-								<td id="game-timer-black">
-									00:00
-								</td>
-							</tr>
-						</table>
-					</div>
+			<div id="game-info" class="game-info">
+				<table id="player-info-container-white" class="light game-info-container player-info-container">
+					<thead class="name-info-container timer-container">
+					<tr>
+						<th class="name-info"></th>
+						<th id="timer-white" class="timer">00:00</th>
+					</tr>
+					</thead>
+					<tbody class="player-info-content light">
+					<tr>
+						<td colspan="2">WEISS</td>
+					</tr>
+					<tr>
+						<td>Anzahl d. Züge:</td>
+						<td class="turns-complete"></td>
+					</tr>
+					<tr>
+						<td>Zeit gesamt:</td>
+						<td class="time-complete"></td>
+					</tr>
+					<tr><td colspan="2"><div class="captured-pieces"></div> </td></tr>
+					</tbody>
+				</table>
+				<div id="turn-info-container" class="game-info-container turn-info-container">
+					WEISS ist am Zug!
 				</div>
+				<table id="player-info-container-black" class="dark game-info-container player-info-container">
+					<thead class="name-info-container timer-container">
+					<tr>
+						<th class="name-info"></th>
+						<th id="timer-black" class="timer">00:00</th>
+					</tr>
+					</thead>
+					<tbody class="player-info-content dark">
+					<tr>
+						<td colspan="2">WEISS</td>
+					</tr>
+					<tr>
+						<td>Anzahl d. Züge:</td>
+						<td class="turns-complete"></td>
+					</tr>
+					<tr>
+						<td>Zeit gesamt:</td>
+						<td class="time-complete"></td>
+					</tr>
+					<tr><td colspan="2"><div class="captured-pieces"></div> </td></tr>
+
+					</tbody>
+				</table>
 			</div>
+
 			<div id="grid-pause">
 				<img src="/ChessGame/project/resources/images/pause-icon-128x128.png" title="Pause" id="pause-button">
 				<!-- <button id="pause-button" class="pause-button"></button> -->
