@@ -512,12 +512,21 @@ h4{
 .grid-game{
     display: grid;
     grid-template-columns: 624px 90px 1fr;
+	grid-template-rows: 90px auto;
     row-gap: 0px;
 }
 
-.grid-turnInfo{
+#game-info{
+	box-sizing: border-box;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	border: black solid 1px;
+	border-collapse: collapse;
+
 }
 
 .grid-pause{
@@ -553,36 +562,71 @@ h4{
 
 /* turn info grid */
 
-.turn-info-grid{
-	display: grid;
-	grid-template-columns: 113px 1fr 148px;
-	margin-left: 5px;
-	margin-right: 5px;
+.player-info-container {
+	width: 36%;
+	height: 100%;
+	font-weight: bold;
+	font-size: 18px;
+	border: none;
+	border-spacing: 0;
+	border-collapse: collapse;
+	position: relative;
 }
 
-.game-turn-info-continer{
-	grid-column: 2 / 3;
-	grid-row: 1 / 2;
-}
-
-.game-timer-white-container{
-	grid-column: 1 / 2;
-	grid-row: 1 / 2;
-}
-
-.game-timer-black-container{
-	grid-column: 3 / 4;
-	grid-row: 1 / 2;
-}
-
-/* Timer */
-
-.game-timer{
-    border-collapse: collapse;
-    border-spacing: 0px;
-    font-weight: bold;
-    font-size: 18px;
+.player-info-container td, .player-info-container th {
 	border: 3px solid black;
+	border-collapse: collapse;
+}
+player-info-container th {
+	padding: 10%;
+}
+.turn-info-container{
+	width: auto;
+	margin: auto;
+}
+
+.player-info-content {
+	display: none;
+	z-index: 3;
+	min-width: 100%;
+	width: 100%
+}
+.player-info-content * {
+	z-index: 3;
+	width: 100%;
+}
+
+.name-info-container:hover + .player-info-content {
+	display: table-row;
+	position: absolute;
+	z-index: 3;
+}
+
+.name-info-container:hover th:first-child::before{
+	content: "  \25B4";
+	transition: 0.5s;
+	padding-left: 15px;
+	float: left;
+}
+.name-info-container th:first-child::before{
+	content: "  \25BE";
+	transition: 0.5s;
+	padding-left: 15px;
+	float: left;
+}
+
+.captured-pieces {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.captured-piece {
+	width: 30%;
+}
+.captured-piece img{
+	width: 100%;
 }
 
 /*** Pause ***/
@@ -626,13 +670,18 @@ h4{
 }
 
 #init-layer {
-	background-image: url("/ChessGame/project/resources/images/chess-icon-480x480-big.png");
+	background: url("/ChessGame/project/resources/images/chess-icon-480x480-big.png") no-repeat left;
+	background-size: contain;
 }
 
 .init-layer-content {
+	text-align: center;
 	font-size: 48px;
-	margin: auto;
+	margin: 10px auto;
 	width: 33%;
+	border: #000 solid 6px;
+    background-color: #ffffff7F;
+
 }
 
 #start-new-game {
@@ -761,6 +810,10 @@ h4{
 }
 
 /*************** manual ****************/
+
+.bulletless{
+    list-style-type: none;
+}
 
 /* spacing text passages */
 

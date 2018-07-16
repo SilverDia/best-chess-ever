@@ -18,6 +18,9 @@ public class Player {
 
     private String name;
     private PieceConfig.Color color;
+    private Long turnCounter = 0L;
+    private Long durationFullSecs = 0L;
+
     private boolean active;
     private boolean isChecked;
     private boolean canCheck;
@@ -108,5 +111,21 @@ public class Player {
 
     public HashMap<String, Piece> getCapturedPieces() {
         return capturedPieces;
+    }
+
+    public Long getTurnCounter() {
+        return turnCounter;
+    }
+
+    public void addTurn() {
+        this.turnCounter++;
+    }
+
+    public Long getDurationFullSecs() {
+        return durationFullSecs;
+    }
+
+    public void addDurationSecs(Long durationSecs) {
+        this.durationFullSecs += durationSecs;
     }
 }
