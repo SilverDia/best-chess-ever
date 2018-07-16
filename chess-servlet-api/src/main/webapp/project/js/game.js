@@ -47,7 +47,7 @@ function parse_json() {
     var lastEntry = jsonObject.turnHistory.length - 1;
     $('#turn-info-container').text(jsonObject.activePlayer + " ist am Zug!");
     if (typeof jsonObject.turnHistory[lastEntry].message !== 'undefined')
-        document.getElementById('game-log-textarea').innerHTML += jsonObject.turnHistory[lastEntry].message + '\n';
+        document.getElementById('game-log-textarea').innerHTML = jsonObject.turnHistory[lastEntry].message + '\n' + document.getElementById('game-log-textarea').innerHTML;
     if (typeof jsonObject.turnHistory[lastEntry].movement !== 'undefined') {
         document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveFromSquareId).classList.add("last-turn");
         document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveToSquareId).classList.add("last-turn");

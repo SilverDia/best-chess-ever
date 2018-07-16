@@ -73,22 +73,25 @@ public class Game {
 		Movement movement = player.get(activePlayer).getPieceSet().getPiece(pieceId).getMoveWithDestination(squareId);
 		String capturedPiece = (movement.getRules().contains(Move.CAPTURE_MOVE)
 				&& board.getSquare(squareId).getPiece() != null)
-						? board.getSquare(squareId).getPiece().getName().getDE()
-						: "";
+						? board.getSquare(squareId).getPiece().getName().getDE() : "";
 		player.get(activePlayer).movePiece(pieceId, squareId);
-		if (movement != null) {
+		if (movement != null) {			
 			board.movePiece(movement);
-			handleSpecialMove(movement);
-			finishTurn(new Turn(activePlayer, movement, board.getSquare(squareId).getPiece().getName().getDE(),
-					capturedPiece, false, false, turnHistory.getLast().getEndTime(), new Date()));
+			Turn turn = new Turn(player.get(activePlayer).getName() + " (" + activePlayer.getDE() + ")", movement,
+					board.getSquare(squareId).getPiece().getName().getDE(), capturedPiece, false, false,
+					turnHistory.getLast().getEndTime(), new Date());
+			
+			handleSpecialMove(movement, turn);
+			finishTurn(turn);
 		}
 	}
 
-	public void handleSpecialMove(Movement movement) {
+	public void handleSpecialMove(Movement movement, Turn turn) {
 		if (movement.getRules().contains(Move.CASTELING)) {
 			boolean right = movement.getDirection().x > 0;
 			String moveFromId = (right ? "H" : "A") + movement.getMoveFromSquareId().charAt(1);
 			String moveToId = (right ? "E" : "C") + movement.getMoveFromSquareId().charAt(1);
+			turn.setExtraInfo(" mit einer Rochade");
 			board.movePiece(new Movement(moveFromId, moveToId, null, Move.CASTELING, null));
 		} else if (movement.getRules().contains(Move.EN_PASSANT)) {
 			Piece piece = board.getSquare(movement.getMoveToSquareId()).getPiece();
@@ -96,6 +99,8 @@ public class Game {
 			Square capturedPawn = board.getSquare(BoardConfig.toSquareId(piece.getCoords(board).next(dir, 1)));
 			capturedPawn.getPiece().setCaptured(true);
 			capturedPawn.setPiece(null);
+			turn.setCapturedPiece("Bauer");
+			turn.setExtraInfo(" en Passant");
 		}
 	}
 
@@ -125,7 +130,13 @@ public class Game {
 		turn.setChecked(player.get(activePlayer).isChecked());
 		turnHistory.add(turn);
 
-		evaluatePossibleMoves();
+		GameState state = evaluatePossibleMoves();
+		
+		if (state.equals(GameState.CHECK))
+			turn.setChecked(true);
+		if (state.equals(GameState.CHECKMATE))
+			turn.setCheckmated(true);
+		turn.setMessage();
 	}
 
 	private GameState evaluatePossibleMoves() {
