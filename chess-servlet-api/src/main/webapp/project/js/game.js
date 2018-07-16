@@ -79,7 +79,7 @@ function setupOnclick(color) {
         for (piece in jsonObject.player[color].pieceSet[pieceType]) {
             if (typeof jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves !== 'undefined')
                 document
-                    .getElementById(jsonObject.player[color].pieceSet[pieceType][piece].positionSquareId).firstChild
+                    .getElementById(jsonObject.player[color].pieceSet[pieceType][piece].positionSquareId).firstChild.firstChild
                     .setAttribute("onclick", "clickedPiece('" + color
                         + "','" + pieceType + "','" + piece + "')");
         }
