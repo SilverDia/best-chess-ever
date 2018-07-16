@@ -13,7 +13,7 @@ public class Turn {
 	private final transient static Logger LOG = Logger.getLogger(Turn.class.getName());
 
 	private String playerName;
-	private transient Movement movement;
+	private Movement movement;
 	private transient boolean checked;
 	private transient boolean checkmated;
 	private transient Date startTime;
@@ -24,8 +24,8 @@ public class Turn {
 	private transient String extraInfo = "";
 	private String message;
 
-	public Turn(String playerName, Movement movement, String movedPiece, String capturedPiece,
-			boolean checked, boolean checkmated, Date startTime, Date endTime) {
+	public Turn(String playerName, Movement movement, String movedPiece, String capturedPiece, boolean checked,
+			boolean checkmated, Date startTime, Date endTime) {
 		this.playerName = playerName;
 		this.movement = movement;
 		this.checked = checked;
@@ -35,22 +35,27 @@ public class Turn {
 		this.movedPiece = movedPiece;
 		this.setCapturedPiece(capturedPiece);
 		long millis = endTime.getTime() - startTime.getTime();
-		
+
 		long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
 		long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
-		duration = (minutes != 0?minutes + " min, ":"") + (seconds - TimeUnit.MINUTES.toSeconds(minutes) + " sek");
+		duration = (minutes != 0 ? minutes + " min, " : "") + (seconds - TimeUnit.MINUTES.toSeconds(minutes) + " sek");
 	}
 
 	public void setMessage() {
-		if (playerName != null) { //dummy Turn
-		message = playerName + " bewegt " + movedPiece + " von " + movement.getMoveFromSquareId() + " nach "
-				+ movement.getMoveToSquareId() + " in " + duration;
-		if (movement.getRules().contains(Move.CAPTURE_MOVE))
-			message += " und schl&auml;gt " + getCapturedPiece();
-		message += extraInfo;
-		if (checked || checkmated)
-			message += " und stellt den K&ouml;nig in " + (checkmated ? "Schachmatt" : "Schach");
+		if (playerName != null) { // dummy Turn
+			message = format(playerName, playerName.endsWith("(Weiss)") ? "white" : "black") + " bewegt "
+					+ format(movedPiece, "black") + " von " + format(movement.getMoveFromSquareId(), "aqua") + " nach "
+					+ format(movement.getMoveToSquareId(), "aqua") + " in " + duration;
+			if (movement.getRules().contains(Move.CAPTURE_MOVE))
+				message += " und schl&auml;gt " + format(getCapturedPiece(), "black");
+			message += extraInfo;
+			if (checked || checkmated)
+				message += " und stellt den K&ouml;nig in " + (checkmated ? "Schachmatt" : "Schach");
 		}
+	}
+
+	private String format(String string, String color) {
+		return "<b style='color: " + color + ";'>" + string + "</b>";
 	}
 
 	@Override

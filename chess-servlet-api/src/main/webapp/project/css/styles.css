@@ -689,7 +689,13 @@ h4{
     width: 68px;
 }
 
-.chessboard-tile img{
+.chessboard-tile-content{
+	height: 100%;
+	width: 100%;
+	float: left;
+}
+
+.chessboard-tile-content img{
 	float: left;
 }
 
@@ -710,7 +716,8 @@ h4{
 }
 
 .last-turn{
-    background-color: aqua;
+    border: 4px solid aqua;
+    margin: -4px;
 }
 
 .capture{
@@ -747,8 +754,10 @@ h4{
 	margin: auto;
     height: 82.5%;
     width: 100%;
-    overflow: auto;
 	resize: none;
+	overflow-y: auto;
+	border: 1px solid black;
+    background: darkgray;
 }
 
 /*************** manual ****************/

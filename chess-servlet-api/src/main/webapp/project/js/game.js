@@ -46,10 +46,10 @@ function parse_json() {
     var lastEntry = jsonObject.turnHistory.length - 1;
     document.getElementById('game-turn-info-container').innerHTML = jsonObject.player[jsonObject.activePlayer].name + " ist am Zug!";
     if (typeof jsonObject.turnHistory[lastEntry].message !== 'undefined')
-        document.getElementById('game-log-textarea').innerHTML = jsonObject.turnHistory[lastEntry].message + '\n' + document.getElementById('game-log-textarea').innerHTML;
+        document.getElementById('game-log-textarea').innerHTML = jsonObject.turnHistory[lastEntry].message + '<br>' + document.getElementById('game-log-textarea').innerHTML;
     if (typeof jsonObject.turnHistory[lastEntry].movement !== 'undefined') {
-        document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveFromSquareId).classList.add("last-turn");
-        document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveToSquareId).classList.add("last-turn");
+        document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveFromSquareId).firstChild.classList.add("last-turn");
+        document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveToSquareId).firstChild.classList.add("last-turn");
     }
 
     var i;
@@ -57,7 +57,7 @@ function parse_json() {
         for (square in jsonObject.board.chessBoard[i]) {
             if (jsonObject.board.chessBoard[i][square].pieceID !== "") {
                 document
-                    .getElementById(jsonObject.board.chessBoard[i][square].squareId).innerHTML = "<img src=/ChessGame/project/resources/images/piece-sets/default/"
+                    .getElementById(jsonObject.board.chessBoard[i][square].squareId).firstChild.innerHTML = "<img src=/ChessGame/project/resources/images/piece-sets/default/"
                     + jsonObject.board.chessBoard[i][square].pieceID
                         .substring(
                             0,
@@ -65,7 +65,7 @@ function parse_json() {
                         .toLowerCase() + ".png\>";
             } else {
                 document
-                    .getElementById(jsonObject.board.chessBoard[i][square].squareId).innerHTML = "";
+                    .getElementById(jsonObject.board.chessBoard[i][square].squareId).firstChild.innerHTML = "";
             }
         }
     }
@@ -95,7 +95,7 @@ function clickedPiece(color, pieceType, piece) {
 
     for (move in jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves) {
         var element = document
-            .getElementById(jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves[move].moveToSquareId);
+            .getElementById(jsonObject.player[color].pieceSet[pieceType][piece].possibleMoves[move].moveToSquareId).firstChild;
         element
             .setAttribute(
                 "onclick",
