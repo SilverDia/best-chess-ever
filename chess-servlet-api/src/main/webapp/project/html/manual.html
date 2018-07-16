@@ -29,7 +29,7 @@
 		            <h3>Das Spielbrett</h3>
 		            <div class="manual-text">
 			            <p>
-			                Das Spiel wird auf einem Spielbrett mit 64 Feldern, aufgeteilt in ein 8x8 Raster gespielt. Jedes Feld wird durch eine Buchstaben/Ziffern Kombination bezeichnet. Hierbei werden die Spalten von a bis h und die Reihen von 1 bis 8 gezählt. Das Spielbrett ist so positioniert, dass die linke untere Ecke aus Sicht des weißen Spielers die Bezeichnung a1 trägt.
+			                Das Spiel wird auf einem Spielbrett mit 64 Feldern, aufgeteilt in ein 8x8 Raster gespielt. Jedes Feld wird durch eine Buchstaben/Ziffern Kombination bezeichnet. Hierbei werden die Spalten von A bis H und die Reihen von 1 bis 8 gezählt. Das Spielbrett ist so positioniert, dass die linke untere Ecke aus Sicht des weißen Spielers die Bezeichnung A1 trägt.
 			              
 			                Zu Beginn des Spiel sieht das Schachbrett wie folgt aus:
 			                    <br/>
@@ -121,13 +121,13 @@
 			            <p>
 			                Führt ein Bauer einen Doppelzug wie oben beschrieben aus, besteht für gegnerische Bauern die Möglichkeit, den eben bewegten Bauern so zu schlagen, als ob dieser nur einen einfachen Zug ausgeführt hätte.
 			                <!-- hier müste noch ein Beispielbild rein-->
-			                Befindet sich also nach dem Doppelzug links oder rechts von dem gezogenen Bauern ein gegnerischer Bauer, so kann der gegnerische Bauer das entsprechende diagonal vor ihm liegende Feld besetzen, und dabei den doppelt gezogenen Bauern en passant schlagen. Diese Regel findet nur unmittelbar nach dem Ausführen des Doppelzugs Anwendung.
+			                Befindet sich also nach dem Doppelzug links oder rechts von dem gezogenen Bauern ein gegnerischer Bauer, so kann der gegnerische Bauer das entsprechende diagonal vor ihm liegende Feld besetzen, und dabei den doppelt gezogenen Bauern "en passant" schlagen. Diese Regel findet nur unmittelbar nach dem Ausführen des Doppelzugs Anwendung.
 			            </p>
 	                </div>
 		            <h3>Umwandlung von Bauern</h3>
 		            <div class="manual-text">
 			            <p>
-			                Wenn ein Bauer die gegnerische Seite des Spielbretts erreicht, das bedeutet die achte Reihe für weiße Bauern, bzw. die erste Reihe für schwarze Bauern, dann wird dieser in eine andere Figur umgewandelt. Dabei hat der Spieler die Möglichkeit zwischen Springer, Läufer, Turm und Dame zu wählen. Die gewünschte Figur wird durch Klicken auf den entsprechenden Button ausgewählt (die Texte erscheinen dann natürlich in deutsch).	
+			                Wenn ein Bauer die gegnerische Seite des Spielbretts erreicht, das bedeutet die achte Reihe für weiße Bauern, bzw. die erste Reihe für schwarze Bauern, dann wird dieser in eine andere Figur umgewandelt. Dabei hat der Spieler die Möglichkeit zwischen Springer, Läufer, Turm und Dame zu wählen. Die gewünschte Figur wird durch Klicken auf den entsprechenden Button ausgewählt.	
 			            </p>
 	                </div>
 		            <h3>Die Rochade</h3>
@@ -135,15 +135,17 @@
 			            <p>
 			                Ein weiterer Sonderzug ist die Rochade. Sie ist der einzige Zug, in dem zwei Figuren bewegt werden, und zwar König und Turm. Hierbei wird der König zwei Felder nach rechts oder nach links bewegt. Gleichzeitig wird der Turm in dessen Richtung der König bewegt wurde, auf das Feld zwischen König und Ausgangsposition des Königs gesetzt. 
 			                <!-- hier müste noch ein Beispielbild rein-->
-			                Auf Brettspielnetz wird hierzu einfach der König zwei Felder zur Seite bewegt, der Turm wird anschließend automatisch platziert.	
+			                Hierzu einfach der König zwei Felder zur Seite bewegt, der Turm wird anschließend automatisch platziert.	
 			                  
-			                Voraussetzungen für die Rochade:
-			                König und Turm dürfen noch nicht bewegt worden sein
-			                Zwischen König und Turm dürfen sich keine Figuren befinden
-			                Der König darf vor der Rochade nicht im Schach stehen
-			                Der König darf bei der Rochade kein Feld überspringen, auf dem Schach droht
-			                Der König darf sich bei Abschluss der Rochade nicht auf einem Feld befinden, auf dem er im Schach stände
-			            </p>
+			                <br/><br/>Voraussetzungen für die Rochade:
+							<ul class="bulletless">
+								<li>König und Turm dürfen noch nicht bewegt worden sein</li>
+								<li>Zwischen König und Turm dürfen sich keine Figuren befinden</li>
+								<li>Der König darf vor der Rochade nicht im Schach stehen</li>
+								<li>Der König darf bei der Rochade kein Feld überspringen, auf dem Schach droht</li>
+								<li>Der König darf sich bei Abschluss der Rochade nicht auf einem Feld befinden, auf dem er im Schach stände</li>
+							</ul>
+						</p>
 		            </div>
                 </div>
                 <div id="endings" class="content-block">
@@ -252,17 +254,15 @@
 					<h3>Remis</h3>
 					<div class="manual-text">
 						<p>
-								Schachpartien können unentschieden enden. Dieses sogenannte Remis tritt ein, wenn:
-								beide Spieler sich auf das Unentschieden einigen
-								ein Spieler patt gesetzt wurde
-								zum dritten Mal die gleiche Stellung auftritt, wobei der gleiche Spieler am Zug ist, und die gleichen Züge möglich sind  *
-								50 Züge lang keine Figur geschlagen worden ist, kein Bauer bewegt worden ist und ein Spieler Remis beantragt  *
-								beide Spieler nicht mehr über die ausreichenden Figuren verfügen um den Gegner matt zu setzen. z.B. König gegen König, König gegen König und Springer, König gegen König und Läufer  *
-								* Diese Punkte werden von Brettspielnetz nicht automatisch erkannt. Du solltest deinen Gegner in diesem Fall mit einem Verweis auf die Spielregel das Unentschieden anbieten. Wenn dein Gegner weiterspielen will, obwohl du der Meinung bist, dass das Spiel unentschieden steht, kannst du einen der Administratoren von Brettspielnetz.de informieren. Wenn es tatsächlich Remis ist, kann es dem Gegner passieren, dass er wegen Spielverzögerung verwarnt wird.
-								Denke daran, Spiel und Spielnummer anzugeben! Wenn es sich um eine Zugwiederholung handelt, musst du auch die 3 Zugnummern angeben, in denen sich die Stellung wiederholt - wir suchen keine komplette Partie durch!
-								Der Administrator wird die Partie dann für unentschieden erklären, wenn eine der obigen Bedingungen erfüllt ist. Bitte beachte, dass es sich in den Bedingungen um 50 Vollzüge handelt. Das heißt, wenn beispielsweise der erste Zug die Zugnummer 41 hatte, ist das Spiel erst ab dem 91. Zug remis, wenn sich bis dahin nichts getan hat.
-								Wichtig: Du darfst den Zug nur dann ausführen, wenn das Spiel nicht durch den Zug verloren ist. Das können wir nicht mehr rückgängig machen.
-								Falls weitergespielt wird, verfält das Recht Remis zu beantragen. Zu beachten ist dies insbesondere beim Remis durch dreifache Zugwiederholung. Hier muss ggf. Remis beantragt werden bevor die gleiche Stellung zum dritten Mal auftritt. 
+							Schachpartien können unentschieden enden. Dieses sogenannte Remis tritt ein, wenn:
+							<ul class="bulletless">
+								<li>beide Spieler sich auf das Unentschieden einigen</li>
+								<li>ein Spieler patt gesetzt wurde</li>
+								<li>zum dritten Mal die gleiche Stellung auftritt, wobei der gleiche Spieler am Zug ist, und die gleichen Züge möglich sind</li>
+								<li>50 Züge lang keine Figur geschlagen worden ist, kein Bauer bewegt worden ist und ein Spieler Remis beantragt</li>
+								<li>beide Spieler nicht mehr über die ausreichenden Figuren verfügen um den Gegner matt zu setzen. z.B. König gegen König, König gegen König und Springer, König gegen König und Läufer</li>
+							</ul>
+							Diese Punkte werden nicht automatisch erkannt. Du solltest deinen Gegner in diesem Fall mit einem Verweis auf die Spielregel das Unentschieden anbieten. 
 						</p>
 					</div>		            
 	            </div>
