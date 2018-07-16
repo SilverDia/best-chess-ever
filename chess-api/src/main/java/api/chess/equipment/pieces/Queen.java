@@ -11,10 +11,11 @@ public class Queen extends Piece {
 	private final transient static Logger LOG = Logger.getLogger(Queen.class.getName());
 
 	@Override
-	public void init(int id, PieceConfig.Color color) {
+	public Piece init(int id, PieceConfig.Color color) {
 		name = PieceConfig.PieceName.QUEEN;
 		super.init(id, color);
 		positionSquareId = initPosition(new Coordinates(4, 0), id, 1);
+		return this;
 	}
 
 	@Override

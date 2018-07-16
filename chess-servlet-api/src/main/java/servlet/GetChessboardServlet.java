@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,57 +25,76 @@ public class GetChessboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static Logger LOG = Logger.getLogger(GetChessboardServlet.class.getName());
 
-
 	private final static String ACTION = "action";
 	private final static String ACTION_INIT_GAME = "init-game";
+	private final static String BLACK_PLAYER_NAME = "black-player-name";
+	private final static String WHITE_PLAYER_NAME = "white-player-name";
 	private final static String ACTION_EXECUTE_MOVE = "execute-move";
 	private final static String GAME_ID = "game-id";
 	private final static String MOVE_PIECE_ID = "move-piece-id";
 	private final static String MOVE_TO_SQUARE_ID = "move-to-square-id";
-
+	private final static String PROMOTE_TO_PIECE = "promote-to-piece";
 
 	HashMap<String, Game> games = new HashMap<>();
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GetChessboardServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GetChessboardServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		if (request.getServletContext().getAttribute("games") != null) {
 			try {
 				games = (HashMap<String, Game>) request.getServletContext().getAttribute("games");
 			} catch (ClassCastException e) {
-				LOG.log(Level.SEVERE, "Failed to load games hashmap from servlet context.\nSaved games cannot be loaded:\n" + e.getMessage(), e);
+				LOG.log(Level.SEVERE,
+						"Failed to load games hashmap from servlet context.\nSaved games cannot be loaded:\n"
+								+ e.getMessage(),
+						e);
 			}
 
 		}
 
-		if (request.getParameter(ACTION) != null && ! request.getParameter(ACTION).equals("")) {
+		if (request.getParameter(ACTION) != null && !request.getParameter(ACTION).equals("")) {
 			String action = request.getParameter(ACTION);
 			if (action.equals(ACTION_INIT_GAME)) {
+				String nameWhitePlayer = "WHITE_PLAYER_" + String.valueOf(new Date().getTime());
+				String nameBlackPlayer = "BLACK_PLAYER_" + String.valueOf(new Date().getTime());
+				if (request.getParameter(BLACK_PLAYER_NAME) != null && !request.getParameter(BLACK_PLAYER_NAME).equals("")) {
+					nameBlackPlayer = request.getParameter(BLACK_PLAYER_NAME);
+				}
+				if (request.getParameter(WHITE_PLAYER_NAME) != null && !request.getParameter(WHITE_PLAYER_NAME).equals("")) {
+					nameWhitePlayer = request.getParameter(WHITE_PLAYER_NAME);
+				}
 				Game game = new Game();
 				games.put(game.gameId, game);
 				request.getServletContext().setAttribute("games", games);
-				game.init("white_player", "black_player");
+				game.init(nameWhitePlayer, nameBlackPlayer);
 				response.getWriter().append(new Gson().toJson(game));
 
-			}
-			else if (action.equals(ACTION_EXECUTE_MOVE)) {
-				if ((request.getParameter(GAME_ID) != null && ! request.getParameter(GAME_ID).equals("")) &&
-						(request.getParameter(MOVE_PIECE_ID) != null && ! request.getParameter(MOVE_PIECE_ID).equals("")) &&
-						(request.getParameter(MOVE_TO_SQUARE_ID) != null && ! request.getParameter(MOVE_TO_SQUARE_ID).equals(""))) {
+			} else if (action.equals(ACTION_EXECUTE_MOVE)) {
+				if ((request.getParameter(GAME_ID) != null && !request.getParameter(GAME_ID).equals(""))
+						&& (request.getParameter(MOVE_PIECE_ID) != null
+								&& !request.getParameter(MOVE_PIECE_ID).equals(""))
+						&& (request.getParameter(MOVE_TO_SQUARE_ID) != null
+								&& !request.getParameter(MOVE_TO_SQUARE_ID).equals(""))) {
 					String gameId = request.getParameter(GAME_ID);
 					if (games.containsKey(gameId)) {
 						Game game = games.get(gameId);
 						game.executeMove(request.getParameter(MOVE_PIECE_ID), request.getParameter(MOVE_TO_SQUARE_ID));
+						if ((request.getParameter(PROMOTE_TO_PIECE) != null
+								&& !request.getParameter(PROMOTE_TO_PIECE).equals(""))) {
+							game.promote(request.getParameter(MOVE_PIECE_ID), request.getParameter(PROMOTE_TO_PIECE));
+						}
 						response.getWriter().append(new Gson().toJson(game));
 
 					}
@@ -86,9 +106,11 @@ public class GetChessboardServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

@@ -15,11 +15,15 @@ public class Direction {
 	}
 
 	public Direction rotate() {
-		return new Direction(y, x);
+		return new Direction(-y, x);
 	}
 
 	public Direction invert() {
 		return new Direction(-x, -y);
+	}
+
+	public Direction add(Direction dir) {
+		return new Direction(dir.x + x, dir.y + y);
 	}
 
 	public Coordinates apply(Coordinates coordinates, int steps) {

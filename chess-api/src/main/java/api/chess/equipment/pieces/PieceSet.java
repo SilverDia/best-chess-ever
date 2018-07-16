@@ -1,105 +1,96 @@
 package api.chess.equipment.pieces;
 
-import api.chess.equipment.board.Board;
 import api.chess.gameplay.rules.Movement;
 import api.chess.player.Player;
 import api.config.PieceConfig;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import static api.config.PieceConfig.PieceName.*;
 import static java.lang.String.valueOf;
 
 public class PieceSet {
-    private final transient static Logger LOG = Logger.getLogger(PieceSet.class.getName());
+	private final transient static Logger LOG = Logger.getLogger(PieceSet.class.getName());
 
-    private transient ArrayList<Piece> pieces = new ArrayList<>();
+	private HashMap<String, Piece> pieces = new HashMap<>();
 
-    private King king;
+	@Override
+	public String toString() {
+		return new Gson().toJson(this);
+	}
 
-    private HashMap<String, Queen> queens = new HashMap<>();
-    private HashMap<String, Bishop> bishops = new HashMap<>();
-    private HashMap<String, Knight> knights = new HashMap<>();
-    private HashMap<String, Rook>  rooks = new HashMap<>();
+	public void init(Player player) {
+		PieceConfig.Color color = player.getColor();
 
-    private HashMap<String, Pawn>  pawns = new HashMap<>();
+		Piece king = new King().init(0, color);
+		pieces.put(king.id, king);
 
-    @Override
-    public String toString() {
-        return new Gson().toJson(this);
-    }
+		Piece queen = new Queen().init(0, color);
+		pieces.put(queen.id, queen);
 
-    public void init(Player player) {
-    	PieceConfig.Color color = player.getColor();
-        king = new King();
-        king.init(0, color);
-        Queen queen = new Queen();
-        queen.init(0, color);
-        queens.put(queen.id, queen);
+		for (int i = 0; i < 2; i++) {
+			Piece bishop = new Bishop().init(i, color);
+			pieces.put(bishop.id, bishop);
 
-        for (int i = 0; i < 2; i++) {
-            Bishop bishop = new Bishop();
-            bishop.init(i, color);
-            bishops.put(bishop.id, bishop);
-            Rook rook = new Rook();
-            rook.init(i, color);
-            rooks.put(rook.id, rook);
-            Knight knight= new Knight();
-            knight.init(i, color);
-            knights.put(knight.id, knight);
-        }
-        for (int i = 0; i < 8; i++) {
-            Pawn pawn = new Pawn();
-            pawn.init(i, color);
-            pawns.put(pawn.id, pawn);
-        }
+			Piece rook = new Rook().init(i, color);
+			pieces.put(rook.id, rook);
 
-        pieces.add(king);
-        pieces.add(queen);
-        pieces.addAll(bishops.values());
-        pieces.addAll(rooks.values());
-        pieces.addAll(knights.values());
-        pieces.addAll(pawns.values());
-    }
+			Piece knight = new Knight().init(i, color);
+			pieces.put(knight.id, knight);
+		}
+		for (int i = 0; i < 8; i++) {
+			Piece pawn = new Pawn().init(i, color);
+			pieces.put(pawn.id, pawn);
+		}
+	}
 
-    public ArrayList<Piece> getPieces() {
-        return pieces;
-    }
-    
-    public Piece getPiece(String pieceId) {
-    	return pieces.stream().filter(piece -> piece.id.equals(pieceId)).findFirst().orElse(null);
-    }
+	public HashMap<String, Piece> getPieces() {
+		return pieces;
+	}
 
-    public Movement movePiece(String pieceId, String moveToSqaureId) {
-        String pieceName = getPieceName(pieceId);
+	public Piece getPiece(String pieceId) {
+		return pieces.get(pieceId);
+	}
 
-        if (pieceName.equals(KING.toString())) {
-            return king.move(moveToSqaureId);
-        } else if (pieceName.equals(QUEEN.toString())) {
-            return queens.get(pieceId).move(moveToSqaureId);
-        } else if (pieceName.equals(BISHOP.toString())) {
-            return bishops.get(pieceId).move(moveToSqaureId);
-        } else if (pieceName.equals(KNIGHT.toString())) {
-            return knights.get(pieceId).move(moveToSqaureId);
-        } else if (pieceName.equals(ROOK.toString())) {
-            return rooks.get(pieceId).move(moveToSqaureId);
-        } else if (pieceName.equals(PAWN.toString())) {
-            return pawns.get(pieceId).move(moveToSqaureId);
-        }
-        return null;
-    }
+	public Movement movePiece(String pieceId, String moveToSqaureId) {
+		return pieces.get(pieceId).move(moveToSqaureId);
+	}
 
-    public void removeCapturedPiece(String pieceId) {
-        movePiece(pieceId, "");
-    }
+	public void removeCapturedPiece(String pieceId) {
+		movePiece(pieceId, "");
+	}
 
-    private String getPieceName(String pieceId) {
-        return pieceId.split("_")[0];
-    }
+	public void doPromotion(String pawnPieceId, String newPieceName) {
+		PieceConfig.Color color = getPiece(pawnPieceId).getColor();
+		String position = getPiece(pawnPieceId).getPositionSquareId();
+		String pieceName = newPieceName.toUpperCase();
+		Piece newPiece = getPiece(pawnPieceId);
+		if (pieceName.equals(PieceConfig.PieceName.QUEEN.toString())) {
+			newPiece = new Queen().init(createId(PieceConfig.PieceName.QUEEN, color), color);
+		} else if (pieceName.equals(PieceConfig.PieceName.KNIGHT.toString())) {
+			newPiece = new Knight().init(createId(PieceConfig.PieceName.KNIGHT, color), color);
+		} else if (pieceName.equals(PieceConfig.PieceName.BISHOP.toString())) {
+			newPiece = new Bishop().init(createId(PieceConfig.PieceName.BISHOP, color), color);
+		} else if (pieceName.equals(PieceConfig.PieceName.ROOK.toString())) {
+			newPiece = new Rook().init(createId(PieceConfig.PieceName.ROOK, color), color);
+		}
+		newPiece.setPositionSquareId(position);
+		pieces.get(pawnPieceId).positionSquareId = "";
+		pieces.get(pawnPieceId).captured = true;
+		pieces.put(newPiece.id, newPiece);
+	}
 
+	private int createId(PieceConfig.PieceName pieceName, PieceConfig.Color color) {
+		int i = 0;
+		String id = pieceName.toString() + "_" + color.toString() + "_";
+		while (getPiece(id + i) != null) {
+			i++;
+		}
+		return i;
+	}
 
+	private String getPieceName(String pieceId) {
+		return pieceId.split("_")[0];
+	}
 }

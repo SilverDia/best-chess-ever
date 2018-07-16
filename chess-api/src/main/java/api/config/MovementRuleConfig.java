@@ -15,6 +15,7 @@ public class MovementRuleConfig {
                 moves.add(Move.PAWN_MOVE);
                 moves.add(Move.PAWN_FIRST_MOVE);
                 moves.add(Move.PAWN_CAPTURE);
+                moves.add(Move.EN_PASSANT);
                 break;
             }
             case ROOK: {

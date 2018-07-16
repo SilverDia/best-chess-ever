@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import api.chess.equipment.board.Board;
-import api.chess.equipment.board.Coordinates;
-import api.chess.equipment.board.Direction;
-import api.chess.equipment.board.Square;
-import api.chess.equipment.pieces.Pawn;
+import api.chess.equipment.board.*;
 import api.chess.equipment.pieces.Piece;
 import api.chess.equipment.pieces.Rook;
+import api.chess.gameplay.rules.Movement.Restriction;
 import api.config.BoardConfig;
 import api.config.PieceConfig;
 
@@ -64,23 +61,38 @@ public enum Move {
 
 		@Override
 		public List<Movement> evaluate(Board board, Piece piece) {
-			return MoveUtils.evaluateDirection(this, 1,
-					piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.VERT : Direction.VERT.invert(), board,
-					piece);
+			List<Movement> moves = new ArrayList<>();
+			Direction dir = piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.VERT : Direction.VERT.invert();
+			Coordinates coord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(dir, 1);
+			if (coord.isValid()) {
+				Piece next = board.getSquare(BoardConfig.toSquareId(coord)).getPiece();
+				if (next == null)
+					moves.add(new Movement(piece.getPositionSquareId(), BoardConfig.toSquareId(coord), dir, this, null)
+							.restrict(Restriction.NO_CAPTURE));
+			}
+			return moves;
 		}
 	},
 	PAWN_FIRST_MOVE {
 
 		@Override
 		public List<Movement> evaluate(Board board, Piece piece) {
+			List<Movement> moves = new ArrayList<>();
 			if (!piece.hasMoved()) {
-				List<Movement> result = MoveUtils.evaluateDirection(this, 2, null,
-						piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.VERT : Direction.VERT.invert(),
-						board, piece, 1);
-				if (result.size() == 2 && result.get(2).getBlockedBy() == null)
-					return Arrays.asList(result.get(2));
+				Direction dir = piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.VERT
+						: Direction.VERT.invert();
+				Coordinates coord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(dir, 1);
+				Coordinates coord2 = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(dir, 2);
+
+				if (coord.isValid() && coord2.isValid()) {
+					Piece next = board.getSquare(BoardConfig.toSquareId(coord)).getPiece();
+					Piece next2 = board.getSquare(BoardConfig.toSquareId(coord2)).getPiece();
+					if (next == null && next2 == null)
+						moves.add(new Movement(piece.getPositionSquareId(), BoardConfig.toSquareId(coord2), dir, this,
+								null).restrict(Restriction.NO_CAPTURE));
+				}
 			}
-			return new ArrayList<>();
+			return moves;
 		}
 	},
 	PAWN_CAPTURE {
@@ -88,29 +100,33 @@ public enum Move {
 		@Override
 		public List<Movement> evaluate(Board board, Piece piece) {
 			List<Movement> moves = new ArrayList<>();
-			Coordinates rt_coord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(
-					piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.DIAG_RT : Direction.DIAG_RT.invert(),
-					1);
-			Coordinates lt_coord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(
-					piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.DIAG_LT : Direction.DIAG_LT.invert(),
-					1);
+			Direction rt_dir = piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.DIAG_RT
+					: Direction.DIAG_RT.invert();
+			Direction lt_dir = piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.DIAG_LT
+					: Direction.DIAG_LT.invert();
+			Coordinates rt_coord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(rt_dir, 1);
+			Coordinates lt_coord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(lt_dir, 1);
 
 			if (rt_coord.isValid()) {
 				Piece diag_rt = board.getSquare(BoardConfig.toSquareId(rt_coord)).getPiece();
+				Movement move_rt = new Movement(piece.getPositionSquareId(), BoardConfig.toSquareId(rt_coord), rt_dir,
+						this, null);
 				if (diag_rt != null && diag_rt.getColor() != piece.getColor())
-					moves.add(new Movement(piece.getPositionSquareId(),
-							diag_rt.getPositionSquareId(), piece.getColor().equals(PieceConfig.Color.WHITE)
-									? Direction.DIAG_RT : Direction.DIAG_RT.invert(),
-							this, null).addMovementRule(CAPTURE_MOVE));
+					move_rt.addMovementRule(CAPTURE_MOVE);
+				else
+					move_rt.restrict(Restriction.RESTRICT_KING);
+				moves.add(move_rt);
 			}
 
 			if (lt_coord.isValid()) {
 				Piece diag_lt = board.getSquare(BoardConfig.toSquareId(lt_coord)).getPiece();
+				Movement move_lt = new Movement(piece.getPositionSquareId(), BoardConfig.toSquareId(lt_coord), lt_dir,
+						this, null);
 				if (diag_lt != null && diag_lt.getColor() != piece.getColor())
-					moves.add(new Movement(piece.getPositionSquareId(),
-							diag_lt.getPositionSquareId(), piece.getColor().equals(PieceConfig.Color.WHITE)
-									? Direction.DIAG_LT : Direction.DIAG_LT.invert(),
-							this, null).addMovementRule(CAPTURE_MOVE));
+					move_lt.addMovementRule(CAPTURE_MOVE);
+				else
+					move_lt.restrict(Restriction.RESTRICT_KING);
+				moves.add(move_lt);
 			}
 
 			return moves;
@@ -137,8 +153,7 @@ public enum Move {
 			List<Movement> moves = new ArrayList<>();
 
 			if (!piece.hasMoved()) {
-				List<Movement> right_side = MoveUtils.evaluateDirection(this, 5, null, Direction.HOR, board, piece,
-						1);
+				List<Movement> right_side = MoveUtils.evaluateDirection(this, 5, null, Direction.HOR, board, piece, 1);
 				if (!right_side.isEmpty()) {
 					Piece rightOutmost = board.getSquare(right_side.get(right_side.size() - 1).getMoveToSquareId())
 							.getPiece();
@@ -170,29 +185,34 @@ public enum Move {
 		public List<Movement> evaluate(Board board, Piece piece) {
 			List<Movement> moves = new ArrayList<>();
 
-			Coordinates rCoord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(Direction.HOR, 1);
-			if (rCoord.isValid()) {
-				Piece rPiece = board.getSquare(BoardConfig.toSquareId(rCoord)).getPiece();
-				Turn lastTurn = board.getGame().getTurnHistory().getLast();
-				if (rPiece != null && !rPiece.getColor().equals(piece.getColor())
-						&& lastTurn.getMovement().getRules().contains(PAWN_FIRST_MOVE)
-						&& board.getSquare(lastTurn.getMovement().getMoveToSquareId()).getPiece() == rPiece)
-					moves.add(new Movement(piece.getPositionSquareId(), rPiece.getPositionSquareId(), Direction.HOR,
-							this, null).addMovementRule(CAPTURE_MOVE));
-			}
+			Turn lastTurn = board.getGame().getTurnHistory().getLast();
+			if (lastTurn.getMovement() != null && lastTurn.getMovement().getRules().contains(PAWN_FIRST_MOVE)) {
+				Direction pawnDir = piece.getColor().equals(PieceConfig.Color.WHITE) ? Direction.VERT
+						: Direction.VERT.invert();
 
-			Coordinates lCoord = board.getSquare(piece.getPositionSquareId()).getCoordinates()
-					.next(Direction.HOR.invert(), 1);
-			if (lCoord.isValid()) {
-				Piece lPiece = board.getSquare(BoardConfig.toSquareId(lCoord)).getPiece();
-				Turn lastTurn = board.getGame().getTurnHistory().getLast();
-				if (lPiece != null && !lPiece.getColor().equals(piece.getColor())
-						&& lastTurn.getMovement().getRules().contains(PAWN_FIRST_MOVE)
-						&& board.getSquare(lastTurn.getMovement().getMoveToSquareId()).getPiece() == lPiece)
-					moves.add(new Movement(piece.getPositionSquareId(), lPiece.getPositionSquareId(), Direction.HOR,
-							this, null).addMovementRule(CAPTURE_MOVE));
-			}
+				Coordinates rCoord = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(Direction.HOR,
+						1);
+				if (rCoord.isValid()) {
+					Piece rPiece = board.getSquare(BoardConfig.toSquareId(rCoord)).getPiece();
 
+					if (rPiece != null && !rPiece.getColor().equals(piece.getColor())
+							&& board.getSquare(lastTurn.getMovement().getMoveToSquareId()).getPiece() == rPiece)
+						moves.add(new Movement(piece.getPositionSquareId(),
+								BoardConfig.toSquareId(rCoord.next(pawnDir, 1)), pawnDir.add(Direction.HOR), this, null)
+										.addMovementRule(Move.CAPTURE_MOVE));
+				}
+
+				Coordinates lCoord = board.getSquare(piece.getPositionSquareId()).getCoordinates()
+						.next(Direction.HOR.invert(), 1);
+				if (lCoord.isValid()) {
+					Piece lPiece = board.getSquare(BoardConfig.toSquareId(lCoord)).getPiece();
+					if (lPiece != null && !lPiece.getColor().equals(piece.getColor())
+							&& board.getSquare(lastTurn.getMovement().getMoveToSquareId()).getPiece() == lPiece)
+						moves.add(new Movement(piece.getPositionSquareId(),
+								BoardConfig.toSquareId(lCoord.next(pawnDir, 1)), pawnDir.add(Direction.HOR), this, null)
+										.addMovementRule(Move.CAPTURE_MOVE));
+				}
+			}
 			return moves;
 		}
 	};
@@ -203,14 +223,14 @@ public enum Move {
 		return MoveUtils.evaluateDirection(this, 8, null, dir, board, piece, 1);
 	}
 
-	private static class MoveUtils {
-		private static List<Movement> evaluateDirection(Move move, int maxSteps, Direction direction,
-				Board board, Piece piece) {
+	public static class MoveUtils {
+		public static List<Movement> evaluateDirection(Move move, int maxSteps, Direction direction, Board board,
+				Piece piece) {
 			return evaluateDirection(move, maxSteps, null, direction, board, piece, 1);
 		}
 
-		private static List<Movement> evaluateDirection(Move move, int maxSteps, Piece blockedBy,
-				Direction direction, Board board, Piece piece, int step) {
+		public static List<Movement> evaluateDirection(Move move, int maxSteps, Piece blockedBy, Direction direction,
+				Board board, Piece piece, int step) {
 			List<Movement> moves = new ArrayList<>();
 
 			Coordinates newCoords = board.getSquare(piece.getPositionSquareId()).getCoordinates().next(direction, step);
@@ -234,13 +254,15 @@ public enum Move {
 							? addLists(moves,
 									evaluateDirection(move, maxSteps, blockedBy, direction, board, piece, ++step))
 							: moves;
-				}
+				} else if (next.getPiece().getColor().equals(piece.getColor()) && blockedBy == null)
+					moves.add(new Movement(piece.getPositionSquareId(), next.getSquareId(), direction, move, blockedBy)
+							.restrict(Restriction.RESTRICT_KING));
 			}
 			return moves;
 		}
 
-		private static List<Movement> evaluateCombination(Move move, int maxSteps, Direction direction,
-				Board board, Piece piece) {
+		public static List<Movement> evaluateCombination(Move move, int maxSteps, Direction direction, Board board,
+				Piece piece) {
 			List<Movement> moves = new ArrayList<>();
 			moves.addAll(evaluateDirection(move, maxSteps, direction, board, piece));
 			moves.addAll(evaluateDirection(move, maxSteps, direction.invert(), board, piece));
@@ -249,7 +271,7 @@ public enum Move {
 			return moves;
 		}
 
-		private static <T> List<T> addLists(List<T> l1, List<T> l2) {
+		public static <T> List<T> addLists(List<T> l1, List<T> l2) {
 			l1.addAll(l2);
 			return l1;
 		}

@@ -1,160 +1,276 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="/ChessGame/project/css/styles.css" />
-        <title>Schach - Spiel</title>
-        <script src="/ChessGame/project/js/turn_validation.js"></script>
-    </head>
-    <body> 
-        <nav id="navbar" class="navbar"></nav>
-        <div class="content">
-        	<div class="content-block">
-	            <div class="grid-game">
-					<div id="turnInfo" class="grid-turnInfo">
-	Turninformation Placeholder
-					</div>
-	                <div id="game" class="grid-chessboard">
-						<table id="chessboard" class="chessboard">
-							<tr>
-								<td id="A8" class="chessboard-tile light"></td>
-								<td id="B8" class="chessboard-tile dark"></td>
-								<td id="C8" class="chessboard-tile light"></td>
-								<td id="D8" class="chessboard-tile dark"></td>
-								<td id="E8" class="chessboard-tile light"></td>
-								<td id="F8" class="chessboard-tile dark"></td>
-								<td id="G8" class="chessboard-tile light"></td>
-								<td id="H8" class="chessboard-tile dark"></td>
-							</tr>        
-							<tr>         
-								<td id="A7" class="chessboard-tile dark"></td>
-								<td id="B7" class="chessboard-tile light"></td>
-								<td id="C7" class="chessboard-tile dark"></td>
-								<td id="D7" class="chessboard-tile light"></td>
-								<td id="E7" class="chessboard-tile dark"></td>
-								<td id="F7" class="chessboard-tile light"></td>
-								<td id="G7" class="chessboard-tile dark"></td>
-								<td id="H7" class="chessboard-tile light"></td>
-							</tr>        
-							<tr>         
-								<td id="A6" class="chessboard-tile light"></td>
-								<td id="B6" class="chessboard-tile dark"></td>
-								<td id="C6" class="chessboard-tile light"></td>
-								<td id="D6" class="chessboard-tile dark"></td>
-								<td id="E6" class="chessboard-tile light"></td>
-								<td id="F6" class="chessboard-tile dark"></td>
-								<td id="G6" class="chessboard-tile light"></td>
-								<td id="H6" class="chessboard-tile dark"></td>
-							</tr>        
-							<tr>         
-								<td id="A5" class="chessboard-tile dark"></td>
-								<td id="B5" class="chessboard-tile light"></td>
-								<td id="C5" class="chessboard-tile dark"></td>
-								<td id="D5" class="chessboard-tile light"></td>
-								<td id="E5" class="chessboard-tile dark"></td>
-								<td id="F5" class="chessboard-tile light"></td>
-								<td id="G5" class="chessboard-tile dark"></td>
-								<td id="H5" class="chessboard-tile light"></td>
-							</tr>        
-							<tr>         
-								<td id="A4" class="chessboard-tile light"></td>
-								<td id="B4" class="chessboard-tile dark"></td>
-								<td id="C4" class="chessboard-tile light"></td>
-								<td id="D4" class="chessboard-tile dark"></td>
-								<td id="E4" class="chessboard-tile light"></td>
-								<td id="F4" class="chessboard-tile dark"></td>
-								<td id="G4" class="chessboard-tile light"></td>
-								<td id="H4" class="chessboard-tile dark"></td>
-							</tr>        
-							<tr>         
-								<td id="A3" class="chessboard-tile dark"></td>
-								<td id="B3" class="chessboard-tile light"></td>
-								<td id="C3" class="chessboard-tile dark"></td>
-								<td id="D3" class="chessboard-tile light"></td>
-								<td id="E3" class="chessboard-tile dark"></td>
-								<td id="F3" class="chessboard-tile light"></td>
-								<td id="G3" class="chessboard-tile dark"></td>
-								<td id="H3" class="chessboard-tile light"></td>
-							</tr>        
-							<tr>         
-								<td id="A2" class="chessboard-tile light"></td>
-								<td id="B2" class="chessboard-tile dark"></td>
-								<td id="C2" class="chessboard-tile light"></td>
-								<td id="D2" class="chessboard-tile dark"></td>
-								<td id="E2" class="chessboard-tile light"></td>
-								<td id="F2" class="chessboard-tile dark"></td>
-								<td id="G2" class="chessboard-tile light"></td>
-								<td id="H2" class="chessboard-tile dark"></td>
-							</tr>        
-							<tr>         
-								<td id="A1" class="chessboard-tile dark"></td>
-								<td id="B1" class="chessboard-tile light"></td>
-								<td id="C1" class="chessboard-tile dark"></td>
-								<td id="D1" class="chessboard-tile light"></td>
-								<td id="E1" class="chessboard-tile dark"></td>
-								<td id="F1" class="chessboard-tile light"></td>
-								<td id="G1" class="chessboard-tile dark"></td>
-								<td id="H1" class="chessboard-tile light"></td>
-							</tr>
-						</table>
-	                </div>
-	                <div class="grid-pawn-convertion-white">
-	                    <table id="white" class="chessboard pawn-convertion-white invisible">
-	                        <tr>
-	                            <td class="chessboard-tile light queen white piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/queen_white.png"/>
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td class="chessboard-tile dark bishop white piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/bishop_white.png"/>
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td class="chessboard-tile light knight white piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/knight_white.png"/>
-	                            </td>
-	                        </tr>
-	                        <tr>            
-	                            <td class="chessboard-tile dark rook white piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/rook_white.png"/>            
-	                            </td>
-	                        </tr>
-	                    </table>   
-					</div>
-					<div class="grid-pawn-convertion-black">
-	                    <table id="black" class="chessboard pawn-convertion-black invisible">
-	                        <tr>            
-	                            <td class="chessboard-tile light queen black piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/queen_black.png" />
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td class="chessboard-tile dark bishop black piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/bishop_black.png" />
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td class="chessboard-tile light knight black piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/knight_black.png" />
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td class="chessboard-tile dark rook black piece">
-	                                <img src="/ChessGame/project/resources/images/piece-sets/default/rook_black.png" />
-	                            </td>
-	                        </tr>
-	                    </table>
-	                </div>
-	                <div id="game-log" class="grid-game-log">
-	gamelog-placeholder
-	                </div>
-	            </div>
-            </div>
-            <!-- nur zum testen, später ausgelöst, wenn ein pawn bis ganz hinten durch kommt -->
-            <div id="toggleBlack" onclick="toggle('black')">toggleBlack</div>
-            <div id="toggleWhite" onclick="toggle('white')">toggleWhite</div>
-        </div>
-    </body>
-    <script src="/ChessGame/project/js/script.js"></script>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css"
+		  href="/ChessGame/project/css/styles.css"/>
+	<link rel="shortcut icon" href="/ChessGame/project/resources/images/chess-icon-480x480-big.png"
+		  type="image/x-icon">
+	<title>Schach - Spiel</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="/ChessGame/project/js/game.js"></script>
+
+</head>
+<body>
+<nav id="navbar" class="navbar"></nav>
+<div class="content">
+	<div class="content-block">
+		<h1>Schach-Spiel</h1>
+	</div>
+	<div class="content-block">
+		<div id="pause-layer" class="full-layer">
+			<img src="/ChessGame/project/resources/images/pause-icon-480x480.png"
+				 title="Zum Fortsetzen klicken">
+			<p>Spiel pausiert</p>
+			<p>Zum Fortsetzen klicken</p>
+		</div>
+		<div id="init-layer" class="full-layer">
+			<h2>Neues Spiel starten</h2>
+			<h3>Spielernamen eingeben:</h3>
+			<div>
+				<input type="text" id="init-player-white" class="init-layer-content" placeholder="WHITE">
+				<input type="text" id="init-player-black" class="init-layer-content" placeholder="BLACK">
+				<button id="start-new-game" class="init-layer-content">START</button>
+			</div>
+		</div>
+		<div id="grid-game" class="grid-game">
+			<div id="game-info" class="game-info">
+				<table id="player-info-container-white" class="light game-info-container player-info-container">
+					<thead class="name-info-container timer-container">
+					<tr>
+						<th class="name-info"></th>
+						<th id="timer-white" class="timer">00:00</th>
+					</tr>
+					</thead>
+					<tbody class="player-info-content light">
+					<tr>
+						<td colspan="2">WEISS</td>
+					</tr>
+					<tr>
+						<td>Anzahl d. Züge:</td>
+						<td class="turns-complete"></td>
+					</tr>
+					<tr>
+						<td>Zeit gesamt:</td>
+						<td class="time-complete"></td>
+					</tr>
+					<tr><td colspan="2"><div class="captured-pieces"></div> </td></tr>
+					</tbody>
+				</table>
+				<div id="turn-info-container" class="game-info-container turn-info-container">
+					WEISS ist am Zug!
+				</div>
+				<table id="player-info-container-black" class="dark game-info-container player-info-container">
+					<thead class="name-info-container timer-container">
+					<tr>
+						<th class="name-info"></th>
+						<th id="timer-black" class="timer">00:00</th>
+					</tr>
+					</thead>
+					<tbody class="player-info-content dark">
+					<tr>
+						<td colspan="2">SCHAWARZ</td>
+					</tr>
+					<tr>
+						<td>Anzahl d. Züge:</td>
+						<td class="turns-complete"></td>
+					</tr>
+					<tr>
+						<td>Zeit gesamt:</td>
+						<td class="time-complete"></td>
+					</tr>
+					<tr><td colspan="2"><div class="captured-pieces"></div> </td></tr>
+
+					</tbody>
+				</table>
+			</div>
+
+			<div id="grid-pause">
+				<img src="/ChessGame/project/resources/images/pause-icon-128x128.png" title="Pause" id="pause-button">
+				<!-- <button id="pause-button" class="pause-button"></button> -->
+			</div>
+			<div id="game" class="grid-chessboard">
+				<table id="chessboard" class="chessboard">
+					<tr class="chessboard-label-row">
+						<td class="chessboard-label label-row  label-column">*</td>
+						<td class="chessboard-label label-row">A</td>
+						<td class="chessboard-label label-row">B</td>
+						<td class="chessboard-label label-row">C</td>
+						<td class="chessboard-label label-row">D</td>
+						<td class="chessboard-label label-row">E</td>
+						<td class="chessboard-label label-row">F</td>
+						<td class="chessboard-label label-row">G</td>
+						<td class="chessboard-label label-row">H</td>
+						<td class="chessboard-label label-row  label-column">*</td>
+					</tr>
+					<tr class="promotion-row-white">
+						<td class="chessboard-label label-column">8</td>
+						<td id="A8" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="B8" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="C8" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="D8" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="E8" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="F8" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="G8" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="H8" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td class="chessboard-label label-column">8</td>
+					</tr>
+					<tr>
+						<td class="chessboard-label label-column">7</td>
+						<td id="A7" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="B7" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="C7" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="D7" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="E7" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="F7" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="G7" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="H7" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td class="chessboard-label label-column">7</td>
+					</tr>
+					<tr>
+						<td class="chessboard-label label-column">6</td>
+						<td id="A6" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="B6" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="C6" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="D6" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="E6" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="F6" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="G6" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="H6" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td class="chessboard-label label-column">6</td>
+					</tr>
+					<tr>
+						<td class="chessboard-label label-column">5</td>
+						<td id="A5" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="B5" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="C5" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="D5" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="E5" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="F5" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="G5" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="H5" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td class="chessboard-label label-column">5</td>
+					</tr>
+					<tr>
+						<td class="chessboard-label label-column">4</td>
+						<td id="A4" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="B4" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="C4" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="D4" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="E4" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="F4" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="G4" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="H4" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td class="chessboard-label label-column">4</td>
+					</tr>
+					<tr>
+						<td class="chessboard-label label-column">3</td>
+						<td id="A3" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="B3" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="C3" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="D3" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="E3" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="F3" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="G3" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="H3" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td class="chessboard-label label-column">3</td>
+					</tr>
+					<tr>
+						<td class="chessboard-label label-column">2</td>
+						<td id="A2" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="B2" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="C2" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="D2" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="E2" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="F2" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="G2" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="H2" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td class="chessboard-label label-column">2</td>
+					</tr>
+					<tr class="promotion-row-black">
+						<td class="chessboard-label label-column">1</td>
+						<td id="A1" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="B1" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="C1" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="D1" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="E1" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="F1" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td id="G1" class="chessboard-tile dark"><div class="chessboard-tile-content"></div></td>
+						<td id="H1" class="chessboard-tile light"><div class="chessboard-tile-content"></div></td>
+						<td class="chessboard-label label-column">1</td>
+					</tr>
+					<tr class="chessboard-label-row">
+						<td class="chessboard-label label-row  label-column">*</td>
+						<td class="chessboard-label label-row">A</td>
+						<td class="chessboard-label label-row">B</td>
+						<td class="chessboard-label label-row">C</td>
+						<td class="chessboard-label label-row">D</td>
+						<td class="chessboard-label label-row">E</td>
+						<td class="chessboard-label label-row">F</td>
+						<td class="chessboard-label label-row">G</td>
+						<td class="chessboard-label label-row">H</td>
+						<td class="chessboard-label label-row label-column">*</td>
+					</tr>
+				</table>
+			</div>
+			<div class="grid-pawn-promotion-white">
+				<table id="pawn-promotion-white"
+					   class="chessboard pawn-promotion-white invisible">
+					<tr>
+						<td id="white-pawn-prom-QUEEN" class="chessboard-tile light queen white piece"><img
+								src="/ChessGame/project/resources/images/piece-sets/default/queen_white.png"/>
+						</td>
+					</tr>
+					<tr>
+						<td id="white-pawn-prom-BISHOP" class="chessboard-tile dark bishop white piece"><img
+								src="/ChessGame/project/resources/images/piece-sets/default/bishop_white.png"/>
+						</td>
+					</tr>
+					<tr>
+						<td id="white-pawn-prom-KNIGHT" class="chessboard-tile light knight white piece"><img
+								src="/ChessGame/project/resources/images/piece-sets/default/knight_white.png"/>
+						</td>
+					</tr>
+					<tr>
+						<td id="white-pawn-prom-ROOK" class="chessboard-tile dark rook white piece"><img
+								src="/ChessGame/project/resources/images/piece-sets/default/rook_white.png"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="grid-pawn-promotion-black">
+				<table id="pawn-promotion-black"
+					   class="chessboard pawn-promotion-black invisible">
+					<tr>
+						<td id="black-pawn-prom-QUEEN" class="chessboard-tile light queen black piece"><img
+								src="/ChessGame/project/resources/images/piece-sets/default/queen_black.png"/>
+						</td>
+					</tr>
+					<tr>
+						<td id="black-pawn-prom-BISHOP" class="chessboard-tile dark bishop black piece"><img
+								src="/ChessGame/project/resources/images/piece-sets/default/bishop_black.png"/>
+						</td>
+					</tr>
+					<tr>
+						<td id="black-pawn-prom-KNIGHT" class="chessboard-tile light knight black piece"><img
+								src="/ChessGame/project/resources/images/piece-sets/default/knight_black.png"/>
+						</td>
+					</tr>
+					<tr>
+						<td id="black-pawn-prom-ROOK" class="chessboard-tile dark rook black piece"><img
+								src="/ChessGame/project/resources/images/piece-sets/default/rook_black.png"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div id="game-log" class="grid-game-log">
+				<h4 style="margin: 5px">Game-Log</h4>
+				<div id="game-log-textarea" class="game-log"></div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script src="/ChessGame/project/js/script.js"></script>
 </html>

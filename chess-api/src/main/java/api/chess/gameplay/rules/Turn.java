@@ -10,68 +10,112 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public class Turn {
-    private final transient static Logger LOG = Logger.getLogger(Turn.class.getName());
+	private final transient static Logger LOG = Logger.getLogger(Turn.class.getName());
 
-    private PieceConfig.Color playerColor;
-    private Movement movement;
-    private boolean checked;
-    private boolean checkmated;
-    private Date startTime;
-    private Date endTime;
-    private String duration;
+	private String playerName;
+	private Movement movement;
+	private transient boolean checked;
+	private transient boolean checkmated;
+	private transient Date startTime;
+	private transient Date endTime;
+	private transient String duration;
+	private transient String movedPiece;
+	private transient String capturedPiece;
+	private long seconds;
+	private transient String extraInfo = "";
+	private String message;
 
+	public Turn(String playerName, Movement movement, String movedPiece, String capturedPiece, boolean checked,
+			boolean checkmated, Date startTime, Date endTime) {
+		this.playerName = playerName;
+		this.movement = movement;
+		this.checked = checked;
+		this.checkmated = checkmated;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.movedPiece = movedPiece;
+		this.setCapturedPiece(capturedPiece);
+		long millis = endTime.getTime() - startTime.getTime();
 
-    public Turn(PieceConfig.Color playerColor, Movement movement, boolean checked, boolean checkmated, Date startTime, Date endTime) {
-        this.playerColor = playerColor;
-        this.movement = movement;
-        this.checked = checked;
-        this.checkmated = checkmated;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        long millis = endTime.getTime() - startTime.getTime();
-        duration = String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes(millis),
-                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-    }
+		long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
+		seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
+		duration = (minutes != 0 ? minutes + " min, " : "") + (seconds - TimeUnit.MINUTES.toSeconds(minutes) + " sek");
+	}
 
-    @Override
-    public String toString() {
-        return new Gson().toJson(this);
-    }
+	public void setMessage() {
+		if (playerName != null) { // dummy Turn
+			message = format(playerName, playerName.endsWith("(Weiss)") ? "white" : "black") + " bewegt "
+					+ format(movedPiece, "black") + " von " + format(movement.getMoveFromSquareId(), "aqua") + " nach "
+					+ format(movement.getMoveToSquareId(), "aqua") + " in " + duration;
+			if (movement.getRules().contains(Move.CAPTURE_MOVE))
+				message += " und schl&auml;gt " + format(getCapturedPiece(), "black");
+			message += extraInfo;
+			if (checked || checkmated)
+				message += " und stellt den K&ouml;nig in " + (checkmated ? "Schachmatt" : "Schach");
+		}
+	}
 
-    public PieceConfig.Color getPlayerColor() {
-        return playerColor;
-    }
+	private String format(String string, String color) {
+		return "<b style='color: " + color + ";'>" + string + "</b>";
+	}
 
-    public void setPlayerColor(PieceConfig.Color playerColor) {
-        this.playerColor = playerColor;
-    }
+	@Override
+	public String toString() {
+		return new Gson().toJson(this);
+	}
 
-    public Movement getMovement() {
-        return movement;
-    }
+	public String getPlayerName() {
+		return playerName;
+	}
 
-    public void setMovement(Movement movement) {
-        this.movement = movement;
-    }
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
 
-    public boolean isChecked() {
-        return checked;
-    }
+	public Movement getMovement() {
+		return movement;
+	}
 
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
+	public void setMovement(Movement movement) {
+		this.movement = movement;
+	}
 
-    public boolean isCheckmated() {
-        return checkmated;
-    }
+	public boolean isChecked() {
+		return checked;
+	}
 
-    public void setCheckmated(boolean checkmated) {
-        this.checkmated = checkmated;
-    }
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
 
-    public Date getEndTime() {
-        return endTime;
-    }
+	public boolean isCheckmated() {
+		return checkmated;
+	}
+
+	public void setCheckmated(boolean checkmated) {
+		this.checkmated = checkmated;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public Long getDurationSecs() {
+		return seconds;}
+
+	public String getCapturedPiece() {
+		return capturedPiece;
+	}
+
+	public void setCapturedPiece(String capturedPiece) {
+		this.capturedPiece = capturedPiece;
+	}
+
+	public String getExtraInfo() {
+		return extraInfo;
+	}
+
+	public void setExtraInfo(String extraInfo) {
+		this.extraInfo = extraInfo;
+	}
 }
