@@ -118,6 +118,8 @@ public class Game {
 	}
 
 	private void finishTurn(Turn turn) {
+		player.get(activePlayer).addDurationSecs(turn.getDurationSecs());
+		player.get(activePlayer).addTurn();
 		activePlayer = activePlayer.equals(PieceConfig.Color.WHITE) ? PieceConfig.Color.BLACK : PieceConfig.Color.WHITE;
 		inactivePlayer = inactivePlayer.equals(PieceConfig.Color.WHITE) ? PieceConfig.Color.BLACK
 				: PieceConfig.Color.WHITE;

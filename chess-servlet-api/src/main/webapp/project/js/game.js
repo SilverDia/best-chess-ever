@@ -27,6 +27,7 @@ function init_game(id, whiteName, blackName) {
         if (this.readyState === 4 && this.status === 200) {
             jsonObject = JSON.parse(this.responseText);
             parse_json();
+            updatePlayerInfo();
             startTimer();
         }
     };
@@ -44,7 +45,7 @@ function parse_json() {
     gameID = jsonObject.gameId;
 
     var lastEntry = jsonObject.turnHistory.length - 1;
-    document.getElementById('game-turn-info-container').innerHTML = jsonObject.player[jsonObject.activePlayer].name + " ist am Zug!";
+    $('#turn-info-container').text(jsonObject.player[jsonObject.activePlayer].name + " ist am Zug!");
     if (typeof jsonObject.turnHistory[lastEntry].message !== 'undefined')
         document.getElementById('game-log-textarea').innerHTML = jsonObject.turnHistory[lastEntry].message + '\n' + document.getElementById('game-log-textarea').innerHTML;
     if (typeof jsonObject.turnHistory[lastEntry].movement !== 'undefined') {
@@ -162,6 +163,7 @@ function madeMove(pieceId, moveToSquareId, promPiece) {
         if (this.readyState === 4 && this.status === 200) {
             jsonObject = JSON.parse(this.responseText);
             parse_json();
+            updatePlayerInfo();
             startTimer();
         }
     };
@@ -213,7 +215,7 @@ function formatTime() {
     m = Math.floor(secTotal / 60);
     s = secTotal % 60;
 
-    $('#game-timer-' + (jsonObject.activePlayer).toLowerCase())
+    $('#timer-' + (jsonObject.activePlayer).toLowerCase())
         .text(checkTime(m) + ":" + checkTime(s));
 }
 
@@ -223,4 +225,23 @@ function checkTime(i) {
     }
     // add zero in front of numbers < 10
     return i;
+}
+
+function updatePlayerInfo() {
+    $.each(jsonObject.player, function (i, v) {
+        var color = i.toLowerCase();
+        var $playerInfo = $('#player-info-container-' + color);
+        $playerInfo.find('.name-info').text(v.name);
+        $playerInfo.find('.turns-complete').text(v.turnCounter);
+        $playerInfo.find('.time-complete').text(v.durationFullSecs);
+        $playerInfo.find('.captured-pieces').children("").remove();
+        $.each(v.capturedPieces, function (pi, pv) {
+           $playerInfo.find('.captured-pieces').append($(document.createElement("div"))
+               .addClass('captured-piece')
+               .addClass(pi.substring(0, pi.lastIndexOf("_")).toLowerCase())
+               .append($(document.createElement("img"))
+                   .attr("src", "/ChessGame/project/resources/images/piece-sets/default/" +
+                       pi.substring(0, pi.lastIndexOf("_")).toLowerCase() + ".png")));
+        });
+    });
 }

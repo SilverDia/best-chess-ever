@@ -12,15 +12,17 @@ import java.util.logging.Logger;
 public class Turn {
 	private final transient static Logger LOG = Logger.getLogger(Turn.class.getName());
 
+	private PieceConfig.Color playerColor;
+	private Movement movement;
+	private boolean checked;
+	private boolean checkmated;
+	private Date startTime;
+	private Date endTime;
+	private String duration;
+	private Long durationSecs;
+	String movedPiece;
+	String capturedPiece;
 	private String playerName;
-	private transient Movement movement;
-	private transient boolean checked;
-	private transient boolean checkmated;
-	private transient Date startTime;
-	private transient Date endTime;
-	private transient String duration;
-	private transient String movedPiece;
-	private transient String capturedPiece;
 	private transient String extraInfo = "";
 	private String message;
 
@@ -35,7 +37,12 @@ public class Turn {
 		this.movedPiece = movedPiece;
 		this.setCapturedPiece(capturedPiece);
 		long millis = endTime.getTime() - startTime.getTime();
-		
+		durationSecs = TimeUnit.MILLISECONDS.toSeconds(millis);
+		duration = String.format("%d min, %d sek", TimeUnit.MILLISECONDS.toMinutes(millis),
+				TimeUnit.MILLISECONDS.toSeconds(millis)
+						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+		setMessage();
+
 		long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
 		long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
 		duration = (minutes != 0?minutes + " min, ":"") + (seconds - TimeUnit.MINUTES.toSeconds(minutes) + " sek");
@@ -93,6 +100,9 @@ public class Turn {
 	public Date getEndTime() {
 		return endTime;
 	}
+
+	public Long getDurationSecs() {
+		return durationSecs;}
 
 	public String getCapturedPiece() {
 		return capturedPiece;
