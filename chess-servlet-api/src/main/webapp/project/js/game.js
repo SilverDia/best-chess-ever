@@ -44,9 +44,9 @@ function parse_json() {
     gameID = jsonObject.gameId;
 
     var lastEntry = jsonObject.turnHistory.length - 1;
-    document.getElementById('game-turn-info-container').innerHTML = jsonObject.activePlayer + " ist am Zug!";
+    document.getElementById('game-turn-info-container').innerHTML = jsonObject.player[jsonObject.activePlayer].name + " ist am Zug!";
     if (typeof jsonObject.turnHistory[lastEntry].message !== 'undefined')
-        document.getElementById('game-log-textarea').innerHTML += jsonObject.turnHistory[lastEntry].message + '\n';
+        document.getElementById('game-log-textarea').innerHTML = jsonObject.turnHistory[lastEntry].message + '\n' + document.getElementById('game-log-textarea').innerHTML;
     if (typeof jsonObject.turnHistory[lastEntry].movement !== 'undefined') {
         document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveFromSquareId).classList.add("last-turn");
         document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveToSquareId).classList.add("last-turn");

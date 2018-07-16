@@ -37,27 +37,41 @@ public class PieceConfig {
 
 			@Override
 			public String getDE() {
-				return "Läufer";
+				return "L&auml;ufer";
 			}
 		},
 		QUEEN {
 
 			@Override
 			public String getDE() {
-				return "Königin";
+				return "Dame";
 			}
 		},
 		KING {
 
 			@Override
 			public String getDE() {
-				return "König";
+				return "K&ouml;nig";
 			}
 		};
 		public abstract String getDE();
 	}
 
 	public enum Color {
-		BLACK, WHITE
+		BLACK {
+
+			@Override
+			public String getDE() {
+				return "Schwarz";
+			}
+		},
+		WHITE {
+
+			@Override
+			public String getDE() {
+				return "Weiss";
+			}
+		};
+		public abstract String getDE();
 	}
 }
