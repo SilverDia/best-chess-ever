@@ -577,7 +577,9 @@ h4{
 	border: 3px solid black;
 	border-collapse: collapse;
 }
-
+player-info-container th {
+	padding: 10%;
+}
 .turn-info-container{
 	width: auto;
 	margin: auto;
