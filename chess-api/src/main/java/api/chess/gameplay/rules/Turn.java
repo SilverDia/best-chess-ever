@@ -5,6 +5,7 @@ import api.config.MovementRuleConfig;
 import api.config.PieceConfig;
 import com.google.gson.Gson;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -14,13 +15,14 @@ public class Turn {
 
 	private String playerName;
 	private Movement movement;
-	private transient boolean checked;
-	private transient boolean checkmated;
+	private boolean checked;
+	private boolean checkmated;
 	private transient Date startTime;
 	private transient Date endTime;
 	private transient String duration;
 	private transient String movedPiece;
 	private transient String capturedPiece;
+	private transient String timeStamp;
 	private long seconds;
 	private transient String extraInfo = "";
 	private String message;
@@ -35,23 +37,29 @@ public class Turn {
 		this.endTime = endTime;
 		this.movedPiece = movedPiece;
 		this.setCapturedPiece(capturedPiece);
-		long millis = endTime.getTime() - startTime.getTime();
 
+		Calendar cal = Calendar.getInstance();
+		timeStamp = format(String.format("-%02d:%02d:%02d-: ", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE),
+				cal.get(Calendar.SECOND)), "black");
+
+		long millis = endTime.getTime() - startTime.getTime();
 		long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
 		seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
 		duration = (minutes != 0 ? minutes + " min, " : "") + (seconds - TimeUnit.MINUTES.toSeconds(minutes) + " sek");
 	}
 
 	public void setMessage() {
-		if (playerName != null) { // dummy Turn
-			message = format(playerName, playerName.endsWith("(Weiss)") ? "white" : "black") + " bewegt "
+		if (playerName != null) { // not a dummy Turn
+			message = timeStamp + format(playerName, playerName.endsWith("(Weiss)") ? "white" : "black") + " bewegt "
 					+ format(movedPiece, "black") + " von " + format(movement.getMoveFromSquareId(), "aqua") + " nach "
-					+ format(movement.getMoveToSquareId(), "aqua") + " in " + duration;
+					+ format(movement.getMoveToSquareId(), (checked || checkmated) ? "lightcoral" : "aqua") + " in "
+					+ duration;
 			if (movement.getRules().contains(Move.CAPTURE_MOVE))
 				message += " und schl&auml;gt " + format(getCapturedPiece(), "black");
 			message += extraInfo;
 			if (checked || checkmated)
-				message += " und stellt den K&ouml;nig in " + (checkmated ? "Schachmatt" : "Schach");
+				message += " und stellt den " + format("K&ouml;nig", "black")
+						+ (checkmated ? format(" Schachmatt", "red") : " in " + format("Schach", "red"));
 		}
 	}
 
@@ -101,7 +109,8 @@ public class Turn {
 	}
 
 	public Long getDurationSecs() {
-		return seconds;}
+		return seconds;
+	}
 
 	public String getCapturedPiece() {
 		return capturedPiece;

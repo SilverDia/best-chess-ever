@@ -49,8 +49,13 @@ function parse_json() {
     if (typeof jsonObject.turnHistory[lastEntry].message !== 'undefined')
         document.getElementById('game-log-textarea').innerHTML = jsonObject.turnHistory[lastEntry].message + '<br>' + document.getElementById('game-log-textarea').innerHTML;
     if (typeof jsonObject.turnHistory[lastEntry].movement !== 'undefined') {
+    	if (jsonObject.turnHistory[lastEntry].checked == true || jsonObject.turnHistory[lastEntry].checkmated == true) {
+        document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveToSquareId).firstChild.classList.add("checkmate-cause");
+        document.getElementById(jsonObject.player[jsonObject.activePlayer].pieceSet.pieces.KING_BLACK_0.positionSquareId).firstChild.classList.add("check");
+    	} else {
+    	document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveToSquareId).firstChild.classList.add("last-turn");
+    	}
         document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveFromSquareId).firstChild.classList.add("last-turn");
-        document.getElementById(jsonObject.turnHistory[lastEntry].movement.moveToSquareId).firstChild.classList.add("last-turn");
     }
 
     var i;
@@ -143,6 +148,8 @@ function checkPawnProm(sender, pieceId, moveToSquareId) {
 
 function clearLastMove() {
     $('.last-turn').toggleClass("last-turn", false);
+    $('.checkmate-cause').toggleClass("checkmate-cause", false);
+    $('.check').toggleClass("check", false);
 }
 
 

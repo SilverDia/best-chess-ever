@@ -61,24 +61,26 @@ public class PieceSet {
 		movePiece(pieceId, "");
 	}
 
-	public void doPromotion(String pawnPieceId, String newPieceName) {
+	public Piece doPromotion(String pawnPieceId, String newPieceName) {
 		PieceConfig.Color color = getPiece(pawnPieceId).getColor();
 		String position = getPiece(pawnPieceId).getPositionSquareId();
 		String pieceName = newPieceName.toUpperCase();
-		Piece newPiece = getPiece(pawnPieceId);
+		Piece newPiece;
 		if (pieceName.equals(PieceConfig.PieceName.QUEEN.toString())) {
 			newPiece = new Queen().init(createId(PieceConfig.PieceName.QUEEN, color), color);
 		} else if (pieceName.equals(PieceConfig.PieceName.KNIGHT.toString())) {
 			newPiece = new Knight().init(createId(PieceConfig.PieceName.KNIGHT, color), color);
 		} else if (pieceName.equals(PieceConfig.PieceName.BISHOP.toString())) {
 			newPiece = new Bishop().init(createId(PieceConfig.PieceName.BISHOP, color), color);
-		} else if (pieceName.equals(PieceConfig.PieceName.ROOK.toString())) {
+		} else {
 			newPiece = new Rook().init(createId(PieceConfig.PieceName.ROOK, color), color);
 		}
+		
 		newPiece.setPositionSquareId(position);
-		pieces.get(pawnPieceId).positionSquareId = "";
-		pieces.get(pawnPieceId).captured = true;
+		
+		pieces.remove(pawnPieceId);
 		pieces.put(newPiece.id, newPiece);
+		return newPiece;
 	}
 
 	private int createId(PieceConfig.PieceName pieceName, PieceConfig.Color color) {
