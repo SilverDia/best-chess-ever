@@ -1,5 +1,6 @@
 package servlet;
 
+import api.chess.gameplay.game.Game;
 import api.chess.highscore.HighscoreHandler;
 
 import javax.servlet.ServletException;
@@ -7,44 +8,41 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 @WebServlet(urlPatterns = { "/HighscoreTable" })
 public class Highscore extends HttpServlet {
 
-	HighscoreHandler highscoreHandler = new HighscoreHandler();
+	HashMap<String, HighscoreHandler> highscoreHandler = new HashMap<>();
 
 	protected void doGetPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		StringBuffer requestUrl = request.getRequestURL();
-		for (String line : readTxtFile("/resources/html/highscore.html")) {
-			if (line.equals("!#highscore#!"))
-				response.getWriter().println(createHighscoreTable(request.getParameterMap()));
-			else
-				response.getWriter().println(line);
+		if (request.getServletContext().getAttribute("highscore") != null) {
+			try {
+				highscoreHandler = (HashMap<String, HighscoreHandler>) request.getServletContext()
+						.getAttribute("highscore");
+			} catch (ClassCastException e) {
+				e.printStackTrace();
+			}
 		}
-	}
 
-	private String createHighscoreTable(Map<String, String[]> parameters) {
-		StringBuilder sb = new StringBuilder();
-
-		for (int i = 0; i < highscoreHandler.getHighscoreCount(); i++) {
-			sb.append("\t\t<tr>\n");
-			sb.append("\t\t\t<td>" + highscoreHandler.getName(i) + "</td>\n");
-			sb.append("\t\t\t<td>" + highscoreHandler.getScore(i) + "</td>\n");
-			sb.append("\t\t</tr>\n");
+		if (highscoreHandler.isEmpty()) {
+			highscoreHandler.put("highscore", new HighscoreHandler(getServletContext().getRealPath("/ChessGame").replaceAll("ChessGame", "high.scores")));
+			request.getServletContext().setAttribute("highscore", highscoreHandler);
 		}
-		return sb.toString();
-	}
 
-	private List<String> readTxtFile(String path) throws IOException {
-		return new ArrayList<>(Files.readAllLines(Paths.get(getServletContext().getRealPath(path))));
+		response.getWriter().append(new Gson().toJson(highscoreHandler.get("highscore").getEntries()));
 	}
 
 	/**

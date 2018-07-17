@@ -8,6 +8,7 @@ import api.chess.equipment.pieces.Piece;
 import api.chess.gameplay.rules.Move;
 import api.chess.gameplay.rules.Movement;
 import api.chess.gameplay.rules.Turn;
+import api.chess.highscore.HighscoreHandler;
 import api.chess.player.Player;
 import api.config.BoardConfig;
 import api.config.GameConfig;
@@ -84,6 +85,8 @@ public class Game {
 			handleSpecialMove(movement, turn);
 			finishTurn(turn);
 		}
+		
+		
 	}
 
 	public void handleSpecialMove(Movement movement, Turn turn) {
