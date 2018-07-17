@@ -73,7 +73,7 @@ body{
     font-size: 17px;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover a:not(.navbarIcon), .dropdown:hover .dropbtn {
     background-color: #ddd;
     color: black;
 }
@@ -124,12 +124,13 @@ body{
 
 /*** responsive navigation ***/
 
-/* Import hamburger menu icon */
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
-
 /* Hide the link that should open and close the topnav on small screens */
 .navbar .navbarIcon {
     display: none;
+    background-image: url("/ChessGame/project/resources/images/hamburger-icon.png");
+    background-size: cover;
+    z-index: 99;
+    margin: 10px
 }
 
 /*************** CONTENT ****************/

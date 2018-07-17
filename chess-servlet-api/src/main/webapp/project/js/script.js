@@ -8,7 +8,7 @@ navbarContent += '<div class="dropdown">' +
     '<a href="/ChessGame/project/html/manual.html#anchor-zuege">Spielzüge</a>' +
     '<a href="/ChessGame/project/html/manual.html#anchor-spielende">Spielende</a></div></div>';
 navbarContent += '<a href="/ChessGame/project/html/impressum.html">Impressum</a>';
-navbarContent += '<a href="javascript:void(0);" class="navbarIcon" onclick="toggleNavbar()"><i class="fa fa-bars"></i></a>';
+navbarContent += '<a href="javascript:void(0);" class="navbarIcon" onclick="toggleNavbar()"></a>';
 document.getElementById("navbar").innerHTML = navbarContent;
 
 // (On small screens) Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon
