@@ -1,6 +1,10 @@
 package servlet;
 
 import api.chess.gameplay.game.Game;
+import api.chess.highscore.HighscoreHandler;
+import api.chess.player.Player;
+import api.config.PieceConfig;
+
 import com.google.gson.Gson;
 
 import java.io.BufferedOutputStream;
@@ -100,6 +104,9 @@ public class GetChessboardServlet extends HttpServlet {
 
 						game.executeMove(request.getParameter(MOVE_PIECE_ID), request.getParameter(MOVE_TO_SQUARE_ID),
 								promotion);
+						
+						if (game.getTurnHistory().peekLast().isCheckmated())
+							setHighscore(request, game);
 
 						String responseJson = new Gson().toJson(game);
 						// debug
@@ -111,6 +118,25 @@ public class GetChessboardServlet extends HttpServlet {
 		} else {
 			response.getWriter().append(games.keySet().toString());
 		}
+	}
+	
+	private void setHighscore(HttpServletRequest request, Game game) {
+		HighscoreHandler highscoreHandler = null;
+		if (request.getServletContext().getAttribute("highscore") != null) {
+			try {
+				highscoreHandler = (HighscoreHandler) request.getServletContext().getAttribute("highscore");
+			} catch (ClassCastException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (highscoreHandler == null) {
+			highscoreHandler = new HighscoreHandler(
+					getServletContext().getRealPath("/ChessGame").replaceAll("ChessGame", "high.scores"));
+			request.getServletContext().setAttribute("highscore", highscoreHandler);
+		}
+		Player winner = game.getPlayer().get((game.getActivePlayer().equals(PieceConfig.Color.WHITE)?PieceConfig.Color.BLACK:PieceConfig.Color.WHITE));
+		highscoreHandler.addHighscoreEntry(winner.getName(), winner.getFullTime(), winner.getTurnCounter());
 	}
 
 	/**

@@ -23,26 +23,26 @@ import java.util.logging.Level;
 @WebServlet(urlPatterns = { "/HighscoreTable" })
 public class Highscore extends HttpServlet {
 
-	HashMap<String, HighscoreHandler> highscoreHandler = new HashMap<>();
+	HighscoreHandler highscoreHandler;
 
 	protected synchronized void doGetPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		if (request.getServletContext().getAttribute("highscore") != null) {
 			try {
-				highscoreHandler = (HashMap<String, HighscoreHandler>) request.getServletContext()
-						.getAttribute("highscore");
+				highscoreHandler = (HighscoreHandler) request.getServletContext().getAttribute("highscore");
 			} catch (ClassCastException e) {
 				e.printStackTrace();
 			}
 		}
 
-		if (highscoreHandler.isEmpty()) {
-			highscoreHandler.put("highscore", new HighscoreHandler(getServletContext().getRealPath("/ChessGame").replaceAll("ChessGame", "high.scores")));
+		if (highscoreHandler == null) {
+			highscoreHandler = new HighscoreHandler(
+					getServletContext().getRealPath("/ChessGame").replaceAll("ChessGame", "high.scores"));
 			request.getServletContext().setAttribute("highscore", highscoreHandler);
 		}
 
-		response.getWriter().append(new Gson().toJson(highscoreHandler.get("highscore").getEntries()));
+		response.getWriter().append(new Gson().toJson(highscoreHandler.getEntries()));
 	}
 
 	/**

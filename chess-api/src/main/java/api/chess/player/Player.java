@@ -19,7 +19,7 @@ public class Player {
 
 	private String name;
 	private PieceConfig.Color color;
-	private Long turnCounter = 0L;
+	private int turnCounter = 0;
 	private transient Long durationFullSecs = 0L;
 	private String fullTime;
 
@@ -122,7 +122,7 @@ public class Player {
 		return capturedPieces;
 	}
 
-	public Long getTurnCounter() {
+	public int getTurnCounter() {
 		return turnCounter;
 	}
 
@@ -139,12 +139,16 @@ public class Player {
 		setFullTime();
 
 	}
+	
+	public String getFullTime() {
+		return fullTime;
+	}
 
 	private void setFullTime() {
 		int minutes = (int) (durationFullSecs / 60);
 		int seconds = (int) (durationFullSecs % 60);
 		int hours = minutes / 60;
 		minutes = minutes % 60;
-		fullTime = String.format("-%02d:%02d:%02d-", hours, minutes, seconds);
+		fullTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 }

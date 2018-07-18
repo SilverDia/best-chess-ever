@@ -19,12 +19,17 @@ public class HighscoreHandler {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			for (int i = 0; i < 20; i++) {
+				highscores.add(new HighscoreEntry("--Preset--", "00:00:00", i + 20));
+				sortHighscore();
+			}
+			writeToFile();
 		} else {
 			getHighscores();
 		}
 	}
 
-	public void addHighscoreEntry(String name, int time, int count) {
+	public void addHighscoreEntry(String name, String time, int count) {
 		highscores.add(new HighscoreEntry(name, time, count));
 		sortHighscore();
 		writeToFile();
@@ -35,7 +40,7 @@ public class HighscoreHandler {
 			while (br.ready()) {
 				String line = br.readLine();
 				String[] entry = line.split(";");
-				addHighscoreEntry(entry[0], Integer.parseInt(entry[1]), Integer.parseInt(entry[2]));
+				addHighscoreEntry(entry[0], entry[1], Integer.parseInt(entry[2]));
 			}
 			sortHighscore();
 		} catch (Exception e) {
@@ -49,9 +54,9 @@ public class HighscoreHandler {
 			@Override
 			public int compare(HighscoreEntry o1, HighscoreEntry o2) {
 				if (o1.getMoveCount() != o2.getMoveCount())
-					return o1.getMoveCount() - o2.getMoveCount();
+					return Integer.compare(o1.getMoveCount(), o2.getMoveCount());
 				else
-					return o1.getTime() - o2.getTime();
+					return o1.getTime().compareTo(o2.getTime());
 			}
 		});
 	}

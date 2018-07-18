@@ -3,10 +3,10 @@ package api.chess.highscore;
 public class HighscoreEntry {
 
 	private final String name;
-	private final int time;
+	private final String time;
 	private final int moveCount;
 
-	public HighscoreEntry(String name, int time, int count) {
+	public HighscoreEntry(String name, String time, int count) {
 		this.name = name;
 		this.time = time;
 		this.moveCount = count;
@@ -16,7 +16,7 @@ public class HighscoreEntry {
 		return name;
 	}
 
-	public int getTime() {
+	public String getTime() {
 		return time;
 	}
 

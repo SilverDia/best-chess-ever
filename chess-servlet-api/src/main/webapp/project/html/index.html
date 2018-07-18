@@ -4,6 +4,10 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="/ChessGame/project/css/styles.css" />
         <title>Schach - Startseite</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+		<script src="/ChessGame/project/js/highscore.js"></script>
+		<script type="text/javascript">setLimit(5)</script>
     </head>
     <body> 
         <nav id="navbar" class="navbar"></nav>
@@ -27,44 +31,9 @@
 							<p>Highscore! </p>
 								<table id="highscore-table" class="highscore-table index-highscore-table">
 									<tr>
-										<th>
-											Name
-										</th>
-										<th>
-											benötigte Züge
-										</th>
-									</tr>
-									<tr>
-										<td>
-											Hannes
-										</td>
-										<td>
-											17
-										</td>
-									</tr>
-									<tr>
-										<td>
-											Hanna
-										</td>
-										<td>
-											19
-										</td>
-									</tr>
-									<tr>
-										<td>
-											Klara
-										</td>
-										<td>
-											23
-										</td>
-									</tr>
-									<tr>
-										<td>
-											Günter
-										</td>
-										<td>
-											37
-										</td>
+										<th>Name</th>
+										<th>Züge</th>
+										<th>Zeit</th>
 									</tr>
 								</table>
 						</a>
