@@ -3,115 +3,88 @@ package api.chess.highscore;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class HighscoreHandler {
 
 	private File file;
-	private String highscorePath = "C:\\Users\\mahu\\Documents\\highscore.txt";
 	private ArrayList<HighscoreEntry> highscores = new ArrayList<>();
-	private String[] entry = new String[2];
 
-	private String name = "default";
-	private int score;
-
-	public HighscoreHandler() {
-		file = new File(highscorePath);
+	public HighscoreHandler(String path) {
+		file = new File(path);
 
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-
-		else {
+			for (int i = 0; i < 20; i++) {
+				highscores.add(new HighscoreEntry("--Preset--", "00:00:00", i + 20));
+			}
+			sortHighscore();
+			writeToFile();
+		} else {
 			getHighscores();
-			// for (HighscoreEntry e : highscores) {
-			// System.out.println(e.getName());
-			// System.out.println(e.getScore());
-			// }
 		}
 	}
 
-	private void addHighscoreEntry(String name, int score) {
-		highscores.add(new HighscoreEntry(name, score));
+	public void addHighscoreEntry(String name, String time, int count) {
+		highscores.add(new HighscoreEntry(name, time, count));
+		sortHighscore();
+		writeToFile();
 	}
 
-	public void getHighscores() {
+	private void getHighscores() {
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			while (br.ready()) {
 				String line = br.readLine();
-				entry = line.split(";");
-				addHighscoreEntry(entry[0], Integer.parseInt(entry[1]));
+				String[] entry = line.split(";");
+				addHighscoreEntry(entry[0], entry[1], Integer.parseInt(entry[2]));
 			}
 			sortHighscore();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
-	public void sortHighscore() {
+	private void sortHighscore() {
 		highscores.sort(new Comparator<HighscoreEntry>() {
 
 			@Override
 			public int compare(HighscoreEntry o1, HighscoreEntry o2) {
-				return o1.getScore() - o2.getScore();
+				if (o1.getMoveCount() != o2.getMoveCount())
+					return Integer.compare(o1.getMoveCount(), o2.getMoveCount());
+				else
+					return o1.getTime().compareTo(o2.getTime());
 			}
 		});
 	}
 
-	public void writeToFile() {
+	private void writeToFile() {
 
 		// delete File Content
 		try (FileWriter writer = new FileWriter(file)) {
 			writer.write("");
 			writer.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		// write highscores to file
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
 			bw.write("");
 			for (HighscoreEntry e : highscores) {
-				bw.append(e.getName() + ";" + e.getScore());
+				bw.append(e.getName() + ";" + e.getTime() + ";" + e.getMoveCount());
 				bw.newLine();
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-		addHighscoreEntry(this.name, this.score);
-		sortHighscore();
-		writeToFile();
-
-		System.out.println("New Highscores are: ");
-		for (HighscoreEntry e : highscores) {
-			System.out.println(e.getName());
-			System.out.println(e.getScore());
-		}
-		System.out.println();
-	}
-
-	public int getHighscoreCount() {
-		return highscores.size();
-	}
-
-	public String getName(int i) {
-		return highscores.get(i).getName();
-	}
-
-	public int getScore(int i) {
-		return highscores.get(i).getScore();
+	public List<HighscoreEntry> getEntries() {
+		return highscores;
 	}
 
 }

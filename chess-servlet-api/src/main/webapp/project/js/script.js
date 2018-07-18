@@ -34,10 +34,10 @@ function pause(){
 // toggle pawn-conversion in game.html
 function toggle(string){
     var x = document.getElementById(string);
-    if(x.className === "chessboard pawn-convertion-"+string){
+    if(x.className === "chessboard "+string){
         x.className += " invisible";
     }else{
-        x.className = "chessboard pawn-convertion-"+string;
+        x.className = "chessboard "+string;
     }
 }
 

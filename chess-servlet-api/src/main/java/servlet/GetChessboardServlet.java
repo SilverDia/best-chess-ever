@@ -1,6 +1,10 @@
 package servlet;
 
 import api.chess.gameplay.game.Game;
+import api.chess.highscore.HighscoreHandler;
+import api.chess.player.Player;
+import api.config.PieceConfig;
+
 import com.google.gson.Gson;
 
 import java.io.BufferedOutputStream;
@@ -69,10 +73,12 @@ public class GetChessboardServlet extends HttpServlet {
 			if (action.equals(ACTION_INIT_GAME)) {
 				String nameWhitePlayer = "WHITE_PLAYER_" + String.valueOf(new Date().getTime());
 				String nameBlackPlayer = "BLACK_PLAYER_" + String.valueOf(new Date().getTime());
-				if (request.getParameter(BLACK_PLAYER_NAME) != null && !request.getParameter(BLACK_PLAYER_NAME).equals("")) {
+				if (request.getParameter(BLACK_PLAYER_NAME) != null
+						&& !request.getParameter(BLACK_PLAYER_NAME).equals("")) {
 					nameBlackPlayer = request.getParameter(BLACK_PLAYER_NAME);
 				}
-				if (request.getParameter(WHITE_PLAYER_NAME) != null && !request.getParameter(WHITE_PLAYER_NAME).equals("")) {
+				if (request.getParameter(WHITE_PLAYER_NAME) != null
+						&& !request.getParameter(WHITE_PLAYER_NAME).equals("")) {
 					nameWhitePlayer = request.getParameter(WHITE_PLAYER_NAME);
 				}
 				Game game = new Game();
@@ -90,19 +96,47 @@ public class GetChessboardServlet extends HttpServlet {
 					String gameId = request.getParameter(GAME_ID);
 					if (games.containsKey(gameId)) {
 						Game game = games.get(gameId);
-						game.executeMove(request.getParameter(MOVE_PIECE_ID), request.getParameter(MOVE_TO_SQUARE_ID));
-						if ((request.getParameter(PROMOTE_TO_PIECE) != null
-								&& !request.getParameter(PROMOTE_TO_PIECE).equals(""))) {
-							game.promote(request.getParameter(MOVE_PIECE_ID), request.getParameter(PROMOTE_TO_PIECE));
-						}
-						response.getWriter().append(new Gson().toJson(game));
 
+						String promotion = (request.getParameter(PROMOTE_TO_PIECE) != null
+								&& !request.getParameter(PROMOTE_TO_PIECE).equals(""))
+										? request.getParameter(PROMOTE_TO_PIECE)
+										: "";
+
+						game.executeMove(request.getParameter(MOVE_PIECE_ID), request.getParameter(MOVE_TO_SQUARE_ID),
+								promotion);
+						
+						if (game.getTurnHistory().peekLast().isCheckmated())
+							setHighscore(request, game);
+
+						String responseJson = new Gson().toJson(game);
+						// debug
+						// System.out.println(responseJson);
+						response.getWriter().append(responseJson);
 					}
 				}
 			}
 		} else {
 			response.getWriter().append(games.keySet().toString());
 		}
+	}
+	
+	private void setHighscore(HttpServletRequest request, Game game) {
+		HighscoreHandler highscoreHandler = null;
+		if (request.getServletContext().getAttribute("highscore") != null) {
+			try {
+				highscoreHandler = (HighscoreHandler) request.getServletContext().getAttribute("highscore");
+			} catch (ClassCastException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (highscoreHandler == null) {
+			highscoreHandler = new HighscoreHandler(
+					getServletContext().getRealPath("/ChessGame").replaceAll("ChessGame", "high.scores"));
+			request.getServletContext().setAttribute("highscore", highscoreHandler);
+		}
+		Player winner = game.getPlayer().get((game.getActivePlayer().equals(PieceConfig.Color.WHITE)?PieceConfig.Color.BLACK:PieceConfig.Color.WHITE));
+		highscoreHandler.addHighscoreEntry(winner.getName(), winner.getFullTime(), winner.getTurnCounter());
 	}
 
 	/**

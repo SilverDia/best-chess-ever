@@ -41,7 +41,10 @@ public class King extends Piece {
 
 		checkedByMove = movesAimingOnKing.stream().filter(move -> move.getBlockedBy() == null).findAny().orElse(null);
 
-		if (movesAimingOnKing.stream().filter(move -> move.getBlockedBy() == null).count() > 0) {
+		if (checkedByMove != null) {
+			getPossibleMoves().removeAll(
+					getPossibleMoves().stream().filter(move -> Restriction.RESTRICT_KING.equals(move.getRestriction()))
+							.collect(Collectors.toList()));
 			if (getPossibleMoves().isEmpty())
 				return Game.GameState.CHECKMATE;
 			return Game.GameState.CHECK;

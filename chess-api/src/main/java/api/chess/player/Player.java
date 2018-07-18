@@ -8,124 +8,147 @@ import api.config.MovementRuleConfig;
 import api.config.PieceConfig;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
 public class Player {
-    private final static Logger LOG = Logger.getLogger(Player.class.getName());
+	private final static Logger LOG = Logger.getLogger(Player.class.getName());
 
-    private String name;
-    private PieceConfig.Color color;
-    private Long turnCounter = 0L;
-    private Long durationFullSecs = 0L;
+	private String name;
+	private PieceConfig.Color color;
+	private int turnCounter = 0;
+	private transient Long durationFullSecs = 0L;
+	private String fullTime;
 
-    private boolean active;
-    private boolean isChecked;
-    private boolean canCheck;
+	private boolean active;
+	private boolean isChecked;
+	private boolean canCheck;
 
-    private PieceSet pieceSet;
+	private PieceSet pieceSet;
 
-    private transient HashMap<String, Piece> freePieces = new HashMap<>();
-    private HashMap<String, Piece> capturedPieces = new HashMap<>();
+	private transient HashMap<String, Piece> freePieces = new HashMap<>();
+	private HashMap<String, Piece> capturedPieces = new HashMap<>();
 
-    public void initPlayer(String name, PieceConfig.Color color) {
-        this.name = name;
-        this.color = color;
+	public void initPlayer(String name, PieceConfig.Color color) {
+		this.name = name;
+		this.color = color;
 
-        pieceSet = new PieceSet();
-        pieceSet.init(this);
+		pieceSet = new PieceSet();
+		pieceSet.init(this);
 
-        updatePlayer();
-        active = color.equals(PieceConfig.Color.WHITE);
-    }
+		updatePlayer();
+		active = color.equals(PieceConfig.Color.WHITE);
+	}
 
-    public void updatePlayer() {
-        active = !active;
-        updatePlayerPieces();
-    }
+	public void updatePlayer() {
+		active = !active;
+		updatePlayerPieces();
+	}
 
-    public void updatePlayerPieces() {
-        for (Entry<String, Piece> entry : pieceSet.getPieces().entrySet()) {
-            String id = entry.getKey();
-            Piece piece = entry.getValue();
+	public void updatePlayerPieces() {
+		for (Entry<String, Piece> entry : pieceSet.getPieces().entrySet()) {
+			String id = entry.getKey();
+			Piece piece = entry.getValue();
 
-            if (piece.isCaptured()) {
-                capturedPieces.put(id, piece);
-                freePieces.remove(id);
-            } else {
-                freePieces.put(id, piece);
-                capturedPieces.remove(id);
-            }
-        }
-    }
+			if (piece.isCaptured()) {
+				capturedPieces.put(id, piece);
+				freePieces.remove(id);
+			} else {
+				freePieces.put(id, piece);
+				capturedPieces.remove(id);
+			}
+		}
+	}
 
-    public Movement movePiece(String pieceId, String moveToSqaureId) {
-        return pieceSet.movePiece(pieceId, moveToSqaureId);
-    }
+	public Piece doPromotion(String pawnPieceId, String newPieceName) {
+		Piece newPiece = pieceSet.doPromotion(pawnPieceId, newPieceName);
+		freePieces.put(newPiece.getId(), newPiece);
+		freePieces.remove(pawnPieceId);
+		return newPiece;
+	}
 
-    public void removeCapturedPiece(String pieceId) {
-        movePiece(pieceId, "");
-    }
+	public Movement movePiece(String pieceId, String moveToSqaureId) {
+		return pieceSet.movePiece(pieceId, moveToSqaureId);
+	}
 
-    public HashMap<String, Piece> getFreePieces() {
-        return freePieces;
-    }
+	public void removeCapturedPiece(String pieceId) {
+		movePiece(pieceId, "");
+	}
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+	public HashMap<String, Piece> getFreePieces() {
+		return freePieces;
+	}
 
-    public void setChecked(boolean checked) {
-        isChecked = checked;
-    }
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
-    public void setCanCheck(boolean canCheck) {
-        this.canCheck = canCheck;
-    }
+	public void setChecked(boolean checked) {
+		isChecked = checked;
+	}
 
-    public boolean isCanCheck() {
-        return canCheck;
-    }
+	public void setCanCheck(boolean canCheck) {
+		this.canCheck = canCheck;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public boolean isCanCheck() {
+		return canCheck;
+	}
 
-    public PieceConfig.Color getColor() {
-        return color;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public boolean isActive() {
-        return active;
-    }
+	public PieceConfig.Color getColor() {
+		return color;
+	}
 
-    public boolean isChecked() {
-        return isChecked;
-    }
+	public boolean isActive() {
+		return active;
+	}
 
-    public PieceSet getPieceSet() {
-        return pieceSet;
-    }
+	public boolean isChecked() {
+		return isChecked;
+	}
 
-    public HashMap<String, Piece> getCapturedPieces() {
-        return capturedPieces;
-    }
+	public PieceSet getPieceSet() {
+		return pieceSet;
+	}
 
-    public Long getTurnCounter() {
-        return turnCounter;
-    }
+	public HashMap<String, Piece> getCapturedPieces() {
+		return capturedPieces;
+	}
 
-    public void addTurn() {
-        this.turnCounter++;
-    }
+	public int getTurnCounter() {
+		return turnCounter;
+	}
 
-    public Long getDurationFullSecs() {
-        return durationFullSecs;
-    }
+	public void addTurn() {
+		this.turnCounter++;
+	}
 
-    public void addDurationSecs(Long durationSecs) {
-        this.durationFullSecs += durationSecs;
-    }
+	public Long getDurationFullSecs() {
+		return durationFullSecs;
+	}
+
+	public void addDurationSecs(Long durationSecs) {
+		this.durationFullSecs += durationSecs;
+		setFullTime();
+
+	}
+	
+	public String getFullTime() {
+		return fullTime;
+	}
+
+	private void setFullTime() {
+		int minutes = (int) (durationFullSecs / 60);
+		int seconds = (int) (durationFullSecs % 60);
+		int hours = minutes / 60;
+		minutes = minutes % 60;
+		fullTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+	}
 }

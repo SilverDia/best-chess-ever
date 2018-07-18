@@ -27,13 +27,14 @@
 		</div>
 		<div id="init-layer" class="full-layer">
 			<h2>Neues Spiel starten</h2>
-			<h3>Spielernamen eingeben:</h3>
+			<h3 id="init-input-info">Spielernamen eingeben:</h3>
 			<div>
 				<input type="text" id="init-player-white" class="init-layer-content" placeholder="WHITE">
 				<input type="text" id="init-player-black" class="init-layer-content" placeholder="BLACK">
 				<button id="start-new-game" class="init-layer-content">START</button>
 			</div>
 		</div>
+		
 		<div id="grid-game" class="grid-game">
 			<div id="game-info" class="game-info">
 				<table id="player-info-container-white" class="light game-info-container player-info-container">
@@ -52,8 +53,10 @@
 						<td class="turns-complete"></td>
 					</tr>
 					<tr>
-						<td>Zeit gesamt:</td>
-						<td class="time-complete"></td>
+						<td colspan="2">Zeit gesamt:</td>
+					</tr>
+					<tr>
+						<td class="time-complete" colspan="2"></td>
 					</tr>
 					<tr><td colspan="2"><div class="captured-pieces"></div> </td></tr>
 					</tbody>
@@ -77,8 +80,10 @@
 						<td class="turns-complete"></td>
 					</tr>
 					<tr>
-						<td>Zeit gesamt:</td>
-						<td class="time-complete"></td>
+						<td colspan="2">Zeit gesamt:</td>
+					</tr>
+					<tr>
+						<td class="time-complete" colspan="2"></td>
 					</tr>
 					<tr><td colspan="2"><div class="captured-pieces"></div> </td></tr>
 

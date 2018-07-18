@@ -8,6 +8,7 @@ import api.chess.equipment.pieces.Piece;
 import api.chess.gameplay.rules.Move;
 import api.chess.gameplay.rules.Movement;
 import api.chess.gameplay.rules.Turn;
+import api.chess.highscore.HighscoreHandler;
 import api.chess.player.Player;
 import api.config.BoardConfig;
 import api.config.GameConfig;
@@ -68,7 +69,7 @@ public class Game {
 		evaluatePossibleMoves();
 	}
 
-	public void executeMove(String pieceId, String squareId) {
+	public void executeMove(String pieceId, String squareId, String promotion) {
 
 		Movement movement = player.get(activePlayer).getPieceSet().getPiece(pieceId).getMoveWithDestination(squareId);
 		String capturedPiece = (movement.getRules().contains(Move.CAPTURE_MOVE)
@@ -82,8 +83,11 @@ public class Game {
 					turnHistory.getLast().getEndTime(), new Date());
 			
 			handleSpecialMove(movement, turn);
+			if (promotion != "")
+				promote(pieceId, promotion);
 			finishTurn(turn);
 		}
+		
 	}
 
 	public void handleSpecialMove(Movement movement, Turn turn) {
@@ -92,6 +96,7 @@ public class Game {
 			String moveFromId = (right ? "H" : "A") + movement.getMoveFromSquareId().charAt(1);
 			String moveToId = (right ? "E" : "C") + movement.getMoveFromSquareId().charAt(1);
 			turn.setExtraInfo(" mit einer Rochade");
+			board.getSquare(moveFromId).getPiece().setPositionSquareId(moveToId);
 			board.movePiece(new Movement(moveFromId, moveToId, null, Move.CASTELING, null));
 		} else if (movement.getRules().contains(Move.EN_PASSANT)) {
 			Piece piece = board.getSquare(movement.getMoveToSquareId()).getPiece();
@@ -159,6 +164,8 @@ public class Game {
 			// adding fake move, so you can capture checkingPiece
 			movesToBlock.add(new Movement(checkingPiece.getPositionSquareId(), checkingPiece.getPositionSquareId(),
 					checkingMove.getDirection(), checkingMove.getRules().get(0), null));
+			//removing moves that are blocked -> behind the king
+			movesToBlock.removeAll(movesToBlock.stream().filter(move -> move.getBlockedBy() != null).collect(Collectors.toList()));
 
 			activePieces.stream().filter(piece -> piece != king).forEach(piece -> piece
 					.setPossibleMoves(GameConfig.intersectLists(piece.getPossibleMoves(), movesToBlock, move -> true)));
@@ -176,9 +183,8 @@ public class Game {
 	}
 
 	public void promote(String pieceId, String toPiece) {
-		player.get(inactivePlayer).getPieceSet().doPromotion(pieceId, toPiece);
-		player.get(inactivePlayer).updatePlayerPieces();
-		updateBoard();
+		Piece newPiece = player.get(activePlayer).doPromotion(pieceId, toPiece);
+		board.getSquare(newPiece.getPositionSquareId()).setPiece(newPiece);
 	}
 
 	private King getKing(Player player) {
