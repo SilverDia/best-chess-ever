@@ -471,18 +471,19 @@ h4{
     height: 100%;
 }
 
-/* little highscore table */
+/* little highscore advertisement */
 
-.index-grid-highscore:hover{
-    background-color: #bfbfbf;
+#link-to-highscore {
+	text-align: right;
 }
 
-.index-grid-highscore a{
+#link-to-highscore a{
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: inline-block;
     text-decoration: none;
     color: black;
-    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
 }
 
 /************** HIGHSCORE ****************/
