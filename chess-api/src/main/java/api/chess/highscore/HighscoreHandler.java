@@ -21,8 +21,8 @@ public class HighscoreHandler {
 			}
 			for (int i = 0; i < 20; i++) {
 				highscores.add(new HighscoreEntry("--Preset--", "00:00:00", i + 20));
-				sortHighscore();
 			}
+			sortHighscore();
 			writeToFile();
 		} else {
 			getHighscores();
