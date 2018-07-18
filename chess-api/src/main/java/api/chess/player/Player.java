@@ -8,6 +8,7 @@ import api.config.MovementRuleConfig;
 import api.config.PieceConfig;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map.Entry;
@@ -19,7 +20,8 @@ public class Player {
 	private String name;
 	private PieceConfig.Color color;
 	private Long turnCounter = 0L;
-	private Long durationFullSecs = 0L;
+	private transient Long durationFullSecs = 0L;
+	private String fullTime;
 
 	private boolean active;
 	private boolean isChecked;
@@ -134,5 +136,15 @@ public class Player {
 
 	public void addDurationSecs(Long durationSecs) {
 		this.durationFullSecs += durationSecs;
+		setFullTime();
+
+	}
+
+	private void setFullTime() {
+		int minutes = (int) (durationFullSecs / 60);
+		int seconds = (int) (durationFullSecs % 60);
+		int hours = minutes / 60;
+		minutes = minutes % 60;
+		fullTime = String.format("-%02d:%02d:%02d-", hours, minutes, seconds);
 	}
 }

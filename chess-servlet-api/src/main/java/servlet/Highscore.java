@@ -25,7 +25,7 @@ public class Highscore extends HttpServlet {
 
 	HashMap<String, HighscoreHandler> highscoreHandler = new HashMap<>();
 
-	protected void doGetPost(HttpServletRequest request, HttpServletResponse response)
+	protected synchronized void doGetPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		if (request.getServletContext().getAttribute("highscore") != null) {
