@@ -37,6 +37,16 @@
 		
 		<div id="grid-game" class="grid-game">
 			<div id="game-info" class="game-info">
+			<table>
+			<tr>
+			<td colspan="2">
+							<h3 id="turn-info-text"><div id="turn-info-container" class="game-info-container turn-info-container">
+					WEISS ist am Zug!
+				</div></h3>
+			</td>
+			</tr>
+			<tr>
+			<td>
 				<table id="player-info-container-white" class="light game-info-container player-info-container">
 					<thead class="name-info-container timer-container">
 					<tr>
@@ -61,10 +71,9 @@
 					<tr><td colspan="2"><div class="captured-pieces"></div> </td></tr>
 					</tbody>
 				</table>
-				<div id="turn-info-container" class="game-info-container turn-info-container">
-					WEISS ist am Zug!
-				</div>
-				<table id="player-info-container-black" class="dark game-info-container player-info-container">
+			</td>
+			<td>
+							<table id="player-info-container-black" class="dark game-info-container player-info-container">
 					<thead class="name-info-container timer-container">
 					<tr>
 						<th class="name-info"></th>
@@ -89,6 +98,9 @@
 
 					</tbody>
 				</table>
+			</td>
+			</tr>
+			</table>
 			</div>
 
 			<div id="grid-pause">
