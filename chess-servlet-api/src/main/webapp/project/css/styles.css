@@ -964,6 +964,18 @@ player-info-container th {
     margin-top: 165px;
 }
 
+/* IMPRESSUM */
+
+.impressum-header {
+	font-weight:bold;
+	font-size: 20px;
+}
+
+.impressum-content {
+	margin-top: 2px;
+	margin-bottom: 10px;
+}
+
 .anchor{
   display: block;
   height: 62.67px; /*same height as navbar*/

@@ -11,7 +11,7 @@ navbarContent += '<a href="/ChessGame/project/html/impressum.html">Impressum</a>
 navbarContent += '<a href="javascript:void(0);" class="navbarIcon" onclick="toggleNavbar()"></a>';
 document.getElementById("navbar").innerHTML = navbarContent;
 
-// (On small screens) Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon
+// (On small screens) Toggle between adding and removing the "responsive" class to topnav when the user clicks on the hamburgericon
 function toggleNavbar() {
     var x = document.getElementById("navbar");
     if (x.className === "navbar") {
