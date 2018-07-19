@@ -491,7 +491,7 @@ h4{
 #highscore-table{
     border-collapse: collapse;
     border-spacing: 0px;
-    margin: auto;
+    width: 100%;
 }
 
 #highscore-table td, #highscore-table th{
