@@ -74,20 +74,21 @@ public class Game {
 		Movement movement = player.get(activePlayer).getPieceSet().getPiece(pieceId).getMoveWithDestination(squareId);
 		String capturedPiece = (movement.getRules().contains(Move.CAPTURE_MOVE)
 				&& board.getSquare(squareId).getPiece() != null)
-						? board.getSquare(squareId).getPiece().getName().getDE() : "";
+						? board.getSquare(squareId).getPiece().getName().getDE()
+						: "";
 		player.get(activePlayer).movePiece(pieceId, squareId);
-		if (movement != null) {			
+		if (movement != null) {
 			board.movePiece(movement);
 			Turn turn = new Turn(player.get(activePlayer).getName() + " (" + activePlayer.getDE() + ")", movement,
 					board.getSquare(squareId).getPiece().getName().getDE(), capturedPiece, false, false,
 					turnHistory.getLast().getEndTime(), new Date());
-			
+
 			handleSpecialMove(movement, turn);
 			if (promotion != "")
 				promote(pieceId, promotion);
 			finishTurn(turn);
 		}
-		
+
 	}
 
 	public void handleSpecialMove(Movement movement, Turn turn) {
@@ -136,7 +137,7 @@ public class Game {
 		turnHistory.add(turn);
 
 		GameState state = evaluatePossibleMoves();
-		
+
 		if (state.equals(GameState.CHECK))
 			turn.setChecked(true);
 		if (state.equals(GameState.CHECKMATE))
@@ -164,8 +165,9 @@ public class Game {
 			// adding fake move, so you can capture checkingPiece
 			movesToBlock.add(new Movement(checkingPiece.getPositionSquareId(), checkingPiece.getPositionSquareId(),
 					checkingMove.getDirection(), checkingMove.getRules().get(0), null));
-			//removing moves that are blocked -> behind the king
-			movesToBlock.removeAll(movesToBlock.stream().filter(move -> move.getBlockedBy() != null).collect(Collectors.toList()));
+			// removing moves that are blocked -> behind the king
+			movesToBlock.removeAll(
+					movesToBlock.stream().filter(move -> move.getBlockedBy() != null).collect(Collectors.toList()));
 
 			activePieces.stream().filter(piece -> piece != king).forEach(piece -> piece
 					.setPossibleMoves(GameConfig.intersectLists(piece.getPossibleMoves(), movesToBlock, move -> true)));
@@ -173,12 +175,9 @@ public class Game {
 
 		inactivePieces.forEach(piece -> piece.setPossibleMoves(null));
 		activePieces.forEach(Piece::removeInvalid);
-		if (state.equals(GameState.CHECKMATE)) {
-			if (!activePieces.stream().anyMatch(piece -> piece.getPossibleMoves() != null)) {
-				// TODO game is done!
-			} else
-				state = GameState.CHECK;
-		}
+		if (state.equals(GameState.CHECKMATE)
+				&& activePieces.stream().anyMatch(piece -> piece.getPossibleMoves() != null))
+			state = GameState.CHECK;
 		return state;
 	}
 

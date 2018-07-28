@@ -18,7 +18,6 @@
     <modules>
         <module>chess-api</module>
         <module>chess-servlet-api</module>
-        <module>chess-2-ear</module>
     </modules>
 
     <dependencyManagement>
