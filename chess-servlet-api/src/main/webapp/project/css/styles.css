@@ -13,7 +13,7 @@
 body {
 	margin: 0px;
 	background-image:
-		url("/ChessGame/project/resources/kaiman/chess_background.png");
+		url("/ChessGame/project/resources/images/chess_background.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
@@ -401,7 +401,7 @@ h4 {
 	grid-column: 1/2;
 	grid-row: 2/3;
 	background-image:
-		url("/ChessGame/project/resources/kaiman/IndexChessGame.jpg");
+		url("/ChessGame/project/resources/images/IndexChessGame.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 }
