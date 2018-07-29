@@ -1,3 +1,4 @@
+//Create Navbar
 var navbarContent = '<a href="/ChessGame/project/html/index.html">Startseite</a>';
 navbarContent += '<a href="/ChessGame/project/html/game.html">Spiel</a>';
 navbarContent += '<a href="/ChessGame/project/html/highscore.html">Highscore</a>';
