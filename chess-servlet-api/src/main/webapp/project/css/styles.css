@@ -450,7 +450,7 @@ h4 {
 #highscore-table {
 	border-collapse: collapse;
 	border-spacing: 0px;
-	margin: auto;
+	width: 100%;
 }
 
 #highscore-name-row {
@@ -461,6 +461,10 @@ h4 {
     border: 1px;
     border-style: solid;
     border-color: slategray;
+    font-size: 18px;
+	padding: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .highscore-table td, .highscore-table th{
